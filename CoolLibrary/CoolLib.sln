@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoolLib", "CoolLib", "{5C87DBDD-D70B-48B7-A77B-0F0F4FB33C01}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoolLib.Shared", "CoolLib\CoolLib.Shared\CoolLib.Shared.vcxitems", "{4B9D4CD0-F51C-4AAD-AB45-20CF5ADDF1F3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoolTests", "CoolTests\CoolTests.vcxproj", "{766A6902-0848-4684-82CB-B71A79F44A2B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43} = {9ED7B939-0390-4105-9F5E-2F2C143E5F43}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoolLib.General", "CoolLib\CoolLib.General\CoolLib.General.vcxproj", "{9ED7B939-0390-4105-9F5E-2F2C143E5F43}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CoolLib\CoolLib.Shared\CoolLib.Shared.vcxitems*{4b9d4cd0-f51c-4aad-ab45-20cf5addf1f3}*SharedItemsImports = 9
+		CoolLib\CoolLib.Shared\CoolLib.Shared.vcxitems*{9ed7b939-0390-4105-9f5e-2f2c143e5f43}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Debug|ARM.ActiveCfg = Debug|Win32
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Debug|x64.ActiveCfg = Debug|x64
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Debug|x64.Build.0 = Debug|x64
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Debug|x86.ActiveCfg = Debug|Win32
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Debug|x86.Build.0 = Debug|Win32
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Release|ARM.ActiveCfg = Release|Win32
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Release|x64.ActiveCfg = Release|x64
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Release|x64.Build.0 = Release|x64
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Release|x86.ActiveCfg = Release|Win32
+		{766A6902-0848-4684-82CB-B71A79F44A2B}.Release|x86.Build.0 = Release|Win32
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Debug|ARM.ActiveCfg = Debug|Win32
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Debug|x64.ActiveCfg = Debug|x64
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Debug|x64.Build.0 = Debug|x64
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Debug|x86.ActiveCfg = Debug|Win32
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Debug|x86.Build.0 = Debug|Win32
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Release|ARM.ActiveCfg = Release|Win32
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Release|x64.ActiveCfg = Release|x64
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Release|x64.Build.0 = Release|x64
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Release|x86.ActiveCfg = Release|Win32
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4B9D4CD0-F51C-4AAD-AB45-20CF5ADDF1F3} = {5C87DBDD-D70B-48B7-A77B-0F0F4FB33C01}
+		{766A6902-0848-4684-82CB-B71A79F44A2B} = {5C87DBDD-D70B-48B7-A77B-0F0F4FB33C01}
+		{9ED7B939-0390-4105-9F5E-2F2C143E5F43} = {5C87DBDD-D70B-48B7-A77B-0F0F4FB33C01}
+	EndGlobalSection
+EndGlobal

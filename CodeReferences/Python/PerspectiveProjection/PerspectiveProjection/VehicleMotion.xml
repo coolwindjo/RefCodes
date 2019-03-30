@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CVIConfig>
+  <Header xmlns="" copyright="LG Electronics">
+    The LGRP for ADAS
+    <Application name="CVIConfig" version="0.9 beta"/>
+  </Header>
+  <parameterTable>
+    <!-- ====================================================================== -->
+    <!-- 1. Vehicle motion -->
+    <!-- ====================================================================== -->
+    <parameter name="use_default" value="1"/>
+    <!-- [km/h] -->
+    <parameter name="fVehicleVelocity" 	value="6.0000e+001"/>
+    <!-- [m/s] -->
+    <parameter name="fVehicleJerkZ" 	value="0.0000e-002"/>
+    <!-- [rad/sec] -->
+    <parameter name="fVehicleYawRate" 	value="1.0000e+000"/>
+    <parameter name="fVehicleJerkPitch" 	value="0.0000e-001"/>
+  </parameterTable>
+</CVIConfig>

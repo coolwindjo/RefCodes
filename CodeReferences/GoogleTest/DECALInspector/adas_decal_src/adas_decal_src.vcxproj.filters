@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="images">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="images\config">
+      <UniqueIdentifier>{e9a3cb05-8ae8-4ffd-b19e-c2bb172bccd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\config\CalibrationData">
+      <UniqueIdentifier>{c9e0d473-9865-434c-a2e9-d2c417efde98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\component">
+      <UniqueIdentifier>{dc7c4637-3fba-4a57-bb44-cae47701071a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\service">
+      <UniqueIdentifier>{6028436e-7fe5-4fd3-8552-dbe95b515bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\component\decal">
+      <UniqueIdentifier>{61f48942-f7d0-4a80-9d84-eb7afd544650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\topic">
+      <UniqueIdentifier>{428dc648-646c-478e-91e2-7a7009c2dcc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DATplayList">
+      <UniqueIdentifier>{f14dc426-7402-409d-81cf-938dc9616033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\version">
+      <UniqueIdentifier>{8b73e203-c403-4138-8478-8cf6b6a9f11e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\component\decal\cae">
+      <UniqueIdentifier>{99fc9d59-5d28-45ef-94ee-1fb14d11e0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\component\decal\mot2d">
+      <UniqueIdentifier>{c3ff101e-1007-499a-9353-371dbbc9dbc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\component\decal\mot3d">
+      <UniqueIdentifier>{c8453a8b-5dba-4916-82e7-3f14a97760b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\component\decal\vpe">
+      <UniqueIdentifier>{781a6e74-93cd-407e-b658-9891c0e413a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\service\decal">
+      <UniqueIdentifier>{0ec6ba26-f288-4daf-aa41-9794a11f35bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\config\cal">
+      <UniqueIdentifier>{fcf1f79d-a9c1-4833-b4da-ddd3e0ce1e00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\component\LGClient">
+      <UniqueIdentifier>{203ef381-daf7-4ba4-a54e-1ae9b315f620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\component\LGClient\Transfer">
+      <UniqueIdentifier>{02d409b0-71b5-485d-84dc-9d16e7892991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{ab80fd25-01df-4161-93f2-60670303b68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\IPC">
+      <UniqueIdentifier>{8fb27e03-e706-4a52-ac98-8bc56ff87151}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\CalibrationData\Calibration.xml">
+      <Filter>images\config\CalibrationData</Filter>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\CalibrationData\DynamicExtrinsicCalibrationOutput.xml">
+      <Filter>images\config\CalibrationData</Filter>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\CalibrationData\InstallationInformation.xml">
+      <Filter>images\config\CalibrationData</Filter>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\mpc55.xml">
+      <Filter>images\config</Filter>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\cal\decalresult_temp.xml">
+      <Filter>images\config\cal</Filter>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\cal\intrinsic_temp.xml">
+      <Filter>images\config\cal</Filter>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\cal\secalresult.xml">
+      <Filter>images\config\cal</Filter>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\cal\secalsnapshot.xml">
+      <Filter>images\config\cal</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\mpc55_release\src\version\version_decal.h">
+      <Filter>src\version</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCae.h">
+      <Filter>src\component\decal\cae</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCaeParam.h">
+      <Filter>src\component\decal\cae</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCaeParamSet.h">
+      <Filter>src\component\decal\cae</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCaeResult.h">
+      <Filter>src\component\decal\cae</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot2d\CDecalMot2D.h">
+      <Filter>src\component\decal\mot2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot2d\DecalMot2DParam.h">
+      <Filter>src\component\decal\mot2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot2d\DecalMot2DParamSet.h">
+      <Filter>src\component\decal\mot2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot2d\DecalMot2DResult.h">
+      <Filter>src\component\decal\mot2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot3d\CDecalMot3D.h">
+      <Filter>src\component\decal\mot3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot3d\DecalMot3DParam.h">
+      <Filter>src\component\decal\mot3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot3d\DecalMot3DParamSet.h">
+      <Filter>src\component\decal\mot3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot3d\DecalMot3DResult.h">
+      <Filter>src\component\decal\mot3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpe.h">
+      <Filter>src\component\decal\vpe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpeData.h">
+      <Filter>src\component\decal\vpe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpeParamSet.h">
+      <Filter>src\component\decal\vpe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpeResult.h">
+      <Filter>src\component\decal\vpe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\Decal.h">
+      <Filter>src\component\decal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\DecalDeveloperData.h">
+      <Filter>src\component\decal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\DecalErrorCode.h">
+      <Filter>src\component\decal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\DecalParamSet.h">
+      <Filter>src\component\decal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\service\decal\VFDecalService.h">
+      <Filter>src\service\decal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\service\decal\VFDecalServiceParam.h">
+      <Filter>src\service\decal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\DecalDebugTopic.h">
+      <Filter>src\topic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\DecalDtcTopic.h">
+      <Filter>src\topic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\DecalTopic.h">
+      <Filter>src\topic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\DecalExtrinsicTopic.h">
+      <Filter>src\topic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\IntrinsicTopic.h">
+      <Filter>src\topic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\lgclient\Transfer\CIPCTransfer.h">
+      <Filter>src\component\LGClient\Transfer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\lgclient\Transfer\CTransfer.h">
+      <Filter>src\component\LGClient\Transfer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\lib\IPC\IPC4Debug.h">
+      <Filter>lib\IPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\DecalInspect.h">
+      <Filter>src\component\decal</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCae.cpp">
+      <Filter>src\component\decal\cae</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\mot2d\CDecalMot2D.cpp">
+      <Filter>src\component\decal\mot2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\mot3d\CDecalMot3D.cpp">
+      <Filter>src\component\decal\mot3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpe.cpp">
+      <Filter>src\component\decal\vpe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\Decal.cpp">
+      <Filter>src\component\decal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mpc55_release\src\service\decal\VFDecalService.cpp">
+      <Filter>src\service\decal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mpc55_release\src\component\lgclient\Transfer\CIPCTransfer.cpp">
+      <Filter>src\component\LGClient\Transfer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mpc55_release\lib\IPC\IPC4Debug.cpp">
+      <Filter>lib\IPC</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\mpc55_release\build\images\config\run_win64.sh">
+      <Filter>images</Filter>
+    </None>
+    <None Include="..\..\..\mpc55_release\build\images\DATplayList\MonoDATList.datpls">
+      <Filter>DATplayList</Filter>
+    </None>
+  </ItemGroup>
+</Project>

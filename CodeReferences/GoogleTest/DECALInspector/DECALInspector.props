@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <GTESTDIR>D:\GitRepository\tools\DECALInspector\googletest</GTESTDIR>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_PropertySheetDisplayName>DECALInspector</_PropertySheetDisplayName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(GTESTDIR)/googletest/include/;$(GTESTDIR)/googletest;$(GTESTDIR)/googlemock/include/;$(GTESTDIR)/googlemock;../../../tools/DECALInspector/;../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DECAL_GTEST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="GTESTDIR">
+      <Value>$(GTESTDIR)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

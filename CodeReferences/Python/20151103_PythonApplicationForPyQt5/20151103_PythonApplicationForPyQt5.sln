@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication1", "PythonApplication1\PythonApplication1.pyproj", "{9BA2EA8A-D7CE-483D-8651-429E86C58686}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication2", "PythonApplication2\PythonApplication2.pyproj", "{609448F0-D73C-4CE5-B288-3088BC5E0165}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication3", "PythonApplication3\PythonApplication3.pyproj", "{E7308EDB-AAFF-4575-971C-A9C6D2CC1155}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "RunScript_GUI", "RunScript_GUI\RunScript_GUI\RunScript_GUI.pyproj", "{09AF387D-D1E5-4E66-A206-3EE288CF89F4}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication4", "PythonApplication4\PythonApplication4.pyproj", "{1E81F77D-1E1C-4EEE-BCDC-DF7C93021DE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BA2EA8A-D7CE-483D-8651-429E86C58686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA2EA8A-D7CE-483D-8651-429E86C58686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{609448F0-D73C-4CE5-B288-3088BC5E0165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{609448F0-D73C-4CE5-B288-3088BC5E0165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7308EDB-AAFF-4575-971C-A9C6D2CC1155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7308EDB-AAFF-4575-971C-A9C6D2CC1155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09AF387D-D1E5-4E66-A206-3EE288CF89F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AF387D-D1E5-4E66-A206-3EE288CF89F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E81F77D-1E1C-4EEE-BCDC-DF7C93021DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E81F77D-1E1C-4EEE-BCDC-DF7C93021DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

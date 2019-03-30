@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DD6F73A2-205A-4450-B1B1-2FD0C9C518D8}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>adas_decal_src</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>adas_decal_src</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="adas_ecal_src.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="adas_ecal_src.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="adas_ecal_src.props" />
+    <Import Project="..\DECALInspector.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="adas_ecal_src.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\CalibrationData\Calibration.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\CalibrationData\DynamicExtrinsicCalibrationOutput.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\CalibrationData\InstallationInformation.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\cal\decalresult_temp.xml" />
+    <Xml Include="..\..\..\mpc55_release\build\images\config\cal\intrinsic_temp.xml" />
+    <Xml Include="..\..\..\mpc55_release\build\images\config\cal\secalresult.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\..\..\mpc55_release\build\images\config\cal\secalsnapshot.xml" />
+    <Xml Include="..\..\..\mpc55_release\build\images\config\mpc55.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\mpc55_release\lib\IPC\IPC4Debug.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCae.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCaeParam.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCaeParamSet.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCaeResult.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\Decal.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\DecalDeveloperData.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\DecalErrorCode.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\DecalInspect.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\DecalParamSet.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot2d\CDecalMot2D.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot2d\DecalMot2DParam.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot2d\DecalMot2DParamSet.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot2d\DecalMot2DResult.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot3d\CDecalMot3D.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot3d\DecalMot3DParam.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot3d\DecalMot3DParamSet.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\mot3d\DecalMot3DResult.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpe.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpeData.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpeParamSet.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpeResult.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\lgclient\Transfer\CIPCTransfer.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\component\lgclient\Transfer\CTransfer.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\service\decal\VFDecalService.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\service\decal\VFDecalServiceParam.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\DecalDebugTopic.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\DecalDtcTopic.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\DecalExtrinsicTopic.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\DecalTopic.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\topic\IntrinsicTopic.h" />
+    <ClInclude Include="..\..\..\mpc55_release\src\version\version_decal.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\mpc55_release\lib\IPC\IPC4Debug.cpp" />
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\cae\DecalCae.cpp" />
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\Decal.cpp" />
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\mot2d\CDecalMot2D.cpp" />
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\mot3d\CDecalMot3D.cpp" />
+    <ClCompile Include="..\..\..\mpc55_release\src\component\decal\vpe\DecalVpe.cpp" />
+    <ClCompile Include="..\..\..\mpc55_release\src\component\lgclient\Transfer\CIPCTransfer.cpp" />
+    <ClCompile Include="..\..\..\mpc55_release\src\service\decal\VFDecalService.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\mpc55_release\build\images\config\run_win64.sh" />
+    <None Include="..\..\..\mpc55_release\build\images\DATplayList\MonoDATList.datpls" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

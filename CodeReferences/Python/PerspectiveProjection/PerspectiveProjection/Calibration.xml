@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CVIConfig>
+	<Header xmlns="" copyright="LG Electronics">
+		The LGRP for ADAS
+		<Application name="CVIConfig" version="0.9 beta"/>
+	</Header>
+	<parameterTable>
+		<!-- ====================================================================== -->
+		<!-- 1. Raw image intrinsic calibration parameters [pixel]-->
+		<!-- ====================================================================== -->
+		<parameter name="fFocalLength_u_raw" value="1.550000e+003"/>
+		<parameter name="fFocalLength_v_raw" value="1.550000e+003"/>
+		<parameter name="fOpticalCenter_u_raw" value="1.440000e+003"/>
+		<parameter name="fOpticalCenter_v_raw" value="5.400000e+002"/>
+		<!-- ====================================================================== -->
+		<!-- 2. Distortion parameters -->
+		<!-- ====================================================================== -->
+		<parameter name="nDistortionModel" value="0.0"/>
+		<!-- 0: Bradski's model, 1: fisheye camera model, 2: Zhang's model... -->
+		<parameter name="fDistortionCoefficient_1" value="2.211900e-001"/>
+		<parameter name="fDistortionCoefficient_2" value="-1.700000e-002"/>
+		<parameter name="fDistortionCoefficient_3" value="0.000000e+000"/>
+		<parameter name="fDistortionCoefficient_4" value="0.000000e+000"/>
+		<parameter name="fDistortionCoefficient_5" value="1.130000e-003"/>
+		<parameter name="fDistortionCoefficient_6" value="6.573800e-001"/>
+		<!-- ====================================================================== -->
+		<!-- 3. Undistorted image intrinsic calibration parameters [pixel] -->
+		<!-- ====================================================================== -->
+		<parameter name="fFocalLength_u_undistorted" value="1.150000e+003"/>
+		<parameter name="fFocalLength_v_undistorted" value="1.150000e+003"/>
+		<parameter name="fOpticalCenter_u_undistorted" value="1.440000e+003"/>
+		<parameter name="fOpticalCenter_v_undistorted" value="3.200000e+002"/>
+		<!-- ====================================================================== -->
+		<!-- 4. Vehicle Dependent Data -->
+		<!-- ====================================================================== -->
+		<!-- [meter] -->
+		<parameter name="fFrontAxisHeight" value="3.153000e-01"/>
+		<parameter name="fVehicleLevelOffset" value="0.000000e+00"/>
+		<!-- [degree] -->
+		<parameter name="fConstructionExtrinsic_roll" value="0.000000"/>
+		<parameter name="fConstructionExtrinsic_pitch" value="0.000000"/>
+		<parameter name="fConstructionExtrinsic_yaw" value="0.000000"/>
+		<!-- ====================================================================== -->
+		<!-- 5. Effective camera position for SECAL -->
+		<!-- ====================================================================== -->
+		<!-- [meter] -->
+		<parameter name="fEffectiveCameraPosition_x" value="1.067000e+00"/>
+		<parameter name="fEffectiveCameraPosition_y" value="-2.400000e-02"/>
+		<parameter name="fEffectiveCameraPosition_z" value="9.068360e-01"/>
+		<!-- ====================================================================== -->
+		<!-- 6. Static Extrinsic Calibration (SECAL) result -->
+		<!-- ====================================================================== -->
+		<parameter name="nStatus_SECAL" value="1"/>		<!--0: Calibration Not OK, 1: Calibration OK-->
+		<parameter name="nQualityLevel_SECAL" value="0"/>		<!--0 ~ 100%-->
+		<parameter name="nQualityMeasure_SECAL" value="0"/>		<!-- 0: Very low, 1: Low, 2: High, 3: Very high quality or confidence-->
+		<!-- [degree] -->
+		<parameter name="fExtrinsicDeviation_roll_SECAL" value="0.000000e+00"/>
+		<parameter name="fExtrinsicDeviation_pitch_SECAL" value="2.000000e+00"/>
+		<parameter name="fExtrinsicDeviation_yaw_SECAL" value="1.000000e+00"/>
+		<!-- [meter] -->
+		<parameter name="fComputedCameraHeight_SECAL" value="1.222136e+00"/>
+		<!-- ====================================================================== -->
+		<!-- Check the correspondence between DAT file and "DynamicExtrinsicCalibrationInput.xml" -->
+		<!-- ====================================================================== -->
+		<parameter name="szDatTag" value="0"/>
+		<parameter name="nICALdate" value="0"/>
+		<parameter name="nSECALdate" value="0"/>
+	</parameterTable>
+</CVIConfig>
+
+

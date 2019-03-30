@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CVIConfig>
+  <Header xmlns="" copyright="LG Electronics">
+    The LGRP for ADAS
+    <Application name="CVIConfig" version="0.9 beta"/>
+  </Header>
+  <parameterTable>
+    <!-- ====================================================================== -->
+    <!-- 1. Target information -->
+    <!-- ====================================================================== -->
+    <parameter name="nTargetType" value="0"/>	<!-- 0: Nightview, 1: Nightview groß, 2: TBD -->
+    <!-- [meter] -->
+    <parameter name="fTargetPosition_x" value="-8.780000e-001"/>
+    <parameter name="fTargetPosition_y" value="0.000000e+000"/>
+    <parameter name="fTargetPosition_z" value="8.990000e-001"/>
+    <!-- ====================================================================== -->
+    <!-- 2. Input camera position -->
+    <!-- ====================================================================== -->
+    <!-- [meter] -->
+    <parameter name="fInputCameraPosition_x" value="0.0"/>
+    <parameter name="fInputCameraPosition_y" value="0.0"/>
+    <parameter name="fInputCameraPosition_z" value="0.0"/>
+    <!-- ====================================================================== -->
+    <!-- Check the correspondence between DAT file and "InstallationInformation.xml" -->
+    <!-- ====================================================================== -->
+    <parameter name="szDatTag" value="11H29M49S"/>
+    <parameter name="nSECALdate" value="20170626"/>
+  </parameterTable>
+</CVIConfig>

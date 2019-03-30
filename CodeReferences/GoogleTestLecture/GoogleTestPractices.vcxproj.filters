@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="01_start.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="02_3A.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="03_TestFixture.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="03_TextFixture_2.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="03_TextFixture_3.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="04_GoogleTestFunctions.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="05_SuiteFixture.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="05_SuiteFixture_2.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="06_GlobalFixture.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="07_TimeTest.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="08_MemoryLeakTest.cpp">
+      <Filter>20170223</Filter>
+    </ClCompile>
+    <ClCompile Include="09_ParameterizedTest.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="10_TestSpecificSubclass.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="10_TestSpecificSubclass_2.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="11_TestDouble-Stub.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="12_TestDouble.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="12_TestDouble_2.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="13_TestDouble-Fake.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="14_TestDouble-Spy.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="15_TestDouble-Mock.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="16_GoogleMock.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+    <ClCompile Include="17_Listener.cpp">
+      <Filter>20170224</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="20170223">
+      <UniqueIdentifier>{e8bc603f-2ced-4106-9ee4-085c41f56f12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20170224">
+      <UniqueIdentifier>{df9774d8-9553-427c-87f1-6735fd331adf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

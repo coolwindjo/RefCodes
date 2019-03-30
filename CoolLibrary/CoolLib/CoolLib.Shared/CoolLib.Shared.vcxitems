@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{4b9d4cd0-f51c-4aad-ab45-20cf5addf1f3}</ItemsProjectGuid>
+    <ItemsRootNamespace>CoolLib</ItemsRootNamespace>
+    <ItemsProjectName>CoolLib.Shared</ItemsProjectName>
+    <CodeSharingProject>248F659F-DAC5-46E8-AC09-60EC9FC95053</CodeSharingProject>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolLibraries\CodeAnalysis.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolLibraries\CoolLib.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolLibraries\IoMethods.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolLibraries\LinkedList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolLibraries\Matrix.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolLibraries\DynamicArray.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolLibraries\SortMethods.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolLibraries\ThreadedBst.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)targetver.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CoolLib.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)dllmain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)IoMethods.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LinkedList.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Matrix.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)DynamicArray.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SortMethods.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ThreadedBst.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+</Project>
