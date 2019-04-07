@@ -28,7 +28,8 @@
                 //"-std=c++1z",
                 "-g",
                 "-Wall",
-                "${relativeFile}",
+                //"${relativeFile}",
+                "${fileBasenameNoExtension}/${fileBasenameNoExtension}.cpp",
                 "-o",
                 "${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe"
             ],
@@ -59,10 +60,12 @@
             "label": "build C",
             "command": "gcc",
             "args": [
-                "${file}",
+                //"${relativeFile}",
+                "${fileBasenameNoExtension}/${fileBasenameNoExtension}.c",
                 "-o",
                 "-g",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                //"${fileDirname}/${fileBasenameNoExtension}.exe",
+                "${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe",
             ],
             "group": "build",
             //컴파일시 에러를 편집기에 반영
