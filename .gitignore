@@ -1,0 +1,25 @@
+################################################################################
+# 이 .gitignore 파일은 Microsoft(R) Visual Studio에서 자동으로 만들어졌습니다.
+################################################################################
+
+*.exe
+*.suo
+*.tlog
+*.ipch
+*.pdb
+*.ilk
+*.log
+*.obj
+*.idb
+*.manifest
+*.res
+*.lastbuildstate
+*.~$lock
+*.db
+*.vs
+Debug
+x64
+__pycache__
+/CoolLibrary/CoolLib/CoolLib.General/x64/
+/CoolLibrary/CoolLib/lib/
+/CodeReferences/Python/20151103_PythonApplicationForPyQt5/RunScript_GUI/RunScript_GUI/PSTools

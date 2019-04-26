@@ -1,13 +1,15 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 inline const int WarnIfNot(const int condFlag, const char* condition){
 	if (condFlag == 0){
 		cout << "Warning: [" << condition << "] is violated!\n";
 	}
+	return condFlag;
 }
-#define VERI(condition) WarnIfNot((condition), (#condition))
+#define W_IFNOT(condition) WarnIfNot((condition), (#condition))
 #define FOR(i, size) for(int (i)=0; (i)<(size); (i)++)
 
 typedef pair<int, int> ii;
@@ -16,7 +18,6 @@ typedef vector<int> vi;
 const int INF = 1e9;
 const int MAX_N = 100 + 1;
 const int MAX_M = (int)((double)(MAX_N*(MAX_N-1)) * 0.5);
-
 
 int N, M;//공장 수, 도로 정보 수
 int A[MAX_M], B[MAX_M], D[MAX_M];//공장 A, 공장 B, 거리 D
@@ -36,8 +37,8 @@ int main(){
 	InputData();//	입력 함수
 
 	//	코드를 작성하세요
-	VERI(N > 0);
-	VERI(M > 0);
+	W_IFNOT(N > 0);
+	W_IFNOT(M > 0);
 
 	// Init
 	FOR(i, N){
@@ -80,9 +81,9 @@ int main(){
 		FOR(i, N){
 			if (k==i) continue;
 			int& dist = arDist[k][i];
-			VERI(dist > 0);
+			W_IFNOT(dist > 0);
 			if (dist == INF) continue;
-			VERI(dist < INF);
+			W_IFNOT(dist < INF);
 			if (dist > worst)
 				worst = dist;
 		}
