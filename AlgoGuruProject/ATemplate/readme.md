@@ -1,5 +1,7 @@
 # Problem information
 
+Floyd-Warshall
+Dijkstra
 Implementation
 Math
 Hash table
