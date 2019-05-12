@@ -29,9 +29,9 @@
                 "-g",
                 "-Wall",
                 //"${relativeFile}",
-                "ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.cpp",
+                "${fileBasenameNoExtension}/${fileBasenameNoExtension}.cpp",
                 "-o",
-                "ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe"
+                "${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe"
             ],
             "group": {
                 "kind": "build",
@@ -61,11 +61,11 @@
             "command": "gcc",
             "args": [
                 //"${relativeFile}",
-                "./ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.c",
+                "${fileBasenameNoExtension}/${fileBasenameNoExtension}.c",
                 "-o",
                 "-g",
                 //"${fileDirname}/${fileBasenameNoExtension}.exe",
-                "./ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe",
+                "${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe",
             ],
             "group": "build",
             //컴파일시 에러를 편집기에 반영

@@ -35,7 +35,7 @@
                     "-c"
                 ],
                 "pipeEnv": {},
-                "pipeCwd": "${workspaceFolder}/ToDo/${fileBasenameNoExtension}"
+                "pipeCwd": "${workspaceFolder}/${fileBasenameNoExtension}"
             },
             "sourceFileMap": {
                 "/mnt/c": "c:\\"
