@@ -1,10 +1,9 @@
 # Problem information
 
-<https://www.acmicpc.net/problem/1406>
+<https://www.acmicpc.net/problem/15483>
 
 Floyd-Warshall
 Dijkstra
-Linked list
 Implementation
 Math
 Hash table

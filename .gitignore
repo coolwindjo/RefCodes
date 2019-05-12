@@ -19,6 +19,7 @@
 *.vs
 Debug
 x64
+ipch
 __pycache__
 /CoolLibrary/CoolLib/CoolLib.General/x64/
 /CoolLibrary/CoolLib/lib/
