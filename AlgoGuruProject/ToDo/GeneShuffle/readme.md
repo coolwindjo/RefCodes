@@ -1,6 +1,6 @@
 # Problem information
 
-<https://www.acmicpc.net/problem/1406>
+<https://www.acmicpc.net/problem/5390>
 
 Dynamic Programing
 Mathematics
@@ -16,4 +16,3 @@ Hash table
 Sort
 String manipulation
 Edit distance
-STL::Unordered set

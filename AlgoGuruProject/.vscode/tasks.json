@@ -29,9 +29,9 @@
                 "-g",
                 "-Wall",
                 //"${relativeFile}",
-                "ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.cpp",
+                "./ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.cpp",
                 "-o",
-                "ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe"
+                "./ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe"
             ],
             "group": {
                 "kind": "build",

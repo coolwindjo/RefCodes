@@ -16,4 +16,3 @@ Hash table
 Sort
 String manipulation
 Edit distance
-STL::Unordered set
