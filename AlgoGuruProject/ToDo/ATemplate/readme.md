@@ -2,18 +2,18 @@
 
 <https://www.acmicpc.net/problem/1406>
 
-Dynamic Programing
-Mathematics
-Implementation
-Greedy
+dynamic programing
+mathematics
+implementation
+greedy alogrithm
+DFS
 DFS with backtracking
-BFS with line input
+BFS
 BFS with generations
 Floyd-Warshall
 Dijkstra
-Linked list
-Hash table
-Sort
-String manipulation
-Edit distance
-STL::Unordered set
+sort
+string manipulation
+edit distance
+STL::unordered_set
+STL::list
