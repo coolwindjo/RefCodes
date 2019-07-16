@@ -14,6 +14,9 @@ Floyd-Warshall
 Dijkstra
 sort
 string manipulation
+unique and erase vector
 edit distance
 STL::unordered_set
 STL::list
+
+<https://coolwindjo.github.io/2019/07/16/Naming-Daughter.html>
