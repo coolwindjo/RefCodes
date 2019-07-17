@@ -4,9 +4,11 @@
 
 dynamic programing
 mathematics
+big number
 implementation
 greedy alogrithm
 DFS
+DFS pitfall
 DFS with backtracking
 BFS
 BFS with generations
