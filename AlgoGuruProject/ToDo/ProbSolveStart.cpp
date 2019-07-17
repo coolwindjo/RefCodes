@@ -20,12 +20,11 @@ typedef pair<int, int> ii;
 typedef vector<ii> vii;
 typedef vector<int> vi;
 typedef vector<vi> vvi;
-typedef unsigned long long tUInt;
-typedef long long tInt;
+typedef unsigned long long uint_t;
 
 typedef enum {
 	eR=0, eD, eL, eU, eDIR_LEN
-} DIR_e;
+} Dir_e;
 constexpr int DIR[4][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
 constexpr int INF = 987654321;  // ~= 2^30
 
@@ -43,7 +42,7 @@ public:
 
 int main()
 {
-    ios_base::sync_with_stdio(false); cin.tie(NULL);
+    ios_base::sync_with_stdio(false); cin.tie(nullptr);
 
  	int numTCs = 0;
 	cin >> numTCs;
