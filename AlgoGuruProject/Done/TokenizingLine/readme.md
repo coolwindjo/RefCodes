@@ -1,5 +1,5 @@
 # Problem information
 
-sstream
+std::stringstream
 
 STL::list

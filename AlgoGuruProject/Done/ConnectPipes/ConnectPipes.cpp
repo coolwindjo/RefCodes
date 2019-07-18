@@ -1,7 +1,9 @@
 #include <iostream>
 #include <queue>
+
 using namespace std;
-inline const int WarnIfNot(const int condFlag, const char* condition){
+
+static const int WarnIfNot(const int condFlag, const char* condition){
 	if (condFlag == 0){
 		cout << "Warning: [" << condition << "] is violated!\n";
 	}
@@ -60,11 +62,11 @@ const int CAN_GO[NUM_PIPE_KINDS][NUM_DIRS] = {
 };
 
 int visit[MAX_N][MAX_N] = {0,};
-int CheckRangeFlagPipe(const ii nextPos, const int dir){
+int CheckRangeFlagPipe(const ii nextPos, const int curDir){
 	if (visit[nextPos.first][nextPos.second] != 0) return 0;
 	if (OOR(nextPos.first, 0, N-1)) return 0;
 	if (OOR(nextPos.second, 0, N-1)) return 0;
-	int nextDir = N_DIR[dir];
+	int nextDir = N_DIR[curDir];
 	return CAN_GO[map[nextPos.first][nextPos.second]][nextDir];
 }
 

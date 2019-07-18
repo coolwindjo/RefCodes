@@ -27,7 +27,9 @@ typedef enum {
 constexpr int DIR[4][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
 constexpr int INF = 987654321;  // ~= 2^30
 
+#if 1
 #define TEST
+#endif // 0
 class CProbSolve
 {
     /* data */
