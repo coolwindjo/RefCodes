@@ -46,7 +46,7 @@ class CProbSolve
 	int m_minCost;
 
 public:
-	CProbSolve(const int N) {
+	explicit CProbSolve(const int N) {
 		m_mapSizeN = N;
 		m_minCost = INF;
 		FOR(row, m_mapSizeN) {
@@ -64,7 +64,7 @@ public:
 		}
 		_Solve();
 	}
-	~CProbSolve(){}
+	virtual ~CProbSolve(){}
 
 private:
 	void _Solve() {
