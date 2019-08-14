@@ -1,5 +1,13 @@
+#if 1
+#define TEST
+#endif // 1
+
+#ifdef TEST
 #include <iostream>
 #include <vector>
+#else
+#include <bits/stdc++.h>
+#endif // TEST
 
 using namespace std;
 
@@ -24,12 +32,9 @@ typedef long long ll;
 typedef enum {
 	eR=0, eD, eL, eU, eDIR_LEN
 } Dir_e;
-constexpr int DIR[4][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
+constexpr int DIR[eDIR_LEN][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
 constexpr int INF = 987654321;  // ~= 2^30
 
-#if 1
-#define TEST
-#endif // 0
 class CProbSolve
 {
     /* data */

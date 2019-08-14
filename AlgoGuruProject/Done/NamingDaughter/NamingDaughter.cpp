@@ -103,6 +103,7 @@ private:
 #endif // 0
 				}
 			}
+			sort(m_viiPos.begin(), m_viiPos.end());
 			m_viiPos.erase(unique(m_viiPos.begin(), m_viiPos.end()), m_viiPos.end());
 			const int numCands = m_viiPos.size();
 			if (numCands == 0) return;
