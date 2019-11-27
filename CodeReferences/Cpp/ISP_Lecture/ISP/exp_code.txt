@@ -1,0 +1,100 @@
+
+void ISP_Lab6_Tonemapping()
+{
+	IplImage *img_in, *img_out;
+	int i,j;
+	int width, height;
+	int result_r,result_g,result_b;
+	double gamma = 2.5;//0.5;
+    cvNamedWindow("output", CV_WINDOW_AUTOSIZE); 
+	img_in = cvLoadImage("..\\..\\testset\\HDR_exp_S.png",1);
+	img_out = cvCreateImage(cvGetSize(img_in),img_in->depth,img_in->nChannels);
+	width = img_in->width;
+	height = img_in->height;
+	for (i=0;i<height; i++) {
+		for (j=0;j<width; j++) {
+			//gamma control 
+			result_b = (unsigned char)(img_in->imageData[3*(_im_data_(i,height)*width   + _im_data_(j,width)) + 0]);
+			result_g = (unsigned char)(img_in->imageData[3*(_im_data_(i,height)*width   + _im_data_(j,width)) + 1]);
+			result_r = (unsigned char)(img_in->imageData[3*(_im_data_(i,height)*width   + _im_data_(j,width)) + 2]);
+
+			result_b = pow(((float)result_b/256), 1.0/gamma) * 256;
+			result_g = pow(((float)result_g/256), 1.0/gamma) * 256;
+			result_r = pow(((float)result_r/256), 1.0/gamma) * 256;
+
+			img_out->imageData[3*(i*width + j) + 0] = CLIP255(result_b); //r
+			img_out->imageData[3*(i*width + j) + 1] = CLIP255(result_g); //r
+			img_out->imageData[3*(i*width + j) + 2] = CLIP255(result_r); //r
+		}
+	}
+	cvShowImage("output",img_out);
+	
+	cvSaveImage("..\\..\\results\\Lab6_output.png",img_out);
+
+	cvReleaseImage(&img_in);
+	cvReleaseImage(&img_out);
+}
+
+void ISP_Lab8_AWB()
+{
+
+}
+
+void ISP_Lab9_MultiHDR()
+{
+
+}
+
+void ISP_Lab10_small_ISP()
+{
+	int width,height;
+	width = 1920;
+	height = 1080;
+	int data_16bit,i;
+	//int HDR_OUTPUT_MAX_VALUE = (1<<20)-1;
+
+	unsigned short *pBayer_14bit = new unsigned short[width*height];
+	unsigned int *pBayer_32bit = new unsigned int[width*height];
+	FILE *fp = fopen("..\\..\\testset\\usa_1920x1080x16bit.raw","rb");
+	fread(pBayer_14bit,sizeof(unsigned short),width*height,fp);
+	fclose(fp);
+
+	//14bit Decompress
+	int HDRKneePointP1 = 4096;
+	int HDRKneePointP2 = 7946;
+	int HDRKneePointP3 = 65535;
+	int HDRKneePointRatio1 = 16;
+	int HDRKneePointRatio2 = 255;
+	int HDRKneePointRatio3 = 255;
+	int HDRKneePointNewP2 = 4096;
+	int HDRKneePointNewP3 = 65536;
+	int HDRKneePointNewP4 = 65536;
+	for (i=0;i<width*height;i++) {
+		data_16bit = pBayer_14bit[i];		
+
+		if (data_16bit > 0 && data_16bit <= HDRKneePointP1)
+		{
+			pBayer_32bit[i] = clip_MinMax(data_16bit,0,HDR_OUTPUT_MAX_VALUE);
+		}
+		else if (data_16bit >= HDRKneePointP1 + 1 && data_16bit <= HDRKneePointP2)
+		{
+			pBayer_32bit[i] = clip_MinMax((data_16bit - HDRKneePointP1 + 1) * HDRKneePointRatio1 + HDRKneePointNewP2,0,HDR_OUTPUT_MAX_VALUE);
+		}		
+		else if (data_16bit >= HDRKneePointP2 + 1 && data_16bit <= HDRKneePointP3)
+		{
+			pBayer_32bit[i] = clip_MinMax((data_16bit - HDRKneePointP2 + 1) * HDRKneePointRatio2 + HDRKneePointNewP3,0,HDR_OUTPUT_MAX_VALUE);
+		}		
+		else if (data_16bit >= HDRKneePointP3 + 1 )
+		{
+			pBayer_32bit[i] = clip_MinMax((data_16bit - HDRKneePointP3 + 1) * HDRKneePointRatio3 + HDRKneePointNewP4,0,HDR_OUTPUT_MAX_VALUE);
+		}		
+		else
+		{
+			pBayer_32bit[i] = 0;
+		}
+	}
+
+
+	delete [] pBayer_14bit;
+	delete [] pBayer_32bit;
+}

@@ -1,0 +1,8 @@
+{
+    "python.linting.pep8Enabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "vim.useCtrlKeys": false,
+    "files.trimTrailingWhitespace": true,
+    "python.pythonPath": "/home/coolwind/anaconda3/envs/CoolTrader/bin/python"
+}
