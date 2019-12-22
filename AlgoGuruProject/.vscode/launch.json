@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "Python: Current File",
             "type": "python",
@@ -20,11 +19,34 @@
             "console": "externalTerminal"
         },
         {
-            "name": "(gdb) Bash on Windows Launch",
+            "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            //"program": "enter program name, for example ${workspaceFolder}/a.exe",
-            //"program": "/mnt/c/Users/coolw/source/repos/C-Plus-Plus/${fileBasenameNoExtension}.exe",
+            "program": "${workspaceFolder}/ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe",
+            "args": [
+                "<",
+                "input.txt",
+                ">",
+                "output.txt",
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/ToDo/${fileBasenameNoExtension}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Pipe Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            // "program": "${workspaceFolder}/ToDo/${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe",
             "program": "./${fileBasenameNoExtension}.exe",
             "args": [
                 "<",
@@ -33,18 +55,19 @@
                 "output.txt",
             ],
             "stopAtEntry": false,
+            // "cwd": "${workspaceFolder}/ToDo/${fileBasenameNoExtension}",
             "cwd": "./",
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false,
             "pipeTransport": {
                 "debuggerPath": "/usr/bin/gdb",
                 "pipeProgram": "${env:windir}\\system32\\bash.exe",
                 "pipeArgs": [
                     "-c"
                 ],
-                "pipeEnv": {},
-                "pipeCwd": "${workspaceFolder}/ToDo/${fileBasenameNoExtension}"
+                "pipeCwd": "${workspaceFolder}/ToDo/${fileBasenameNoExtension}",
             },
+            "MIMode": "gdb",
             "sourceFileMap": {
                 "/mnt/c": "c:\\"
             },

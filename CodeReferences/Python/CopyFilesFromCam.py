@@ -13,7 +13,7 @@ from PIL.ExifTags import TAGS
 import cv2
 '''
 
-DRIVE_CAM = 'U:'
+DRIVE_CAM = 'E:'
 PHOTO_DIR_IN_CAM = 'DCIM'
 PHOTO_EXT = 'GIF'
 # VIDEO_DIR_IN_CAM = 'MP_ROOT'
