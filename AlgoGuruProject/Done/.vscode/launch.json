@@ -13,30 +13,53 @@
             "console": "externalTerminal"
         },
         {
-            "name": "(gdb) Bash on Windows Launch",
+            "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            //"program": "enter program name, for example ${workspaceFolder}/a.exe",
-            //"program": "/mnt/c/Users/coolw/source/repos/C-Plus-Plus/${fileBasenameNoExtension}.exe",
+            "program": "${workspaceFolder}/${fileBasenameNoExtension}/${fileBasenameNoExtension}.exe",
+            "args": [
+                "<",
+                "input.txt",
+                ">",
+                "output.txt",
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/${fileBasenameNoExtension}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Pipe Launch",
+            "type": "cppdbg",
+            "request": "launch",
             "program": "./${fileBasenameNoExtension}.exe",
             "args": [
-                "<","input.txt",
-                ">","output.txt",
+                "<",
+                "input.txt",
+                ">",
+                "output.txt",
             ],
             "stopAtEntry": false,
             "cwd": "./",
-            "environment": [
-            ],
-            "externalConsole": true,
+            "environment": [],
+            "externalConsole": false,
             "pipeTransport": {
                 "debuggerPath": "/usr/bin/gdb",
                 "pipeProgram": "${env:windir}\\system32\\bash.exe",
                 "pipeArgs": [
                     "-c"
                 ],
-                "pipeEnv": {},
-                "pipeCwd": "${workspaceFolder}/${fileBasenameNoExtension}"
+                "pipeCwd": "${workspaceFolder}/${fileBasenameNoExtension}",
             },
+            "MIMode": "gdb",
             "sourceFileMap": {
                 "/mnt/c": "c:\\"
             },
