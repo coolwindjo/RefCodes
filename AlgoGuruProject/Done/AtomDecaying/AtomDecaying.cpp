@@ -223,8 +223,6 @@ private:
 				}
 			}
 		}
-
-
 	}
 
 	void _FindLinearCrash()

@@ -38,7 +38,7 @@ constexpr int MAX_NUM_COLS = MAX_MAP_SIZE + MAX_TIME;
 #define TEST
 #define TEST_GEN 3
 #endif // 1
-int g_arMap[2][MAX_NUM_ROWS][MAX_NUM_COLS];
+int g_arMap[2][MAX_NUM_ROWS][MAX_NUM_COLS];	/**< [0]: Effective map, [1]: Temporary map to be determined by extention policy */
 class CProbSolve
 {
 	int m_initRowsN;
@@ -112,10 +112,7 @@ private:
 			_PrintMap();
 #endif // TEST
 
-			if (!vPrevExtendedCells.empty()) {
-				// update the map and the queue with previously extended cells
-				_UpdateMapAndQueue(vPrevExtendedCells, arqLifePos[i]);
-			}
+			_UpdateMapAndQueue(vPrevExtendedCells, arqLifePos[i]);
 
 			// visit all the stem cells in the current queue
 			while (!arqLifePos[i].empty()) {
@@ -151,7 +148,7 @@ private:
 						_UpdateRange(nextRow, nextCol);
 
 						// extention candidates which will get old from the next after the next generation
-						vPrevExtendedCells.push_back(i_ii((2 * val) + 1, ii(nextRow, nextCol)));
+						vPrevExtendedCells.push_back(i_ii(((2 * val) + 1), ii(nextRow, nextCol)));
 					}
 				}
 			}	// while (!m_arqLifePos[i].empty())
@@ -173,7 +170,7 @@ private:
 			const int col = life_pos.second.second;
 			const int val = g_arMap[1][row][col];
 			if (life_pos.first == (2 * val) + 1) {
-				// resultant extentions
+				// final extention value
 				g_arMap[0][row][col] = val;
 
 				// it start to get old from the next generation
