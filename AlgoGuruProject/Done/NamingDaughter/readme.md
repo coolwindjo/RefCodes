@@ -1,6 +1,6 @@
 # Problem information
 
-<https://www.swexpertacademy.com/main/code/problem/problemDetail.do>
+<https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWm8hNu6llcDFASj&categoryId=AWm8hNu6llcDFASj&categoryType=CODE>
 
 BFS with generations
 
