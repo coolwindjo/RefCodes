@@ -37,6 +37,11 @@
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
+                    "text": "python import sys;sys.path.insert(0, '/usr/share/gcc-8/python');from libstdcxx.v6.printers import register_libstdcxx_printers;register_libstdcxx_printers(None)",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
@@ -73,6 +78,11 @@
                 "/mnt/c": "c:\\"
             },
             "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "python import sys;sys.path.insert(0, '/usr/share/gcc-8/python');from libstdcxx.v6.printers import register_libstdcxx_printers;register_libstdcxx_printers(None)",
+                    "ignoreFailures": false
+                },
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",

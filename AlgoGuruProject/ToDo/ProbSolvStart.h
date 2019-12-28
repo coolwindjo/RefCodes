@@ -10,5 +10,8 @@ typedef pair<int, int> ii;
 typedef vector<ii> vii;
 typedef vector<int> vi;
 typedef vector<vi> vvi;
+typedef vector<string> vstr;
+typedef pair<int, string> i_str;
+typedef vector<i_str> vi_str;
 typedef long long ll;
 constexpr int INF = 987654321;

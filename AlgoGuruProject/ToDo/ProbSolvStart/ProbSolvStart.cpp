@@ -1,4 +1,4 @@
-#include "ProbSolvStart.h"
+#include "../ProbSolvStart.h"
 
 #if 1
 #define TEST
@@ -19,10 +19,8 @@ typedef enum {
 constexpr int DIR[eDIR_LEN][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
 
 
-// constexpr int NUM_HOUSES = 8;
 class CProbSolv
 {
-    // vvi m_vviDualStates;
 public:
     CProbSolv()
     {
@@ -32,25 +30,39 @@ public:
 private:
     void _Solve(){
 
-        // vi viStates;
-        // FOR(s, NUM_HOUSES){
-        //     int state;
-        //     cin >> state;
-        //     viStates.push_back(state);
-        // }
-        // m_vviDualStates.push_back(viStates);
-        // m_vviDualStates.push_back(viStates);
+#if 0
+        int numFeatureRequests = 0;
+        cin >> numFeatureRequests;
 
-        // int days = 0;
-        // cin >> days;
-        // int states[NUM_HOUSES];
-        // FOR(i, NUM_HOUSES){
-        //     states[i] = viStates[i];
-        // }
-        // vi viAns = cellCompete(states, days);
-        // for(auto ans : viAns){
-        //     cout << ans << " ";
-        // }
+        vstr featureRequests;
+        FOR(i, numFeatureRequests){
+            string strFeRe;
+            std::getline(std::cin, strFeRe);
+            if(strFeRe.length() == 0){
+                i--;
+                continue;
+            }
+            featureRequests.push_back(strFeRe);
+        }
+#endif
+
+#if 0
+        int rows = 0;
+        int columns = 0;
+        cin >> rows;
+        cin >> columns;
+
+        vvi grid;
+        FOR(i, rows){
+            vi rowG;
+            FOR(j, columns){
+                int val;
+                cin >> val;
+                rowG.push_back(val);
+            }
+            grid.push_back(rowG);
+        }
+#endif
         
     }
 

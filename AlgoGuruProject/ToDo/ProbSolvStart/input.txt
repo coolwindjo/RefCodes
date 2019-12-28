@@ -1,5 +1,12 @@
-2
-1 0 0 0 0 1 0 0
 1
-1 1 1 0 1 1 1 1
-2
+3
+Best services provided by anacell,
+betacellular has great services,
+anacell provides much better services than all other
+
+5 5
+1 0 0 0 0  
+0 1 0 0 0  
+0 0 1 0 0  
+0 0 0 1 0  
+0 0 0 0 1  
