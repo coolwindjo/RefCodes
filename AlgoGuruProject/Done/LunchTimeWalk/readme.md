@@ -1,3 +1,0 @@
-# Problem information
-
-Implementation
