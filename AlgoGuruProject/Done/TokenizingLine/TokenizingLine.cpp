@@ -1,8 +1,4 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-
-using namespace std;
+#include "../../ProbSolvStart.h"
 
 int main()
 {

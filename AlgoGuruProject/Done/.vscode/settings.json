@@ -34,8 +34,10 @@
         "xmemory0": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
-	},
+        "xutility": "cpp",
+        "*.tcc": "cpp",
+        "map": "cpp"
+    },
 	"python.pythonPath": "C:\\ProgramData\\Anaconda3\\python.exe",
 	"python.linting.pylintEnabled": true
 }

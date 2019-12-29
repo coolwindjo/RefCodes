@@ -1,21 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
+#include "../../ProbSolvStart.h"
 
-inline const int WarnIfNot(const int condFlag, const char* condition){
-	if (condFlag == 0){
-		cout << "Warning: [" << condition << "] is violated!\n";
-	}
-	return condFlag;
-}
-#define W_IFNOT(condition) WarnIfNot((condition), (#condition))
-#define FOR(i, size) for(int (i)=0; (i)<(size); (i)++)
-
-typedef pair<int, int> ii;
-typedef vector<ii> vii;
-typedef vector<int> vi;
-const int INF = 1e9;
 const int MAX_N = 100 + 1;
 const int MAX_M = (int)((double)(MAX_N*(MAX_N-1)) * 0.5);
 

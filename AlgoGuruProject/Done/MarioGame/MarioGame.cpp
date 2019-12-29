@@ -1,12 +1,4 @@
-#include <iostream>
-using namespace std;
-const int WarnIfNot(const int condFlag, const char* condition){
-	if(condFlag == 0){
-		cout << "Warning: [" << condition << "] is violated!\n";
-	}
-	return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond))
+#include "../../ProbSolvStart.h"
 
 const int MAX_N = 150000 + 10;
 int N;//버섯 수
@@ -19,36 +11,31 @@ void InputData(){
 	}
 }
 
-const int FindMaxH(const int N, const int (&P)[MAX_N]){
-	int h = 0;
-	int ud = 1;	
-	for (int i=0; i<N; i++){
-		if(ud == 1){
-			if(P[i] > P[i+1]){
-				// go down
-				h += P[i];
-				ud = -1;
-			}
-		}
-		else{
-			if(P[i] < P[i+1]){
-				// go up
-				h -= P[i];
-				ud = 1;
-			}
-		}	
-	}
-	
-	return h;
-}
-
 int main(){
-	int ans = -1;
 
 	InputData();			//	입력 함수
 
 	//	코드를 작성하세요
-	ans = FindMaxH(N, P);
+	int ud = 1;	
+	int ans = 0;
+	for (int i=0; i<N; i++){
+		const int val = P[i];
+		const int next = P[i+1];
+		if(ud == 1){
+			if(val > next){
+				// go down
+				ans += val;
+				ud = -1;
+			}
+		}
+		else{
+			if(val < next){
+				// go up
+				ans -= val;
+				ud = 1;
+			}
+		}	
+	}
 	
 	cout << ans << endl;	//	정답 출력
 	return 0;

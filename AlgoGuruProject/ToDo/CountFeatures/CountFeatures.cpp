@@ -1,28 +1,7 @@
-#include "../ProbSolvStart.h"
+#include "../../ProbSolvStart.h"
 
-#if 1
-#define TEST
-#endif // 1
-
-static const int WarnIfNot(const int condFlag, const char* condition){
- 	if (condFlag == 0) {
-        cout << "Warning: [" << condition << "] is violated!\n";
-    }
-    return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond))
-#define P_IFNOT(cond, var) if (!W_IFNOT(cond)) cout << "= " << var <<endl;
-
-typedef enum {
-	eR=0, eD, eL, eU, eDIR_LEN
-} Dir_e;
-constexpr int DIR[eDIR_LEN][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
-
-
-// constexpr int NUM_HOUSES = 8;
 class CProbSolv
 {
-    // vvi m_vviDualStates;
 public:
     CProbSolv()
     {
@@ -68,47 +47,44 @@ private:
                                 vector<string> featureRequests)
     {
         // WRITE YOUR CODE HERE
-        // vi viVote;
-        vi_str vote_string;
-        FOR(i, numFeatures){
-            vote_string.push_back(i_str(0, possibleFeatures[i]));
+        vistr vistr_vote_string;
+        for(auto posFeat : possibleFeatures){
+            vistr_vote_string.push_back(i_str(0, posFeat));
         }
+
         for(auto featReq : featureRequests){
             vstr tokens;
-            stringstream check(featReq);
-            string strCandidate;
-            while(getline(check, strCandidate, ' ')){
+            stringstream lineStream(featReq);
+            string token;
+            while(getline(lineStream, token, ' ')){
                 int idx = 0;
-                if((idx = strCandidate.rfind(',')) > 0){
-                    strCandidate = strCandidate.substr(0,idx);
+                if((idx = token.rfind(',')) > 0){
+                    token = token.substr(0,idx);
                 }
                 
-                tokens.push_back(strCandidate);
+                tokens.push_back(token);
             }
 
             for(auto tok : tokens){
                 FOR(j, numFeatures)
                 if(possibleFeatures[j].compare(tok) == 0)
                 {
-                    vote_string[j].first++;
+                    vistr_vote_string[j].first--;
                 }
             }
         }
 
-        sort(vote_string.begin(), vote_string.end());
+        sort(vistr_vote_string.begin(), vistr_vote_string.end());
 
+        int numAns = topFeatures;
         vstr vstrAns;
-        FOR_DEC(i, numFeatures-topFeatures, numFeatures){
-            vstrAns.push_back(vote_string[i].second);
+        for(auto vote_string : vistr_vote_string){
+            vstrAns.push_back(vote_string.second);
+            if (--numAns == 0) break;
         }
 
         return vstrAns;
     }
-
-    // vector<int> cellCompete(int* states, int days){
-    //     const int resIdx = days%2;
-    //     return m_vviDualStates[resIdx];
-    // }
 
 };
 

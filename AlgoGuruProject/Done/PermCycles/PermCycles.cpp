@@ -1,21 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <unordered_set>
+#include "../../ProbSolvStart.h"
 
-using namespace std;
-
-const int WarnIfNot(const int condFlag, const char* condition){
-    if (condFlag == 0){
-        cout << "Warning: [" << condition << "] is violated!\n";
-    }
-    return condFlag;
-}
-#define W_IFNOT(condition) WarnIfNot((condition), (#condition))
-#define P_IFNOT(cond, var) if(!W_IFNOT((cond))) cout << "= " << (var) <<endl;
-#define FOR_INC(i, from, to) for(int (i)=(from); (i)<(to); (i)++)
-#define FOR(i, to) FOR_INC((i), 0, (to))
-
-typedef vector<int> vi;
 typedef unordered_set<int> usi;
 
 const int MAX_N = 1000+1;

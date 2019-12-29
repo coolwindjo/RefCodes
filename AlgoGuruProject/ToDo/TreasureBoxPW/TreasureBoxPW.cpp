@@ -1,7 +1,4 @@
-#include<iostream>
-#include<fstream>
-
-using namespace std;
+#include "../../ProbSolvStart.h"
 
 static const int MAX_NUM_CHARS_PER_SIDE = 7 + 1;
 static const int MAX_NUM_CHARS = 28 + 1;

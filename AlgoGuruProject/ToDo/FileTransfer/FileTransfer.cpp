@@ -1,28 +1,12 @@
-#include "../ProbSolvStart.h"
-
-#if 1
-#define TEST
-#endif // 1
-
-static const int WarnIfNot(const int condFlag, const char* condition){
- 	if (condFlag == 0) {
-        cout << "Warning: [" << condition << "] is violated!\n";
-    }
-    return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond))
-#define P_IFNOT(cond, var) if (!W_IFNOT(cond)) cout << "= " << var <<endl;
+#include "../../ProbSolvStart.h"
 
 typedef enum {
 	eR=0, eD, eL, eU, eDIR_LEN
 } Dir_e;
 constexpr int DIR[eDIR_LEN][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
 
-
-// constexpr int NUM_HOUSES = 8;
 class CProbSolv
 {
-    // vvi m_vviDualStates;
 public:
     CProbSolv()
     {
@@ -31,16 +15,6 @@ public:
     ~CProbSolv(){}
 private:
     void _Solve(){
-
-        // vi viStates;
-        // FOR(s, NUM_HOUSES){
-        //     int state;
-        //     cin >> state;
-        //     viStates.push_back(state);
-        // }
-        // m_vviDualStates.push_back(viStates);
-        // m_vviDualStates.push_back(viStates);
-
         int rows = 0;
         int columns = 0;
         cin >> rows;
@@ -69,7 +43,6 @@ int minimumHours(int rows, int columns, vector<vector<int> > grid)
 {
     // WRITE YOUR CODE HERE
     m_map.push_back(grid);
-    // m_map.push_back(grid);
     vii viiStarts;
     int i = 0;
     FOR(r, m_map[i].size()){

@@ -1,6 +1,4 @@
-#include <iostream>
-
-using namespace std;
+#include "../../ProbSolvStart.h"
 
 int ComputeNumBags(const int size1, const int size2, const int amount)
 {

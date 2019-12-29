@@ -1,15 +1,5 @@
-#include <iostream>
-#include <fstream>
-using namespace std;
-int WarnIfNot(const int condFlag, const char* condition)
-{
-	if (condFlag == 0)
-	{
-		cout << "Warn: [" << condition << "] is violated!" << endl;
-	}
-	return condFlag;
-}
-#define W_IFNOT(condition) WarnIfNot((condition), (#condition))
+#include "../../ProbSolvStart.h"
+
 const int MAX_GRID = 12;
 const int MAX_INT = (int)2e9;
 typedef struct

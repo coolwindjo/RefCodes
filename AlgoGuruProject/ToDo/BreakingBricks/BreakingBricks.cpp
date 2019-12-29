@@ -1,19 +1,4 @@
-#include<iostream>
-#include<cstring>
-
-//#define TEST
-
-using namespace std;
-
-inline int WarnIfNot(const int condFlag, const char* condition)
-{
-	if (condFlag == 0)
-	{
-		cout << "Warning: [" << condition << "] is violated!" << endl;
-	}
-	return condFlag;
-}
-#define W_IFNOT(condition) WarnIfNot((condition), (#condition))
+#include "../../ProbSolvStart.h"
 
 const size_t MAX_NUM_BALLS = (4U + 1U);
 const size_t MAX_NUM_ROWS = (15U + 1U);

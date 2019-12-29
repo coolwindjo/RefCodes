@@ -1,5 +1,4 @@
-#include <iostream>
-using namespace std;
+#include "../../ProbSolvStart.h"
 
 int N;//직원 수
 int T;//산책 시간(분단위)

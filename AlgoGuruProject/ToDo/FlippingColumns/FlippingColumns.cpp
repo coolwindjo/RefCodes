@@ -1,32 +1,8 @@
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-const int WarnIfNot(const int condFlag, const char* condition){
-    if (condFlag == 0){
-        cout << "Warning:[" << condition << "] is violated!\n";
-    }
-    return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond))
-#define P_IFNOT(cond, var) if(!W_IFNOT(cond)) cout << "= " << var << "\n";
-#define FOR_INC(i,from,to) for(size_t (i)=(from); (i)<(to); ++(i))
-#define FOR_DEC(i,from,to) for(size_t (i)=(from)-1; (i)>=(to); --(i))
-#define FOR(i,to) FOR_INC((i),0,(to))
-typedef pair<int, int> ii;
-typedef vector<ii> vii;
-
-const int INF = 1e9;
-
-// you can use includes, for example:
-// #include <algorithm>
-
-// you can write to stdout for debugging purposes, e.g.
-// cout << "this is a debug message" << endl;
+#include "../../ProbSolvStart.h"
 
 const size_t MAX_N = 100000 + 1;
 const size_t MAX_M = MAX_N;
+
 using namespace std;
 
 #define TEST
@@ -104,25 +80,25 @@ int main()
     ios_base::sync_with_stdio(false); cin.tie(NULL);
 	vector<vector<int>> vecvecnMap;
 	vector<int> vecnMap;
-	vecnMap.push_back(0);
-	vecnMap.push_back(0);
-	vecnMap.push_back(0);
-	vecnMap.push_back(0);
-	vecvecnMap.push_back(vecnMap);
-	vecnMap.clear();
-	vecnMap.push_back(0);
-	vecnMap.push_back(1);
-	vecnMap.push_back(0);
-	vecnMap.push_back(0);
-	vecvecnMap.push_back(vecnMap);
-	vecnMap.clear();
-	vecnMap.push_back(1);
-	vecnMap.push_back(0);
-	vecnMap.push_back(1);
-	vecnMap.push_back(1);
-	vecvecnMap.push_back(vecnMap);
+	FOR(j, 3){
+		vecnMap.clear();
+		FOR(i, 4){
+			int val = 0;
+			cin >> val;
+			vecnMap.push_back(val);
+		}
+		vecvecnMap.push_back(vecnMap);
+	}
 
 	solution(vecvecnMap);
 
+#ifdef TEST
+	for(auto viMap:vecvecnMap){
+		for(auto n:viMap){
+			cout << n << " ";
+		}
+		cout << endl;
+	}
+#endif
 	return 0;
 }

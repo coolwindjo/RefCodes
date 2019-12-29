@@ -1,10 +1,10 @@
-#include <stdio.h>
+#include "../../ProbSolvStart.h"
 
 int GetInputValue()
 {
     int nValue = 0;
 
-    scanf_s("%d", &nValue);
+    cin >> nValue;
 
     return nValue;
 }
@@ -44,7 +44,7 @@ int main()
 {
     int nValOfN = GetInputValue();
     int nTotalCases = CalculateCasesOfLionDeployment(nValOfN);
-    printf("%d", nTotalCases);
+    cout << nTotalCases << endl;
 
     return 0;
 }

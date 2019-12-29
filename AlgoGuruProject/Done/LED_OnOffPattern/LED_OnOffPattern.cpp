@@ -1,23 +1,6 @@
+#include "../../ProbSolvStart.h"
 //#define TEST2
-#include <iostream>
-#include <vector>
 
-using namespace std;
-
-inline static const int WarnIfNot(const int condFlag, const char* condition){
-	if (condFlag == 0){
-		cout << "Warning: [" << condition << "] is violated!\n";
-	}
-	return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond))
-#define P_IFNOT(cond, var) if(!W_IFNOT((cond))) cout << "= " << (var) <<endl;
-#define FOR_INC(i, from, to) for(int (i)=(from); (i)<(to); (i)++)
-#define FOR(i, to) FOR_INC((i), 0, (to))
-
-typedef pair<int, int> ii;
-typedef vector<ii> vii;
-typedef vector<int> vi;
 const int MAX_N = 100000 + 10; 
 
 int N;//LED 수

@@ -1,9 +1,5 @@
-#include <iostream>
-#include <list>
+#include "../../ProbSolvStart.h"
 
-using namespace std;
-
-#define FOR(i, size) for(int (i)=0; (i)<(size); (i)++)
 typedef list<int> li;
 
 int N;//직원 수

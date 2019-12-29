@@ -1,16 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "../../ProbSolvStart.h"
 
 int GetInputValue()
 {
     int nValue = 0;
 
-    scanf_s("%d", &nValue);
+    cin >> nValue;
 
     return nValue;
 }
 
-int GetRgbCosts(int nNumOfHouses)
+int* GetRgbCosts(int nNumOfHouses)
 {
     int** rgb_cost_matrix = { 0, };
     rgb_cost_matrix[0] = (int*) calloc(3, sizeof(int));

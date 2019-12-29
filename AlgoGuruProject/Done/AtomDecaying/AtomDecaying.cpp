@@ -1,54 +1,19 @@
-#if 0
-#define TEST
-#endif // 1
+#include "../../ProbSolvStart.h"
 
-#ifdef TEST
-#define PQII
-#endif // TEST
+// #define PQII
 
-#ifdef TEST
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <stack>
-#include <algorithm>
-#else
-#include <bits/stdc++.h>
-#endif // TEST
-
-using namespace std;
-
-static const int WarnIfNot(const int condFlag, const char* condition) {
-	if (condFlag == 0) {
-		cout << "Warning:[" << condition << "] is violated!\n";
-	}
-	return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond))
-#define P_IFNOT(cond, var) if (!W_IFNOT(cond)) cout << "= " << var << endl;
-#define FOR_INC(i, from, to) for (int (i)=(from); (i)<(to); ++(i))
-#define FOR_DEC(i, from, to) for (int (i)=(to)-1; (i)>=(from); --(i))
-#define FOR(i, to) FOR_INC((i), 0, (to))
-#define OOR(x, min, max) (((x)<(min)) || ((x)>(max)))
-
-typedef pair<int, int> ii;
-typedef pair<int, ii> i_ii;
-typedef vector<ii> vii;
-typedef vector<int> vi;
-typedef vector<vi> vvi;
-typedef long long ll;
 #ifdef PQII
 typedef priority_queue<ii> pqii;
 typedef enum {
 	eX = 0, eY, eXY_LEN
 } XorY_e;
 #endif // PQII
+
 typedef enum {
 	eU = 0, eD, eL, eR, eDIR_LEN
 } Dir_e;
 
 constexpr int N_DIR[eDIR_LEN] = {eD, eU, eR, eL};
-constexpr int INF = 987654321;
 constexpr int INIT_MAP_SIZE = 1000 + 1;
 constexpr int MAX_DBLD_TIME = 2 * 2 * INIT_MAP_SIZE;
 

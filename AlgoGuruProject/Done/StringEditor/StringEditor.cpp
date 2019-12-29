@@ -1,23 +1,6 @@
-#include <iostream>
-//#define STR
-#ifdef STR
-#include <string>
-#else 
-#include <list>
-#endif
-using namespace std;
+#include "../../ProbSolvStart.h"
 
-inline static const int WarnIfNot(const int condFlag, const char* condition){
-    if (condFlag == 0){
-        cout << "Warning:[" << condition << "] is violated!\n";
-    }
-    return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond)) 
-#define P_IFNOT(cond, var) if(!W_IFNOT(cond)) cout << "= " << (var) << "\n";
-#define FOR_INC(i,from,to) for(int (i)=(from); (i)<(to); (i)++)
-#define FOR_DEC(i,from,to) for(int (i)=(from); (i)>=(to); (i)--)
-#define FOR(i,to) FOR_INC((i),0,(to))
+//#define STR
 
 #ifdef STR
 typedef string lc;

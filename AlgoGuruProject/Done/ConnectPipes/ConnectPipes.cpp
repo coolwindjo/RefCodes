@@ -1,25 +1,9 @@
-#include <iostream>
-#include <queue>
-
-using namespace std;
-
-static const int WarnIfNot(const int condFlag, const char* condition){
-	if (condFlag == 0){
-		cout << "Warning: [" << condition << "] is violated!\n";
-	}
-	return condFlag;
-}
-#define W_IFNOT(condition) WarnIfNot((condition), (#condition))
-#define FOR(i, size) for (int (i)=0; (i)<(size); (i)++)
-#define OOR(val, min, max) (((val) < (min)) || ((val) > (max)))
-
-typedef pair<int, int> ii;
-typedef queue<ii> qii;
+#include "../../ProbSolvStart.h"
 
 const int MAX_N = 10 + 1;
 int N;//정사각형 지도 크기
 int X, Y;//수돗물 공급되는 시작 좌표, 가로, 세로
-int map[MAX_N][MAX_N];//지도 정보
+int g_map[MAX_N][MAX_N];//지도 정보
 
 int numPipes = 0;
 void Input_Data(void){
@@ -30,9 +14,9 @@ void Input_Data(void){
 		cin >> str;
 		for(int j = 0; j < N; j++){
 			if(str[j] < 'A')
-				map[i][j] = str[j] - '0';
-			else map[i][j] = str[j] - 'A' + 10;
-			if (map[i][j] != 0) numPipes++;
+				g_map[i][j] = str[j] - '0';
+			else g_map[i][j] = str[j] - 'A' + 10;
+			if (g_map[i][j] != 0) numPipes++;
 		}
 	}
 }
@@ -67,14 +51,14 @@ int CheckRangeFlagPipe(const ii nextPos, const int curDir){
 	if (OOR(nextPos.first, 0, N-1)) return 0;
 	if (OOR(nextPos.second, 0, N-1)) return 0;
 	int nextDir = N_DIR[curDir];
-	return CAN_GO[map[nextPos.first][nextPos.second]][nextDir];
+	return CAN_GO[g_map[nextPos.first][nextPos.second]][nextDir];
 }
 
 int cnt = 0;
 void DFS(const ii pos){
 	visit[pos.first][pos.second] = ++cnt;
 	FOR(dir, NUM_DIRS){
-		if (CAN_GO[map[pos.first][pos.second]][dir] == 0) continue;
+		if (CAN_GO[g_map[pos.first][pos.second]][dir] == 0) continue;
 		ii nextPos(pos.first+DIR[dir][0], pos.second+DIR[dir][1]);
 		if (CheckRangeFlagPipe(nextPos, dir)){
 			DFS(nextPos);
@@ -89,7 +73,7 @@ void BFS(const ii start){
 	while(!iiPosQ.empty()){
 		ii pos = iiPosQ.front(); iiPosQ.pop();
 		FOR(dir, NUM_DIRS){
-			if (CAN_GO[map[pos.first][pos.second]][dir] == 0) continue;
+			if (CAN_GO[g_map[pos.first][pos.second]][dir] == 0) continue;
 			ii nextPos(pos.first+DIR[dir][0], pos.second+DIR[dir][1]);
 			if (CheckRangeFlagPipe(nextPos, dir)){
 				visit[nextPos.first][nextPos.second] = ++cnt;

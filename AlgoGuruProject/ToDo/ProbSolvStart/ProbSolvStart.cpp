@@ -1,17 +1,4 @@
-#include "../ProbSolvStart.h"
-
-#if 1
-#define TEST
-#endif // 1
-
-static const int WarnIfNot(const int condFlag, const char* condition){
- 	if (condFlag == 0) {
-        cout << "Warning: [" << condition << "] is violated!\n";
-    }
-    return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond))
-#define P_IFNOT(cond, var) if (!W_IFNOT(cond)) cout << "= " << var <<endl;
+#include "../../ProbSolvStart.h"
 
 typedef enum {
 	eR=0, eD, eL, eU, eDIR_LEN
@@ -31,18 +18,18 @@ private:
     void _Solve(){
 
 #if 0
-        int numFeatureRequests = 0;
-        cin >> numFeatureRequests;
+        int numLines = 0;
+        cin >> numLines;
 
-        vstr featureRequests;
-        FOR(i, numFeatureRequests){
-            string strFeRe;
-            std::getline(std::cin, strFeRe);
-            if(strFeRe.length() == 0){
+        vstr lines;
+        FOR(i, numLines){
+            string line;
+            std::getline(std::cin, line);
+            if(line.length() == 0){
                 i--;
                 continue;
             }
-            featureRequests.push_back(strFeRe);
+            lines.push_back(line);
         }
 #endif
 

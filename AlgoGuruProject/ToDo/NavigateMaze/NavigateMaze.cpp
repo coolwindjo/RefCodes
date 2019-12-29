@@ -1,9 +1,4 @@
-#include <iostream>
-#include <cstdio>
-#include <queue>
-#include <string>
-
-using std::queue;
+#include "../../ProbSolvStart.h"
 
 class CNode
 {

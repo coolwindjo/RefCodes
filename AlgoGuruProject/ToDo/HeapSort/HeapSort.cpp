@@ -1,17 +1,4 @@
-#include <iostream>
-#include <cstring>
-
-using namespace std;
-
-inline int WarnIfNot(const int condFlag, const char* condition)
-{
-	if (condFlag == 0)
-	{
-		cout << "Warning: [" << condition << "] is violated!" << endl;
-	}
-	return condFlag;
-}
-#define W_IFNOT(condition) WarnIfNot((condition)), (#condition))
+#include "../../ProbSolvStart.h"
 
 typedef struct {
 	int * heap;
