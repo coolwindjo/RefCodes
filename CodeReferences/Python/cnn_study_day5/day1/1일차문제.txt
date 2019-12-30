@@ -1,0 +1,24 @@
+1. 그래프 객체를 생성한 후 이를 이용하여 노드들을 구성한다
+2. name scope('variables')을 아래와 같이 구성한다.
+  a. Session의 run메서드를 실행 시 사용하기 위한 global_step 노드를 구성한다.
+  b. 이전 출력 값을 저장하기 위한 previous_value 노드를 구성한다.   
+3. name scope('exercise_transformation을 아래와 같이 구성한다.
+  a. 그안에 3개의 name scope를 구성한다.(input, imtermediate_layer, output)
+  b. input에는 실행 시 입력 받은 노드를 구성한다. 이때 노드는 1-tensor로 
+   구성하고, 갯 수에 상관 없이 받을 수 있게 구성한다.
+  c intermediate_layer에는 input 노드로 부터 입력 받아 누적곱과 누적합을 
+  계산하는 노드 두 개를 구성한다.
+  d. output에는 imtermediate의 두 개의 노드로 부터 입력 받은 값을 
+   이용하여 합을 출력하는 노드를 구성한다.
+
+4. name scope(global_ops)에 변수 초기화를 해주는 노드를 구성한다. 
+5. test 함수를 구성하여 구동하여 결과 값을 출력하게 한다.
+  예) test ([2,8])
+      test ([3,1,3,3])
+      test ([8])
+      test ([2,3,7])	
+
+6. 출력은 아래와 같이 한다.
+   step:1, result:26.0, total_result:26.0
+7. m_graph 디렉토리에 tensorboard에서 사용할 수 있는 로그를 저장한다.
+      

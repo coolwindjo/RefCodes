@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CVIConfig>
+  <Header xmlns="" copyright="LG Electronics">
+    The LGRP for ADAS
+    <Application name="CVIConfig" version="0.9 beta"/>
+  </Header>
+  <parameterTable>
+    <!-- ====================================================================== -->
+    <!-- 1. Target variation -->
+    <!-- ====================================================================== -->
+    <parameter name="use_default" value="0"/>
+    <!-- [degree] -->
+    <parameter name="fTargetAngle_roll" 	value="0.0000e-000"/>
+    <parameter name="fTargetAngle_pitch" 	value="0.0000e-000"/>
+    <parameter name="fTargetAngle_yaw" 		value="6.0000e+001"/>
+    <!-- ====================================================================== -->
+    <!-- 2. Robustness test -->
+    <!-- ====================================================================== -->
+    <parameter name="noise" value="0"/>
+    <parameter name="salt_and_pepper" value="0"/>  
+  </parameterTable>
+</CVIConfig>

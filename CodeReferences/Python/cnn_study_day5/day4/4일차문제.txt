@@ -1,0 +1,19 @@
+1. CIFAR-10 데이터를 이용하여 10가지 물체를 구별할 수 있는 dnn 모델과 cnn 모델을 
+   keras를 이용하여 생성한다.
+
+   from tensorflow.python.keras.datasets import cifar10
+
+   num_classes = 10
+   im_rows = 32
+   im_cols = 32
+   im_size = im_rows * im_cols * 3
+
+
+   (X_train, y_train), (X_test, y_test) = cifar10.load_data()
+   
+   labels = ["airplane", "automobile", "bird", "cat", "deer", 
+             "dog", "frog", "horse", "ship", "truck"]
+
+
+2. 데이터를 통해 학습 후 각 각 두 모델을 이용하여 제공한 이미지 파일을 판별하는 
+   프로그램을 구성한다.

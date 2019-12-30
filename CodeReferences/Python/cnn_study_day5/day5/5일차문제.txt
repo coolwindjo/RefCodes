@@ -1,0 +1,6 @@
+1. AutoEncoder 모델을 케라스를 이용하여 Fully connected layer만으로 구성한다.
+2. class AE를 구성한다.
+3. 클래스 내부에 Enconder와 Decoder를 구성한다.
+4. show_ae() 메서드를 구성하여 입력 이미지와 디코더 이미지를  출력할 수 있게 한다.
+        
+   

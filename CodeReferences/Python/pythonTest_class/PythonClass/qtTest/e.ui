@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>405</width>
+    <height>417</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="lineEditMain">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>90</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>405</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_1">
+    <property name="title">
+     <string>메뉴1(&amp;M)</string>
+    </property>
+    <widget class="QMenu" name="menutest1">
+     <property name="title">
+      <string>test1</string>
+     </property>
+     <addaction name="actiontest11"/>
+     <addaction name="actiontest22"/>
+    </widget>
+    <addaction name="actiondialog"/>
+    <addaction name="menutest1"/>
+    <addaction name="separator"/>
+    <addaction name="actiontest2"/>
+   </widget>
+   <addaction name="menu_1"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actiondialog"/>
+   <addaction name="actiontest2"/>
+  </widget>
+  <action name="actiondialog">
+   <property name="icon">
+    <iconset>
+     <normaloff>../data/ico1.ico</normaloff>../data/ico1.ico</iconset>
+   </property>
+   <property name="text">
+    <string>다이아로그...(&amp;D)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+D</string>
+   </property>
+  </action>
+  <action name="actiontest11">
+   <property name="text">
+    <string>test11</string>
+   </property>
+  </action>
+  <action name="actiontest22">
+   <property name="text">
+    <string>test22</string>
+   </property>
+  </action>
+  <action name="actiontest2">
+   <property name="icon">
+    <iconset>
+     <normaloff>../data/ico2.ico</normaloff>../data/ico2.ico</iconset>
+   </property>
+   <property name="text">
+    <string>TestToolBar</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

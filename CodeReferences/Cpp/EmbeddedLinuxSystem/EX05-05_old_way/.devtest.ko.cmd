@@ -1,0 +1,1 @@
+cmd_/home/user/work/practice/EX05-05_old_way/devtest.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/user/work/practice/EX05-05_old_way/devtest.ko /home/user/work/practice/EX05-05_old_way/devtest.o /home/user/work/practice/EX05-05_old_way/devtest.mod.o ;  true

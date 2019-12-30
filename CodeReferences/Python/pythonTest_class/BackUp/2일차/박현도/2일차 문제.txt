@@ -1,0 +1,27 @@
+import mymodule
+
+a=input('이름:')
+b=int(input('국어:'))
+c=int(input('영어:'))
+d=int(input('수학:'))
+menu=input('계속 입력하시겠습니까(y/n)? ')
+if(menu=='y')
+    mymodule.funca();
+else
+    mymodule.funcb()
+
+///mymodule
+def hap(a,b):
+    return a+b
+def gop(a,b):
+    return a*b
+def funca():
+    a=input('이름:')
+    b=int(input('국어:'))
+    c=int(input('영어:'))
+    d=int(input('수학:'))
+    return a,b,c,d
+def funcb():
+     print('-----------------------------------------------------------------')
+     print('    이름        국어        영어	수학	총점	평균')
+     print('-----------------------------------------------------------------')
