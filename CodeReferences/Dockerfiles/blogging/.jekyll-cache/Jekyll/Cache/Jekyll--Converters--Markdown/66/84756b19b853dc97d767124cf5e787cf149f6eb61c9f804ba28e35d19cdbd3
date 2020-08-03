@@ -1,0 +1,35 @@
+I"¨<h3 id="github">GitHub</h3>
+<p><a href="https://github.com/coolwindjo/RefCodes/blob/master/AlgoGuruProject/Done/PermCycles" title="PermCycles">PermCycles</a></p>
+
+<p><img src="/assets/img/posting/perm_cycles.png" alt="PermCycles" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp">        <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m_N</span><span class="p">){</span>
+            <span class="n">usi</span><span class="o">::</span><span class="n">iterator</span> <span class="n">it</span> <span class="o">=</span> <span class="n">m_usiPerm</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="o">==</span> <span class="n">m_usiPerm</span><span class="p">.</span><span class="n">end</span><span class="p">()){</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">m_usiPerm</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">m_viPerm</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">){</span>
+                <span class="n">cycleCnt</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="kt">int</span> <span class="n">nodeFrom</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">nodeTo</span> <span class="o">=</span> <span class="n">m_viPerm</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">nodeFrom</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">nodeTo</span> <span class="o">!=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)){</span>
+                    <span class="n">usi</span><span class="o">::</span><span class="n">iterator</span> <span class="n">delit</span> <span class="o">=</span> <span class="n">m_usiPerm</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">nodeTo</span><span class="p">);</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">W_IFNOT</span><span class="p">(</span><span class="n">delit</span> <span class="o">!=</span> <span class="n">m_usiPerm</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span>
+                    <span class="k">else</span> <span class="p">{</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="n">m_usiPerm</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">delit</span><span class="p">);</span>
+                    <span class="n">nodeFrom</span> <span class="o">=</span> <span class="n">nodeTo</span><span class="p">;</span>
+                    <span class="n">nodeTo</span> <span class="o">=</span> <span class="n">m_viPerm</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">nodeFrom</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+                    <span class="n">P_IFNOT</span><span class="p">(</span><span class="n">nodeTo</span> <span class="o">&lt;=</span> <span class="n">m_N</span><span class="p">,</span> <span class="n">nodeTo</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="n">cycleCnt</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span></code></pre></figure>
+:ET

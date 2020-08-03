@@ -1,0 +1,50 @@
+I"#<h3 id="github">GitHub</h3>
+<p><a href="https://github.com/coolwindjo/RefCodes/blob/master/AlgoGuruProject/Done/LED_OnOffPattern" title="LED_OnOffPattern">LED_OnOffPattern</a></p>
+
+<p><img src="/assets/img/posting/led_onoffpattern.png" alt="LED_OnOffPattern" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">FindViolationPatterns</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vii</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">vviiCandLists</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">S</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+	<span class="n">FOR</span><span class="p">(</span><span class="n">even</span><span class="p">,</span> <span class="mi">2</span><span class="p">){</span>
+		<span class="n">vi</span> <span class="n">viAB</span><span class="p">;</span>
+		<span class="n">ii</span> <span class="n">iiCand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+		<span class="n">vii</span> <span class="n">viiCandList</span><span class="p">;</span>
+		<span class="n">FOR</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">N</span><span class="p">){</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="n">even</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+			<span class="n">viAB</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+			<span class="n">CollectCand</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">viAB</span><span class="p">,</span> <span class="n">iiCand</span><span class="p">,</span> <span class="n">viiCandList</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="n">viAB</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+		<span class="n">CollectCand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">viAB</span><span class="p">,</span> <span class="n">iiCand</span><span class="p">,</span> <span class="n">viiCandList</span><span class="p">);</span>
+
+		<span class="n">vviiCandLists</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">viiCandList</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span> <span class="nf">FindMaxLengthWithFlip</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vii</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">vviiCandLists</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">maxLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">){</span>
+		<span class="n">ii</span> <span class="n">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">nextBegin</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+		<span class="k">const</span> <span class="kt">int</span> <span class="n">numLoops</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">vviiCandLists</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">size</span><span class="p">();</span>
+		<span class="n">FOR</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">numLoops</span><span class="p">){</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+				<span class="n">range</span><span class="p">.</span><span class="n">second</span> <span class="o">=</span> <span class="n">vviiCandLists</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">at</span><span class="p">(</span><span class="n">j</span><span class="p">).</span><span class="n">first</span><span class="p">;</span>
+				<span class="n">CheckMaxLenRange</span><span class="p">(</span><span class="n">range</span><span class="p">,</span> <span class="n">maxLen</span><span class="p">);</span>
+				<span class="n">range</span><span class="p">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">nextBegin</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="n">nextBegin</span> <span class="o">=</span> <span class="n">vviiCandLists</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">at</span><span class="p">(</span><span class="n">j</span><span class="p">).</span><span class="n">second</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="n">range</span><span class="p">.</span><span class="n">second</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+		<span class="n">CheckMaxLenRange</span><span class="p">(</span><span class="n">range</span><span class="p">,</span> <span class="n">maxLen</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">maxLen</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+:ET

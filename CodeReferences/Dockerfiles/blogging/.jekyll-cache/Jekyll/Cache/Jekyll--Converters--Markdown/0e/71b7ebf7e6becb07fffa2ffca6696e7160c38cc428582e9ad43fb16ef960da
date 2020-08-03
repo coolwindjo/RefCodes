@@ -1,0 +1,50 @@
+I"â<h3 id="github">GitHub</h3>
+<p><a href="https://github.com/coolwindjo/RefCodes/blob/master/AlgoGuruProject/Done/Warehouse" title="Warehouse">Warehouse</a></p>
+
+<p><img src="/assets/img/posting/warehouse.png" alt="Warehouse" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">// Init</span>
+<span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">N</span><span class="p">){</span>
+    <span class="n">FOR</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">N</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span>
+            <span class="n">arDist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">else</span>
+            <span class="n">arDist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">M</span><span class="p">){</span>
+    <span class="n">arDist</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">arDist</span><span class="p">[</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Update with Floyd</span>
+<span class="n">FOR</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">N</span><span class="p">){</span>
+    <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">N</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">arDist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">INF</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+        <span class="n">FOR</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">N</span><span class="p">){</span>
+            <span class="n">arDist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">arDist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">arDist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">arDist</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Find min worst</span>
+<span class="kt">int</span> <span class="n">minWorst</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+<span class="n">FOR</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">N</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">worst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">N</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="n">i</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+        <span class="kt">int</span><span class="o">&amp;</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">arDist</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">W_IFNOT</span><span class="p">(</span><span class="n">dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dist</span> <span class="o">==</span> <span class="n">INF</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+        <span class="n">W_IFNOT</span><span class="p">(</span><span class="n">dist</span> <span class="o">&lt;</span> <span class="n">INF</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dist</span> <span class="o">&gt;</span> <span class="n">worst</span><span class="p">)</span>
+            <span class="n">worst</span> <span class="o">=</span> <span class="n">dist</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">worst</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">worst</span> <span class="o">&lt;</span> <span class="n">minWorst</span><span class="p">)</span>
+        <span class="n">minWorst</span> <span class="o">=</span> <span class="n">worst</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">minWorst</span><span class="p">;</span></code></pre></figure>
+:ET
