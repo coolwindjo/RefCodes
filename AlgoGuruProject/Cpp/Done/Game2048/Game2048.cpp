@@ -8,13 +8,13 @@ constexpr int DIR[eDIR_LEN][2] = { {0,1},{1,0},{0,-1},{-1,0} };
 constexpr int MAX_MOVES = 5;
 
 //#define TEST
-class CProbSolve
+class ProbSolve
 {
 	int m_mapSizeN;
 	int m_maxVal;
 
 public:
-	explicit CProbSolve(const int N) {
+	explicit ProbSolve(const int N) {
 		m_mapSizeN = N;
 		m_maxVal = 0;
 		vvi map;
@@ -29,7 +29,7 @@ public:
 		}
 		_Solve(map);
 	}
-	virtual ~CProbSolve() {}
+	virtual ~ProbSolve() {}
 
 private:
 	void _Solve(const vvi &map) {
@@ -451,7 +451,7 @@ int main()
 	ios_base::sync_with_stdio(false); cin.tie(nullptr);
 	int N = 0;
 	cin >> N;
-	CProbSolve ps(N);
+	ProbSolve ps(N);
 	return 0;
 }
 

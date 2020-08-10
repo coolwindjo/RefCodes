@@ -7,7 +7,7 @@ typedef enum {
 constexpr int DIR[eDIR_LEN][2] = { {0,1},{1,0} };
 
 //#define TEST
-class CProbSolve
+class ProbSolve
 {
 	int m_mapSizeN;
 	vvii m_map;
@@ -15,7 +15,7 @@ class CProbSolve
 	int m_minZeros;
 
 public:
-	explicit CProbSolve(const int N) {
+	explicit ProbSolve(const int N) {
 		m_minZeros = INF;
 		m_mapSizeN = N;
 		P_IFNOT(m_mapSizeN >= 2 , m_mapSizeN);
@@ -43,7 +43,7 @@ public:
 
 		_Solve();
 	}
-	virtual ~CProbSolve() {}
+	virtual ~ProbSolve() {}
 
 private:
 	int _CountFactor(const int factor, const int val) {
@@ -193,7 +193,7 @@ int main() {
 		int N = 0;
 		cin >> N;
 		cout << "#" << tc + 1 << " ";
-		CProbSolve ps(N);
+		ProbSolve ps(N);
 	}
 	return 0;
 }

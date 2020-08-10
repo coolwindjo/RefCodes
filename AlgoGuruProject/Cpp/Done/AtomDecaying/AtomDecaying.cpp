@@ -30,7 +30,7 @@ typedef struct Atom
 
 // time, (at1, at2)
 typedef i_ii Crash;
-class CProbSolve
+class ProbSolve
 {
 	int m_numAtomsN;
 	vector<Crash> m_vCrashes;
@@ -42,7 +42,7 @@ class CProbSolve
 #endif // PQII
 
 public:
-	explicit CProbSolve(const int N) {
+	explicit ProbSolve(const int N) {
 		m_numAtomsN = N;
 		FOR(i, eDIR_LEN){
 			vi viEmpty;
@@ -61,7 +61,7 @@ public:
 
 		_Solve();
 	}
-	virtual ~CProbSolve(){}
+	virtual ~ProbSolve(){}
 
 private:
 	void _Solve() {
@@ -355,7 +355,7 @@ int main() {
 		int N = 0;
 		cin >> N;
 		cout << "#" << tc + 1 << " ";
-		CProbSolve ps(N);
+		ProbSolve ps(N);
 	}
 	return 0;
 }

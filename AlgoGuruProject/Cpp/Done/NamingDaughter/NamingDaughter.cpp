@@ -11,7 +11,7 @@ constexpr int DIR[eDIR_LEN][2] = { { 1,0 },{ 0,1 } };
 #if 1
 #define USE_SORT_UNIQUE
 #endif
-class CProbSolv
+class ProbSolv
 {
 	vvc m_map;
 	vii m_viiPos;
@@ -25,10 +25,10 @@ class CProbSolv
 #endif // ~USE_SORT_UNIQUE
 
 public:
-	explicit CProbSolv() {
+	explicit ProbSolv() {
 		_Solve();
 	}
-	~CProbSolv() {}
+	~ProbSolv() {}
 
 private:
 	void _Solve() {
@@ -151,7 +151,7 @@ int main() {
 	cin >> numTCs;
 	FOR(tc, numTCs) {
 		cout << "#" << tc + 1 << " ";
-		CProbSolv ps;
+		ProbSolv ps;
 	}
 
 	return 0;

@@ -1,15 +1,15 @@
 #include "../../ProbSolvStart.h"
 
 constexpr int NUM_HOUSES = 8;
-class CProbSolv
+class ProbSolv
 {
     vvi m_vviDualStates;
 public:
-    CProbSolv()
+    ProbSolv()
     {
         _Solve();
     }
-    ~CProbSolv(){}
+    ~ProbSolv(){}
 private:
     void _Solve(){
         vi viStates;
@@ -85,7 +85,7 @@ int main(){
     cin >> numTCs;
     FOR(tc, numTCs){
         cout << "#" << tc+1 <<" ";
-        CProbSolv ps;
+        ProbSolv ps;
     }
     return 0;
 }

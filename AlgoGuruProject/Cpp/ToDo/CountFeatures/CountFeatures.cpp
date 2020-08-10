@@ -1,13 +1,13 @@
 #include "../../ProbSolvStart.h"
 
-class CProbSolv
+class ProbSolv
 {
 public:
-    CProbSolv()
+    ProbSolv()
     {
         _Solve();
     }
-    ~CProbSolv(){}
+    ~ProbSolv(){}
 private:
     void _Solve(){
 
@@ -95,7 +95,7 @@ int main(){
     cin >> numTCs;
     FOR(tc, numTCs){
         cout << "#" << tc+1 <<" ";
-        CProbSolv ps;
+        ProbSolv ps;
         cout << endl;
     }
     return 0;

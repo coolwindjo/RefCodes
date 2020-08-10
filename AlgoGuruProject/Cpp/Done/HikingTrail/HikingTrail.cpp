@@ -7,7 +7,7 @@ constexpr int DIR[4][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
 constexpr int MAX_HEIGHT = 20;
 
 //#define TEST
-class CProbSolv
+class ProbSolv
 {
 	size_t m_mapSizeN;
 	size_t m_maxDigK;
@@ -19,7 +19,7 @@ class CProbSolv
 	int m_maxDist;
 
 public:
-	explicit CProbSolv(const size_t N, const size_t K) {
+	explicit ProbSolv(const size_t N, const size_t K) {
 		m_mapSizeN = N;
 		m_maxDigK = K;
 		m_peak = 0;
@@ -45,7 +45,7 @@ public:
 		}
 		_Solve();
 	}
-	virtual ~CProbSolv() {}
+	virtual ~ProbSolv() {}
 
 private:
 	void _Solve(){
@@ -153,7 +153,7 @@ int main()
 		size_t K = 0;
 		cin >> N >> K;
 		cout << "#" << tc + 1 << " ";
-		CProbSolv ps(N,K);
+		ProbSolv ps(N,K);
 	}
 
 	return 0;

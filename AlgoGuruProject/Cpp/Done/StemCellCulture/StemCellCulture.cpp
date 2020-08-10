@@ -17,7 +17,7 @@ constexpr int MAX_NUM_COLS = MAX_MAP_SIZE + MAX_TIME;
 #define TEST_GEN 3
 #endif // 1
 int g_arMap[2][MAX_NUM_ROWS][MAX_NUM_COLS];	/**< [0]: Effective map, [1]: Temporary map to be determined by extention policy */
-class CProbSolve
+class ProbSolve
 {
 	int m_initRowsN;
 	int m_initColsM;
@@ -28,7 +28,7 @@ class CProbSolve
 	ii m_mapColRange;
 
 public:
-	explicit CProbSolve(const int N, const int M, const int K) {
+	explicit ProbSolve(const int N, const int M, const int K) {
 		(void)memset(&(g_arMap[0][0]), 0, sizeof(g_arMap));
 		m_initRowsN = N;
 		m_initColsM = M;
@@ -53,7 +53,7 @@ public:
 
 		_Solve();
 	}
-	virtual ~CProbSolve() {}
+	virtual ~ProbSolve() {}
 
 private:
 	void _Solve() {
@@ -222,7 +222,7 @@ int main() {
 		int N, M, K;
 		cin >> N >> M >> K;
 		cout << "#" << tc + 1 << " ";
-		CProbSolve ps(N, M, K);
+		ProbSolve ps(N, M, K);
 	}
 	return 0;
 }

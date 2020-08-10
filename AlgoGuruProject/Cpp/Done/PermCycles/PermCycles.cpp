@@ -4,14 +4,14 @@ typedef unordered_set<int> usi;
 
 const int MAX_N = 1000+1;
 
-class CProvSolv
+class ProbSolv
 {
     int m_N;
     vi m_viPerm;
     usi m_usiPerm;
 
 public:
-    explicit CProvSolv(const int N){
+    explicit ProbSolv(const int N){
         m_N = N;
         FOR(i, m_N){
             int permNum=0;
@@ -23,7 +23,7 @@ public:
 
         Solve();
     }
-    virtual ~CProvSolv(){}
+    virtual ~ProbSolv(){}
 
     void Solve(){
         int cycleCnt = 0;
@@ -69,7 +69,7 @@ int main(){
         int N=0;
         cin >> N;
         P_IFNOT(N > 0, N);
-        CProvSolv ps(N);
+        ProbSolv ps(N);
         cout << endl;
     }
 }

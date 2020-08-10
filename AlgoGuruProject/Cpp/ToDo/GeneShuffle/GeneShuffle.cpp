@@ -3,7 +3,7 @@
 typedef unordered_set<int> hsi;
 
 const int MAX_N = 100000 + 1;
-class CProvSolv{
+class ProbSolv{
     int m_N;
 #if 0
     vstr m_vstrSegment;
@@ -11,7 +11,7 @@ class CProvSolv{
     int m_arnGeneCodeA[MAX_N];
     int m_arnGeneCodeB[MAX_N];
 public:
-    explicit CProvSolv(const int N){
+    explicit ProbSolv(const int N){
         m_N = N;
         FOR(i, m_N){
             cin >> m_arnGeneCodeA[i];
@@ -21,7 +21,7 @@ public:
         }
         Solve();
     }
-    virtual ~CProvSolv(){}
+    virtual ~ProbSolv(){}
 
 #if 0
     int GetNumSegments(void){
@@ -159,7 +159,7 @@ int main(){
     FOR(i, numTCs){
         cin >> N;
         P_IFNOT(N>0, N);
-        CProvSolv ps(N);
+        ProbSolv ps(N);
 #if 0
         const int numSegments = ps.GetNumSegments();
         FOR(i, numSegments){

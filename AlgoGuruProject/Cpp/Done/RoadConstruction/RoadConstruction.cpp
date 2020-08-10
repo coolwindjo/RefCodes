@@ -9,7 +9,7 @@ constexpr int DIR[eDIR_LEN][2] = { {0,1},{1,0},{0,-1},{-1,0} };
 #ifdef TEST
 static size_t cnt = 0U;
 #endif // TEST
-class CProbSolve
+class ProbSolve
 {
 	int m_mapSizeN;
 	vvii m_map;
@@ -17,7 +17,7 @@ class CProbSolve
 	int m_minCost;
 
 public:
-	explicit CProbSolve(const int N) {
+	explicit ProbSolve(const int N) {
 		m_mapSizeN = N;
 		m_minCost = INF;
 		FOR(row, m_mapSizeN) {
@@ -35,7 +35,7 @@ public:
 		}
 		_Solve();
 	}
-	virtual ~CProbSolve(){}
+	virtual ~ProbSolve(){}
 
 private:
 	void _Solve() {
@@ -104,6 +104,6 @@ int main() {
 	ios_base::sync_with_stdio(false); cin.tie(nullptr);
 	int N = 0;
 	cin >> N;
-	CProbSolve ps(N);
+	ProbSolve ps(N);
 	return 0;
 }

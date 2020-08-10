@@ -5,14 +5,14 @@ typedef enum {
 } Dir_e;
 constexpr int DIR[eDIR_LEN][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
 
-class CProbSolv
+class ProbSolv
 {
 public:
-    CProbSolv()
+    ProbSolv()
     {
         _Solve();
     }
-    ~CProbSolv(){}
+    ~ProbSolv(){}
 private:
     void _Solve(){
         int rows = 0;
@@ -117,7 +117,7 @@ int main(){
     cin >> numTCs;
     FOR(tc, numTCs){
         cout << "#" << tc+1 <<" ";
-        CProbSolv ps;
+        ProbSolv ps;
         cout << endl;
     }
     return 0;
