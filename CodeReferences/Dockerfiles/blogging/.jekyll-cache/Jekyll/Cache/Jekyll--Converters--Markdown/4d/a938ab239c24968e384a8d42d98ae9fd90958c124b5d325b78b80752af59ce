@@ -1,0 +1,191 @@
+I"��<h3 id="github">GitHub</h3>
+<p><a href="https://github.com/coolwindjo/RefCodes/blob/master/AlgoGuruProject/Done/StemCellCulture" title="StemCellCulture">StemCellCulture</a></p>
+
+<p><img src="/assets/img/posting/stem_cell_culture.png" alt="StemCellCulture" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp">	<span class="k">explicit</span> <span class="nf">CProbSolve</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">M</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">K</span><span class="p">)</span> <span class="p">{</span>
+		<span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">g_arMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">g_arMap</span><span class="p">));</span>
+		<span class="n">m_initRowsN</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+		<span class="n">m_initColsM</span> <span class="o">=</span> <span class="n">M</span><span class="p">;</span>
+		<span class="n">m_timeLimitK</span> <span class="o">=</span> <span class="n">K</span><span class="p">;</span>
+		<span class="n">m_mapMaxRows</span> <span class="o">=</span> <span class="n">INIT_MAP_OFFSET</span> <span class="o">+</span> <span class="n">m_initRowsN</span> <span class="o">+</span> <span class="n">INIT_MAP_OFFSET</span><span class="p">;</span>
+		<span class="n">m_mapMaxCols</span> <span class="o">=</span> <span class="n">INIT_MAP_OFFSET</span> <span class="o">+</span> <span class="n">m_initColsM</span> <span class="o">+</span> <span class="n">INIT_MAP_OFFSET</span><span class="p">;</span>
+		<span class="n">m_mapRowRange</span><span class="p">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">m_mapMaxRows</span><span class="p">;</span>
+		<span class="n">m_mapRowRange</span><span class="p">.</span><span class="n">second</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="n">m_mapColRange</span><span class="p">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">m_mapMaxCols</span><span class="p">;</span>
+		<span class="n">m_mapColRange</span><span class="p">.</span><span class="n">second</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="n">FOR</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">m_initRowsN</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">FOR</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">m_initColsM</span><span class="p">)</span> <span class="p">{</span>
+				<span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+				<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">val</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+					<span class="n">g_arMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">row</span> <span class="o">+</span> <span class="n">INIT_MAP_OFFSET</span><span class="p">][</span><span class="n">col</span> <span class="o">+</span> <span class="n">INIT_MAP_OFFSET</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+					<span class="n">g_arMap</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">row</span> <span class="o">+</span> <span class="n">INIT_MAP_OFFSET</span><span class="p">][</span><span class="n">col</span> <span class="o">+</span> <span class="n">INIT_MAP_OFFSET</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+					<span class="n">_UpdateRange</span><span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="n">INIT_MAP_OFFSET</span><span class="p">,</span> <span class="n">col</span> <span class="o">+</span> <span class="n">INIT_MAP_OFFSET</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+
+		<span class="n">_Solve</span><span class="p">();</span>
+	<span class="p">}</span>
+
+	<span class="kt">void</span> <span class="nf">_BFSwithGenerations</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">queue</span><span class="o">&lt;</span><span class="n">i_ii</span><span class="o">&gt;</span> <span class="n">arqLifePos</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+		<span class="n">FOR_INC</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">m_mapRowRange</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">m_mapRowRange</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">FOR_INC</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">m_mapColRange</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">m_mapColRange</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">g_arMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">];</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+					<span class="n">arqLifePos</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">i_ii</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">val</span><span class="p">,</span> <span class="p">(</span><span class="n">ii</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">))));</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+
+		<span class="c1">// repeat the loop until time limit</span>
+		<span class="n">vector</span><span class="o">&lt;</span><span class="n">i_ii</span><span class="o">&gt;</span> <span class="n">vPrevExtendedCells</span><span class="p">;</span>
+		<span class="n">FOR</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">m_timeLimitK</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">gen</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">ni</span> <span class="o">=</span> <span class="p">(</span><span class="n">gen</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+
+			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">vPrevExtendedCells</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+				<span class="c1">// update the map and the queue with previously extended cells</span>
+				<span class="n">_UpdateMapAndQueue</span><span class="p">(</span><span class="n">vPrevExtendedCells</span><span class="p">,</span> <span class="n">arqLifePos</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+			<span class="p">}</span>
+
+			<span class="c1">// visit all the stem cells in the current queue</span>
+			<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">arqLifePos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="n">i_ii</span> <span class="n">life_pos</span> <span class="o">=</span> <span class="n">arqLifePos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">front</span><span class="p">();</span> <span class="n">arqLifePos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pop</span><span class="p">();</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">life_pos</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="n">life_pos</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+
+				<span class="c1">// getting old</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">life</span> <span class="o">=</span> <span class="n">life_pos</span><span class="p">.</span><span class="n">first</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">life</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+					<span class="c1">// dies</span>
+					<span class="n">g_arMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+					<span class="k">continue</span><span class="p">;</span>
+				<span class="p">}</span>
+
+				<span class="c1">// still alive: push into the next queue</span>
+				<span class="n">arqLifePos</span><span class="p">[</span><span class="n">ni</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">i_ii</span><span class="p">(</span><span class="n">life</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)));</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">g_arMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">];</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">life</span> <span class="o">&gt;</span> <span class="n">val</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+
+				<span class="c1">// now active!</span>
+				<span class="c1">// for extention, the map is going to be updated in the next loop</span>
+				<span class="n">FOR</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">eDIR_LEN</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">const</span> <span class="kt">int</span> <span class="n">nextRow</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="kt">DIR</span><span class="p">[</span><span class="n">dir</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+					<span class="k">const</span> <span class="kt">int</span> <span class="n">nextCol</span> <span class="o">=</span> <span class="n">col</span> <span class="o">+</span> <span class="kt">DIR</span><span class="p">[</span><span class="n">dir</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+					<span class="n">P_IFNOT</span><span class="p">(</span><span class="o">!</span><span class="n">OOR</span><span class="p">(</span><span class="n">nextRow</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m_mapMaxRows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">nextRow</span><span class="p">);</span>
+					<span class="n">P_IFNOT</span><span class="p">(</span><span class="o">!</span><span class="n">OOR</span><span class="p">(</span><span class="n">nextCol</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m_mapMaxCols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">nextCol</span><span class="p">);</span>
+					<span class="k">if</span> <span class="p">(</span><span class="n">g_arMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">nextRow</span><span class="p">][</span><span class="n">nextCol</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+
+					<span class="c1">// previously empty cell</span>
+					<span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">g_arMap</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">nextRow</span><span class="p">][</span><span class="n">nextCol</span><span class="p">])</span> <span class="p">{</span>
+						<span class="n">g_arMap</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">nextRow</span><span class="p">][</span><span class="n">nextCol</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+						<span class="n">_UpdateRange</span><span class="p">(</span><span class="n">nextRow</span><span class="p">,</span> <span class="n">nextCol</span><span class="p">);</span>
+
+						<span class="c1">// extention candidates which will get old from the next after the next generation</span>
+						<span class="n">vPrevExtendedCells</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i_ii</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">nextRow</span><span class="p">,</span> <span class="n">nextCol</span><span class="p">)));</span>
+					<span class="p">}</span>
+				<span class="p">}</span>
+			<span class="p">}</span>	<span class="c1">// while (!m_arqLifePos[i].empty())</span>
+
+		<span class="p">}</span> <span class="c1">// FOR(gen, m_timeLimitK)</span>
+	<span class="p">}</span>
+
+	<span class="kt">void</span> <span class="nf">_UpdateMapAndQueue</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">i_ii</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">vPrevExtendedCellsOut</span><span class="p">,</span> <span class="n">queue</span><span class="o">&lt;</span><span class="n">i_ii</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">qLifePosOut</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">vPrevExtendedCellsOut</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+			<span class="k">const</span> <span class="n">i_ii</span> <span class="n">life_pos</span> <span class="o">=</span> <span class="n">vPrevExtendedCellsOut</span><span class="p">.</span><span class="n">back</span><span class="p">();</span> <span class="n">vPrevExtendedCellsOut</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">life_pos</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="n">life_pos</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">g_arMap</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">];</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">life_pos</span><span class="p">.</span><span class="n">first</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+				<span class="c1">// resultant extentions</span>
+				<span class="n">g_arMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+
+				<span class="c1">// it start to get old from the next generation</span>
+				<span class="n">qLifePosOut</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">life_pos</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span></code></pre></figure>
+
+<h2 id="source-with-respective-queues-for-each-life-time">Source with respective queues for each life time</h2>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#pragma GCC optimize("O3")
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;memory.h&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="err"> </span>
+<span class="cp">#define BASE 151
+</span><span class="err"> </span>
+<span class="k">struct</span> <span class="nc">p</span> <span class="p">{</span>
+<span class="err">    </span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="err"> </span>
+<span class="kt">int</span> <span class="n">map</span><span class="p">[</span><span class="mi">360</span><span class="p">][</span><span class="mi">360</span><span class="p">];</span>
+<span class="n">p</span> <span class="n">q</span><span class="p">[</span><span class="mi">11</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">2001</span><span class="p">];</span>	<span class="c1">// life time, switching by 2, cell of each life time</span>
+<span class="err"> </span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span> <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="err">    </span><span class="k">register</span> <span class="kt">int</span> <span class="n">t</span><span class="p">,</span> <span class="n">tc</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">dx</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span> <span class="p">},</span> <span class="n">dy</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">},</span> <span class="n">idx</span><span class="p">[</span><span class="mi">11</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="p">};</span>
+<span class="err">     </span>
+<span class="err">    </span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">;</span>
+<span class="err">    </span><span class="k">for</span> <span class="p">(</span><span class="n">tc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">tc</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">;</span> <span class="o">++</span><span class="n">tc</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">        </span><span class="k">register</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">siz</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">tt</span><span class="p">;</span>
+<span class="err">        </span><span class="n">memset</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">map</span><span class="p">));</span>
+<span class="err">        </span><span class="n">memset</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">idx</span><span class="p">));</span>
+<span class="err">        </span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span> <span class="o">&gt;&gt;</span> <span class="n">M</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span>
+<span class="err">        </span><span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="err">        </span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">            </span><span class="n">nx</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">BASE</span><span class="p">;</span> <span class="n">ny</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">BASE</span><span class="p">;</span>
+<span class="err">            </span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">tt</span><span class="p">;</span>
+<span class="err">            </span><span class="k">if</span> <span class="p">(</span><span class="n">tt</span><span class="p">)</span> 
+<span class="err">                </span><span class="n">q</span><span class="p">[</span><span class="n">tt</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">[</span><span class="n">tt</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">tt</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="p">};</span>
+<span class="err">            </span><span class="n">map</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="n">tt</span><span class="p">;</span>
+<span class="err">        </span><span class="p">}</span>
+<span class="err">        </span><span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="c1">// for generations</span>
+<span class="err">        </span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">K</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">// for each life time</span>
+<span class="err">            </span><span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">                </span><span class="n">siz</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">];</span>
+<span class="err">                </span><span class="n">ni</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+<span class="err">                </span><span class="n">idx</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+				<span class="c1">// for each cell of each life time</span>
+<span class="err">                </span><span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">siz</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">                    </span><span class="n">p</span> <span class="o">&amp;</span><span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">][</span><span class="n">k</span><span class="p">];</span>
+<span class="err">                    </span><span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">r</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">                        </span><span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="n">x</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">x</span><span class="p">.</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">                            </span><span class="n">ans</span><span class="o">++</span><span class="p">;</span>
+<span class="err">                            </span><span class="n">map</span><span class="p">[</span><span class="n">x</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">x</span><span class="p">.</span><span class="n">y</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="err">                        </span><span class="p">}</span>
+<span class="err">                        </span><span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">][</span><span class="n">idx</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">]</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">x</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">.</span><span class="n">y</span> <span class="p">};</span>
+<span class="err">                    </span><span class="p">}</span>
+<span class="err">                    </span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">r</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">                        </span><span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">][</span><span class="n">idx</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">]</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">x</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">.</span><span class="n">y</span> <span class="p">};</span>
+<span class="err">                        </span><span class="k">for</span> <span class="p">(</span><span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="o">++</span><span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">                            </span><span class="n">nx</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">l</span><span class="p">];</span>
+<span class="err">                            </span><span class="n">ny</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">l</span><span class="p">];</span>
+<span class="err">                            </span><span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+<span class="err">                            </span><span class="n">map</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+<span class="err">                            </span><span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">][</span><span class="n">idx</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">]</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span> <span class="p">};</span>
+<span class="err">                        </span><span class="p">}</span>
+<span class="err">                    </span><span class="p">}</span>
+<span class="err">                    </span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">r</span> <span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">.</span><span class="n">r</span><span class="p">)</span> 
+<span class="err">                        </span><span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">][</span><span class="n">idx</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">ni</span><span class="p">]</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">x</span><span class="p">.</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">.</span><span class="n">y</span> <span class="p">};</span>
+<span class="err">                    </span><span class="k">else</span>
+<span class="err">                        </span><span class="n">ans</span><span class="o">--</span><span class="p">;</span>
+<span class="err">                </span><span class="p">}</span>
+<span class="err">            </span><span class="p">}</span>
+<span class="err">        </span><span class="p">}</span>
+<span class="err">        </span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">'#'</span> <span class="o">&lt;&lt;</span> <span class="n">tc</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+<span class="err">    </span><span class="p">}</span>
+<span class="err">    </span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+:ET

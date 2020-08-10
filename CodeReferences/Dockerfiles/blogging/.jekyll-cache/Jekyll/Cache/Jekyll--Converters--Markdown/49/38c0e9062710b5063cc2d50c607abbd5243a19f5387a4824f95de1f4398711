@@ -1,0 +1,171 @@
+I"(t<h3 id="github">GitHub</h3>
+<p><a href="https://github.com/coolwindjo/RefCodes/blob/master/AlgoGuruProject/Done/AtomDecaying" title="AtomDecaying">AtomDecaying</a></p>
+
+<p><img src="/assets/img/posting/atom_decaying.png" alt="AtomDecaying" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp">	<span class="k">explicit</span> <span class="nf">CProbSolve</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">m_numAtomsN</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+		<span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">eDIR_LEN</span><span class="p">){</span>
+			<span class="n">vi</span> <span class="n">viEmpty</span><span class="p">;</span>
+			<span class="n">m_vviAtomIdx</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">viEmpty</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="n">FOR</span><span class="p">(</span><span class="n">atIdx</span><span class="p">,</span> <span class="n">m_numAtomsN</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">enrg</span><span class="p">;</span>
+			<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="n">dir</span> <span class="o">&gt;&gt;</span> <span class="n">enrg</span><span class="p">;</span>
+			<span class="n">m_vAtoms</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Atom</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">enrg</span><span class="p">));</span>
+			<span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">dir</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">atIdx</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="n">_Solve</span><span class="p">();</span>
+	<span class="p">}</span>
+
+	<span class="kt">void</span> <span class="nf">_Solve</span><span class="p">()</span> <span class="p">{</span>
+		<span class="c1">// Find orthogonal crashes of earlier time than the times of relative atoms</span>
+		<span class="n">_FindOrthoCrash</span><span class="p">();</span>
+		<span class="n">_FindLinearCrash</span><span class="p">();</span>
+
+		<span class="c1">// Sum up the energy of atoms with the limited time</span>
+		<span class="k">const</span> <span class="kt">int</span> <span class="n">energySum</span> <span class="o">=</span> <span class="n">_SumUpEnergy</span><span class="p">();</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">energySum</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kt">void</span> <span class="nf">_FindOrthoCrash</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atI</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eD</span><span class="p">])</span> <span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atJ</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eR</span><span class="p">])</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at1</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atI</span><span class="p">];</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at2</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atJ</span><span class="p">];</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">xVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">yVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">xVector</span> <span class="o">==</span> <span class="n">yVector</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">const</span> <span class="kt">int</span> <span class="n">dbldTime</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xVector</span><span class="p">;</span>
+					<span class="n">m_vCrashes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Crash</span><span class="p">(</span><span class="n">dbldTime</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">atI</span><span class="p">,</span> <span class="n">atJ</span><span class="p">)));</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atI</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eL</span><span class="p">])</span> <span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atJ</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eU</span><span class="p">])</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at1</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atI</span><span class="p">];</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at2</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atJ</span><span class="p">];</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">xVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">yVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">xVector</span> <span class="o">==</span> <span class="n">yVector</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">const</span> <span class="kt">int</span> <span class="n">dbldTime</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xVector</span><span class="p">;</span>
+					<span class="n">m_vCrashes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Crash</span><span class="p">(</span><span class="n">dbldTime</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">atI</span><span class="p">,</span> <span class="n">atJ</span><span class="p">)));</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atI</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eD</span><span class="p">])</span> <span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atJ</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eL</span><span class="p">])</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at1</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atI</span><span class="p">];</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at2</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atJ</span><span class="p">];</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">xVector</span> <span class="o">=</span> <span class="n">at2</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">at1</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">yVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">xVector</span> <span class="o">==</span> <span class="n">yVector</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">const</span> <span class="kt">int</span> <span class="n">dbldTime</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xVector</span><span class="p">;</span>
+					<span class="n">m_vCrashes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Crash</span><span class="p">(</span><span class="n">dbldTime</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">atI</span><span class="p">,</span> <span class="n">atJ</span><span class="p">)));</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atI</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eR</span><span class="p">])</span> <span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atJ</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eU</span><span class="p">])</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at1</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atI</span><span class="p">];</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at2</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atJ</span><span class="p">];</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">xVector</span> <span class="o">=</span> <span class="n">at2</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">at1</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">yVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">xVector</span> <span class="o">==</span> <span class="n">yVector</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">const</span> <span class="kt">int</span> <span class="n">dbldTime</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xVector</span><span class="p">;</span>
+					<span class="n">m_vCrashes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Crash</span><span class="p">(</span><span class="n">dbldTime</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">atI</span><span class="p">,</span> <span class="n">atJ</span><span class="p">)));</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+
+
+	<span class="p">}</span>
+
+	<span class="kt">void</span> <span class="nf">_FindLinearCrash</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atI</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eD</span><span class="p">])</span> <span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atJ</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eU</span><span class="p">])</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at1</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atI</span><span class="p">];</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at2</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atJ</span><span class="p">];</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">xVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">xVector</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+		
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">yVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">yVector</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">const</span> <span class="kt">int</span> <span class="n">dbldTime</span> <span class="o">=</span> <span class="n">yVector</span><span class="p">;</span>
+					<span class="n">m_vCrashes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Crash</span><span class="p">(</span><span class="n">dbldTime</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">atI</span><span class="p">,</span> <span class="n">atJ</span><span class="p">)));</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atI</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eL</span><span class="p">])</span> <span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">atJ</span> <span class="o">:</span> <span class="n">m_vviAtomIdx</span><span class="p">[</span><span class="n">eR</span><span class="p">])</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at1</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atI</span><span class="p">];</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">at2</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">atJ</span><span class="p">];</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">yVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">yVector</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">xVector</span> <span class="o">=</span> <span class="n">at1</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">at2</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">xVector</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">const</span> <span class="kt">int</span> <span class="n">dbldTime</span> <span class="o">=</span> <span class="n">xVector</span><span class="p">;</span>
+					<span class="n">m_vCrashes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Crash</span><span class="p">(</span><span class="n">dbldTime</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">atI</span><span class="p">,</span> <span class="n">atJ</span><span class="p">)));</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="kt">int</span> <span class="nf">_SumUpEnergy</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kt">int</span> <span class="n">enrgSum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="n">sort</span><span class="p">(</span><span class="n">m_vCrashes</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">m_vCrashes</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+		<span class="n">m_vCrashes</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">m_vCrashes</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">m_vCrashes</span><span class="p">.</span><span class="n">end</span><span class="p">()),</span> <span class="n">m_vCrashes</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+		<span class="k">const</span> <span class="kt">int</span> <span class="n">numCrashes</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">m_vCrashes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+		<span class="n">FOR</span><span class="p">(</span><span class="n">crIdx</span><span class="p">,</span> <span class="n">numCrashes</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">const</span> <span class="n">Crash</span> <span class="n">dbldTime_at1at2</span> <span class="o">=</span> <span class="n">m_vCrashes</span><span class="p">[</span><span class="n">crIdx</span><span class="p">];</span>
+			<span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">atm1</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">dbldTime_at1at2</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span><span class="p">];</span>
+			<span class="n">Atom_t</span> <span class="o">&amp;</span><span class="n">atm2</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">dbldTime_at1at2</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">dbldTime</span> <span class="o">=</span> <span class="n">dbldTime_at1at2</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">((</span><span class="n">atm1</span><span class="p">.</span><span class="n">enrg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">atm1</span><span class="p">.</span><span class="n">enrg</span> <span class="o">!=</span> <span class="o">-</span><span class="n">dbldTime</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">((</span><span class="n">atm2</span><span class="p">.</span><span class="n">enrg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">atm2</span><span class="p">.</span><span class="n">enrg</span> <span class="o">!=</span> <span class="o">-</span><span class="n">dbldTime</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">atm1</span><span class="p">.</span><span class="n">enrg</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+				<span class="n">enrgSum</span> <span class="o">+=</span> <span class="n">atm1</span><span class="p">.</span><span class="n">enrg</span><span class="p">;</span>
+				<span class="n">atm1</span><span class="p">.</span><span class="n">enrg</span> <span class="o">=</span> <span class="o">-</span><span class="n">dbldTime</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">atm2</span><span class="p">.</span><span class="n">enrg</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+				<span class="n">enrgSum</span> <span class="o">+=</span> <span class="n">atm2</span><span class="p">.</span><span class="n">enrg</span><span class="p">;</span>
+				<span class="n">atm2</span><span class="p">.</span><span class="n">enrg</span> <span class="o">=</span> <span class="o">-</span><span class="n">dbldTime</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="n">enrgSum</span><span class="p">;</span>
+	<span class="p">}</span>
+
+<span class="cp">#ifdef PQII
+</span>	<span class="kt">void</span> <span class="nf">_FindLinearCrash</span><span class="p">(</span><span class="n">pqii</span> <span class="o">&amp;</span> <span class="n">pqiiSortedList</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">stack</span><span class="o">&lt;</span><span class="n">ii</span><span class="o">&gt;</span> <span class="n">atmS</span><span class="p">;</span>
+		<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">pqiiSortedList</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+			<span class="k">const</span> <span class="n">ii</span> <span class="n">XorY_atIdx</span> <span class="o">=</span> <span class="n">pqiiSortedList</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="n">pqiiSortedList</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+			<span class="k">const</span> <span class="n">Atom_t</span> <span class="n">atm</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">XorY_atIdx</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">atmS</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+				<span class="k">const</span> <span class="n">ii</span> <span class="n">prev_XorY_atIdx</span> <span class="o">=</span> <span class="n">atmS</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+				<span class="c1">// filter out duplicate atom index</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">XorY_atIdx</span><span class="p">.</span><span class="n">second</span> <span class="o">==</span> <span class="n">prev_XorY_atIdx</span><span class="p">.</span><span class="n">second</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+				<span class="k">const</span> <span class="n">Atom_t</span> <span class="n">prev_atm</span> <span class="o">=</span> <span class="n">m_vAtoms</span><span class="p">[</span><span class="n">prev_XorY_atIdx</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+				<span class="k">const</span> <span class="kt">int</span> <span class="n">dbldTime</span> <span class="o">=</span> <span class="n">prev_XorY_atIdx</span><span class="p">.</span><span class="n">first</span> <span class="o">-</span> <span class="n">XorY_atIdx</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">((</span><span class="n">prev_atm</span><span class="p">.</span><span class="n">dir</span> <span class="o">==</span> <span class="n">eD</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">prev_atm</span><span class="p">.</span><span class="n">dir</span> <span class="o">==</span> <span class="n">eL</span><span class="p">))</span> <span class="p">{</span>
+					<span class="k">if</span> <span class="p">((</span><span class="n">atm</span><span class="p">.</span><span class="n">dir</span> <span class="o">==</span> <span class="n">eU</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">atm</span><span class="p">.</span><span class="n">dir</span> <span class="o">==</span> <span class="n">eR</span><span class="p">))</span> <span class="p">{</span>
+						<span class="k">const</span> <span class="kt">int</span> <span class="n">smallerIdx</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">XorY_atIdx</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">prev_XorY_atIdx</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+						<span class="k">const</span> <span class="kt">int</span> <span class="n">biggerIdx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">XorY_atIdx</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">prev_XorY_atIdx</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+						<span class="n">m_vCrashes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Crash</span><span class="p">(</span><span class="n">dbldTime</span><span class="p">,</span> <span class="n">ii</span><span class="p">(</span><span class="n">smallerIdx</span><span class="p">,</span> <span class="n">biggerIdx</span><span class="p">)));</span>
+						<span class="n">atmS</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+						<span class="k">continue</span><span class="p">;</span>
+					<span class="p">}</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+			<span class="n">atmS</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">XorY_atIdx</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="cp">#endif // PQII</span></code></pre></figure>
+
+:ET

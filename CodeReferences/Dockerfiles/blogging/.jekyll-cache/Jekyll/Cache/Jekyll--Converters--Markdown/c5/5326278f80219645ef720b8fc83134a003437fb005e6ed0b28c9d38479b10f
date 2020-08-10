@@ -1,0 +1,49 @@
+I"b<h3 id="github">GitHub</h3>
+<p><a href="https://github.com/coolwindjo/RefCodes/blob/master/AlgoGuruProject/Done/CellCompete" title="CellCompete">CellCompete</a></p>
+
+<p><img src="/assets/img/posting/cell_compete.png" alt="CellCompete" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cellCompete</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">states</span><span class="p">,</span> <span class="kt">int</span> <span class="n">days</span><span class="p">){</span>
+        
+         <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">NUM_HOUSES</span><span class="p">){</span>
+            <span class="n">m_dualStates</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="n">FOR</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">days</span><span class="p">){</span>
+            <span class="k">const</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">d</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>
+            <span class="k">const</span> <span class="kt">int</span> <span class="n">ni</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>
+            <span class="n">FOR</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">NUM_HOUSES</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">h</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">m_dualStates</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">h</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+                        <span class="n">m_dualStates</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="k">else</span><span class="p">{</span>
+                        <span class="n">m_dualStates</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">h</span> <span class="o">==</span> <span class="p">(</span><span class="n">NUM_HOUSES</span><span class="o">-</span><span class="mi">1</span><span class="p">)){</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">m_dualStates</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+                        <span class="n">m_dualStates</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="k">else</span><span class="p">{</span>
+                        <span class="n">m_dualStates</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="k">else</span><span class="p">{</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">m_dualStates</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">m_dualStates</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">h</span><span class="o">+</span><span class="mi">1</span><span class="p">]){</span>
+                        <span class="n">m_dualStates</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="k">else</span><span class="p">{</span>
+                        <span class="n">m_dualStates</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">const</span> <span class="kt">int</span> <span class="n">resIdx</span> <span class="o">=</span> <span class="n">days</span><span class="o">%</span><span class="mi">2</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">m_dualStates</span><span class="p">[</span><span class="n">resIdx</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="err">}</span><span class="p">;</span></code></pre></figure>
+
+:ET

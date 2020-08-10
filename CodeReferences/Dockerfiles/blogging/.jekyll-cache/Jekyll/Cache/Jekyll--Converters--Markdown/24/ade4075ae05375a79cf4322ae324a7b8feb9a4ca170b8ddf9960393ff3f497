@@ -1,0 +1,31 @@
+I"D<h3 id="github">GitHub</h3>
+<p><a href="https://github.com/coolwindjo/RefCodes/blob/master/AlgoGuruProject/Done/MarioGame" title="MarioGame">MarioGame</a></p>
+
+<p><img src="/assets/img/posting/mario.png" alt="MarioGame" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">int</span> <span class="nf">FindMaxH</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">P</span><span class="p">)[</span><span class="n">MAX_N</span><span class="p">])</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">ud</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>	
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">ud</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]){</span>
+				<span class="c1">// go down</span>
+				<span class="n">h</span> <span class="o">+=</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+				<span class="n">ud</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">else</span><span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]){</span>
+				<span class="c1">// go up</span>
+				<span class="n">h</span> <span class="o">-=</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+				<span class="n">ud</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>	
+	<span class="p">}</span>
+	
+	<span class="k">return</span> <span class="n">h</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+:ET

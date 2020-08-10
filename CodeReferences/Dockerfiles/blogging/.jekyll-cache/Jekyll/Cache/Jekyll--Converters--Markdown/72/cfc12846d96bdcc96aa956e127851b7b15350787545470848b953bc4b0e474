@@ -1,0 +1,70 @@
+I"»4<h3 id="github">GitHub</h3>
+<p><a href="https://github.com/coolwindjo/RefCodes/blob/master/AlgoGuruProject/Done/ConnectPipes" title="ConnectPipes">ConnectPipes</a></p>
+
+<p><img src="/assets/img/posting/connect_pipes.png" alt="ConnectPipes" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="n">eDir</span><span class="p">{</span>
+	<span class="n">eD</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+	<span class="n">eR</span><span class="p">,</span>
+	<span class="n">eU</span><span class="p">,</span>
+	<span class="n">eL</span><span class="p">,</span>
+	<span class="n">NUM_DIRS</span>
+<span class="p">};</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">NUM_PIPE_KINDS</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">N_DIR</span><span class="p">[</span><span class="n">NUM_DIRS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">eU</span><span class="p">,</span> <span class="n">eL</span><span class="p">,</span> <span class="n">eD</span><span class="p">,</span> <span class="n">eR</span><span class="p">};</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="kt">DIR</span><span class="p">[</span><span class="n">NUM_DIRS</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span> <span class="p">};</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">CAN_GO</span><span class="p">[</span><span class="n">NUM_PIPE_KINDS</span><span class="p">][</span><span class="n">NUM_DIRS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span>
+	<span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="n">visit</span><span class="p">[</span><span class="n">MAX_N</span><span class="p">][</span><span class="n">MAX_N</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,};</span>
+<span class="kt">int</span> <span class="nf">CheckRangeFlagPipe</span><span class="p">(</span><span class="k">const</span> <span class="n">ii</span> <span class="n">nextPos</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">dir</span><span class="p">){</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">visit</span><span class="p">[</span><span class="n">nextPos</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">nextPos</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">OOR</span><span class="p">(</span><span class="n">nextPos</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">OOR</span><span class="p">(</span><span class="n">nextPos</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">nextDir</span> <span class="o">=</span> <span class="n">N_DIR</span><span class="p">[</span><span class="n">dir</span><span class="p">];</span>
+	<span class="k">return</span> <span class="n">CAN_GO</span><span class="p">[</span><span class="n">map</span><span class="p">[</span><span class="n">nextPos</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">nextPos</span><span class="p">.</span><span class="n">second</span><span class="p">]][</span><span class="n">nextDir</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">DFS</span><span class="p">(</span><span class="k">const</span> <span class="n">ii</span> <span class="n">pos</span><span class="p">){</span>
+	<span class="n">visit</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+	<span class="n">FOR</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">NUM_DIRS</span><span class="p">){</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">CAN_GO</span><span class="p">[</span><span class="n">map</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">second</span><span class="p">]][</span><span class="n">dir</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+		<span class="n">ii</span> <span class="n">nextPos</span><span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="kt">DIR</span><span class="p">[</span><span class="n">dir</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="kt">DIR</span><span class="p">[</span><span class="n">dir</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">CheckRangeFlagPipe</span><span class="p">(</span><span class="n">nextPos</span><span class="p">,</span> <span class="n">dir</span><span class="p">)){</span>
+			<span class="n">DFS</span><span class="p">(</span><span class="n">nextPos</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">qii</span> <span class="n">iiPosQ</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">BFS</span><span class="p">(</span><span class="k">const</span> <span class="n">ii</span> <span class="n">start</span><span class="p">){</span>
+	<span class="n">visit</span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">start</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+	<span class="n">iiPosQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">iiPosQ</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+		<span class="n">ii</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">iiPosQ</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">iiPosQ</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+		<span class="n">FOR</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">NUM_DIRS</span><span class="p">){</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">CAN_GO</span><span class="p">[</span><span class="n">map</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">second</span><span class="p">]][</span><span class="n">dir</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+			<span class="n">ii</span> <span class="n">nextPos</span><span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="kt">DIR</span><span class="p">[</span><span class="n">dir</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="kt">DIR</span><span class="p">[</span><span class="n">dir</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">CheckRangeFlagPipe</span><span class="p">(</span><span class="n">nextPos</span><span class="p">,</span> <span class="n">dir</span><span class="p">)){</span>
+				<span class="n">visit</span><span class="p">[</span><span class="n">nextPos</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">nextPos</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+				<span class="n">iiPosQ</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">nextPos</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+:ET

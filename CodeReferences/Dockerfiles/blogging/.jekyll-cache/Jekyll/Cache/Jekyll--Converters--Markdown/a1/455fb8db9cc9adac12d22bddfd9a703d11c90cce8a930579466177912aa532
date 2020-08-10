@@ -1,0 +1,101 @@
+I"�0<h3 id="github-na">GitHub (n/a)</h3>
+
+<p><img src="/assets/img/posting/drone_go.png" alt="DroneGo" /></p>
+
+<h3 id="source">Source</h3>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="o">/**</span>
+ <span class="o">*</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="err">좌표를</span> <span class="err">표현하는</span> <span class="err">자료구조</span>
+ <span class="o">*</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="nc">pos</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">POS</span><span class="p">;</span>
+
+<span class="o">/**</span>
+ <span class="o">*</span> <span class="err">화재</span> <span class="err">감지</span> <span class="err">센서</span> <span class="err">인터페이스</span>
+ <span class="o">*</span>
+<span class="k">class</span> <span class="nc">FireSensor</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+	<span class="o">/**</span>
+	 <span class="o">*</span> <span class="err">현재</span> <span class="err">화재를</span> <span class="err">감지한</span> <span class="err">센서의</span> <span class="err">위치</span> <span class="err">값을</span> <span class="err">반환</span>
+	 <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="n">POS</span> <span class="err">타입의</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="err">좌표</span><span class="p">.</span> <span class="err">예를</span> <span class="err">들어</span><span class="p">,</span> <span class="mi">1</span><span class="err">번</span> <span class="err">센서에서</span> <span class="err">화재를</span> <span class="err">감지한</span> <span class="err">경우</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">}</span><span class="err">을</span> <span class="err">반환</span>
+	 <span class="o">*</span>
+	<span class="k">virtual</span> <span class="n">POS</span> <span class="n">getSensorPosition</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="o">/**</span>
+ <span class="o">*</span> <span class="err">드론</span> <span class="err">관제</span> <span class="err">시스템</span> <span class="p">(</span><span class="err">테스트</span> <span class="err">대상</span><span class="p">)</span>
+ <span class="o">*</span>
+<span class="k">class</span> <span class="nc">DroneController</span>
+<span class="p">{</span>
+	<span class="n">POS</span> <span class="n">currentDrone1_</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">};</span>
+	<span class="n">POS</span> <span class="n">currentDrone2_</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span><span class="mi">10</span> <span class="p">};</span>
+	
+	<span class="n">FireSensor</span><span class="o">*</span> <span class="n">sensor_</span><span class="p">;</span>
+	<span class="p">...</span>
+<span class="nl">public:</span>
+	<span class="n">DroneController</span><span class="p">(</span><span class="n">FireSensor</span><span class="o">*</span> <span class="n">sensor</span><span class="p">)</span> <span class="o">:</span> <span class="n">sensor_</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+	
+	<span class="o">/**</span>
+	 <span class="o">*</span> <span class="err">화재가</span> <span class="err">발생한</span> <span class="err">위치를</span> <span class="err">얻어와서</span> <span class="err">현재</span> <span class="err">드론과의</span> <span class="err">위치를</span> <span class="err">계산하여</span> <span class="err">가장</span> <span class="err">가까운</span> <span class="err">드론을</span> <span class="err">선택하는</span> <span class="err">함수</span> <span class="p">(</span><span class="err">테스트</span> <span class="err">대상</span><span class="p">)</span>
+	 <span class="o">*</span> <span class="err">다음</span> <span class="err">위치</span> <span class="err">계산을</span> <span class="err">위해</span> <span class="err">선택된</span> <span class="err">드론의</span> <span class="err">위치를</span> <span class="err">저장해둔다</span><span class="p">.</span> <span class="p">(</span><span class="err">선택된</span> <span class="err">드론이</span> <span class="err">해당</span> <span class="err">좌표로</span> <span class="err">이동함을</span> <span class="err">가정</span><span class="p">)</span>
+	 <span class="o">*</span> <span class="err">@</span><span class="k">return</span> <span class="err">화재가</span> <span class="err">발생한</span> <span class="err">곳과</span> <span class="err">가장</span> <span class="err">가까운</span> <span class="err">드론의</span> <span class="err">번호</span><span class="p">.</span> <span class="mi">1</span> <span class="err">혹은</span> <span class="mi">2</span>
+	 <span class="o">*</span>
+	<span class="kt">int</span> <span class="n">selectDrone</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">POS</span> <span class="n">sensed</span> <span class="o">=</span> <span class="n">sensor_</span><span class="o">-&gt;</span><span class="n">getSensorPosition</span><span class="p">();</span>  <span class="c1">// 화제를 감지한 센서의 위치 획득</span>
+
+		<span class="kt">int</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">currentDrone1_</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">sensed</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+		<span class="kt">int</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">currentDrone1_</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">sensed</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+		<span class="kt">int</span> <span class="n">dist1</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span><span class="o">*</span><span class="n">dy</span><span class="p">;</span>
+
+		<span class="n">dx</span> <span class="o">=</span> <span class="n">currentDrone2_</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">sensed</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+		<span class="n">dy</span> <span class="o">=</span> <span class="n">currentDrone2_</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">sensed</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+		<span class="kt">int</span> <span class="n">dist2</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span><span class="o">*</span><span class="n">dy</span><span class="p">;</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="n">dist2</span> <span class="o">&gt;=</span> <span class="n">dist1</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">currentDrone1_</span> <span class="o">=</span> <span class="n">sensed</span><span class="p">;</span>
+			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="n">currentDrone2_</span> <span class="o">=</span> <span class="n">sensed</span><span class="p">;</span>
+			<span class="k">return</span> <span class="mi">2</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="p">...</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>make Stub Class</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">// 문제 3. 테스트 코드 작성</span>
+<span class="k">class</span> <span class="nc">StubSensor</span><span class="o">:</span> <span class="k">public</span> <span class="n">FireSensor</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+	<span class="n">POS</span> <span class="n">m_testPos</span><span class="p">;</span>	
+	<span class="n">POS</span> <span class="n">getSensorPosition</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="n">m_testPos</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">test_3_1</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// TODO: 항목 3-1. </span>
+	<span class="c1">// 화재 위치가 센서 1, 7, 2, 3, 5 순으로 감지되는 상황을 재현하는 테스트 코드</span>
+	<span class="n">StubSensor</span> <span class="n">sensor</span><span class="p">;</span>
+	<span class="n">DroneController</span> <span class="n">dc</span><span class="p">((</span><span class="n">FireSensor</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sensor</span><span class="p">);</span>
+	<span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="n">dc</span><span class="p">.</span><span class="n">selectDrone</span><span class="p">();</span>
+	<span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> <span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+	<span class="n">dc</span><span class="p">.</span><span class="n">selectDrone</span><span class="p">();</span>
+	<span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+	<span class="n">dc</span><span class="p">.</span><span class="n">selectDrone</span><span class="p">();</span>
+	<span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">dc</span><span class="p">.</span><span class="n">selectDrone</span><span class="p">();</span>
+	<span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">sensor</span><span class="p">.</span><span class="n">m_testPos</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="n">dc</span><span class="p">.</span><span class="n">selectDrone</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+:ET
