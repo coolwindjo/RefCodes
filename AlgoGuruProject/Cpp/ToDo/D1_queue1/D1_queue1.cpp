@@ -12,6 +12,9 @@ constexpr int MAX = (int)1e4;
 
 class ProbSolvLec
 {
+    int N;
+    int queue[MAX];
+    int wp, rp;
 public:
     ProbSolvLec()
     {
@@ -46,8 +49,9 @@ private:
 class ProbSolv
 {
     int N;
-    int stack[MAX];
-    int sp = MAX;
+    int queue[MAX];
+    int rp = 0;
+    int wp = 0;
 public:
     ProbSolv()
     {
@@ -66,30 +70,30 @@ private:
             scanf("%d", &cmd);
             if (cmd == 1){
                 scanf("%d", &num);
-                Push(num);
+                Enqueue(num);
             }
             else if(cmd == 0){
-                Pop();
+                Dequeue();
             }
             else{
-                cout << MAX - sp <<endl;
+                cout << wp - rp <<endl;
             }
         }
 
     }
 
-    int Push(int d){
-        if (sp == 0) return -1;
-        stack[--sp] = d;
-        return sp;
+    int Enqueue(int d){
+        if (wp >= MAX) return 0;
+        queue[wp++] = d;
+        return 1;
     }
 
-    int Pop(){
-        if (sp == MAX){
+    int Dequeue(){
+        if (wp == rp){
             cout << "E"<<endl;
-            return -1;
+            return 0;
         }
-        int p = stack[sp++];
+        int p = queue[rp++];
         cout << p <<endl;
         return p;
     }

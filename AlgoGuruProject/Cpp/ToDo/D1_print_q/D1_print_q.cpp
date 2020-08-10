@@ -10,44 +10,12 @@ using namespace std;
 // const int MAX = 10000 + 10;
 constexpr int MAX = (int)1e4;
 
-class ProbSolvLec
-{
-public:
-    ProbSolvLec()
-    {
-        _Solve();
-    }
-    ~ProbSolvLec();
-private:
-    void _Solve(){
-
-        int numLines = 0;
-        scanf("%d", &numLines);
-
-        int cmd = -1;
-        int num = -1;
-        FOR(i, numLines){
-            scanf("%d", &cmd);
-            if (cmd == 1){
-                scanf("%d", &num);
-                Push(num);
-            }
-            else if(cmd == 0){
-                Pop();
-            }
-            else{
-                cout << MAX - sp <<endl;
-            }
-        }
-
-    }
-};
-
 class ProbSolv
 {
     int N;
-    int stack[MAX];
-    int sp = MAX;
+    int que[MAX];
+    int rp = 0;
+    int wp = 0;
 public:
     ProbSolv()
     {
@@ -66,32 +34,43 @@ private:
             scanf("%d", &cmd);
             if (cmd == 1){
                 scanf("%d", &num);
-                Push(num);
+                Enqueue(num);
             }
             else if(cmd == 0){
-                Pop();
+                Dequeue();
             }
             else{
-                cout << MAX - sp <<endl;
+                cout << wp - rp <<endl;
             }
         }
 
     }
 
-    int Push(int d){
-        if (sp == 0) return -1;
-        stack[--sp] = d;
-        return sp;
+    int Enqueue(int d){
+        if (wp >= MAX) return 0;
+        que[wp++] = d;
+        return 1;
     }
-
-    int Pop(){
-        if (sp == MAX){
-            cout << "E"<<endl;
-            return -1;
+    int front(){
+        return que[rp];
+    }
+    int back(){
+        return que[wp-1];
+    }
+    int Dequeue(){
+        if (wp == rp){
+            cout << "E" <<endl;
+            return 0;
         }
-        int p = stack[sp++];
+        int p = que[rp++];
         cout << p <<endl;
         return p;
+    }
+    int size(){
+        return wp-rp;
+    }
+    int empty(){
+        return wp==rp;
     }
 
 };
@@ -99,7 +78,6 @@ private:
 int main(){
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
 
-    // ProbSolv ps;
-    ProbSolvLec ps;
+    ProbSolv ps;
     return 0;
 }
