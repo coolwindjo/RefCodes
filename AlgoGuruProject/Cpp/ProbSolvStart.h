@@ -1,7 +1,3 @@
-#if 0
-#define TEST
-#endif // 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,12 +15,16 @@ static const int WarnIfNot(const int condFlag, const char* condition){
 #define W_IFNOT(cond) WarnIfNot((cond), (#cond))
 #define P_IFNOT(cond, var) if (!W_IFNOT(cond)) cout << "= " << var <<endl;
 
+typedef long long ll;
+constexpr int INF = 987654321;
+
 typedef vector<string> vstr;
 typedef vector<vstr> vvstr;
 typedef pair<int, string> i_str;
 typedef vector<i_str> vistr;
 typedef vector<char> vc;
 typedef vector<vc> vvc;
+
 typedef pair<int, int> ii;
 typedef vector<ii> vii;
 typedef vector<vii> vvii;
@@ -34,17 +34,3 @@ typedef pair<int, ii> i_ii;
 typedef queue<ii> qii;
 typedef queue<int> qi;
 typedef priority_queue<ii> pqii;
-typedef long long ll;
-constexpr int INF = 987654321;
-
-#if 0
-typedef enum {
-	eR=0, eD,
-    eL, eU,
-    eDIR_LEN
-} Dir_e;
-constexpr int DIR[eDIR_LEN][2] = {
-    {0,1}, {1,0},
-    {0,-1}, {-1,0}
-};
-#endif // 0

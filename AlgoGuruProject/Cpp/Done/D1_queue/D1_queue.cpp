@@ -1,23 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../ProbSolvStart.h"
 
-#define FOR_INC(i, from, to) for(int (i)=(from); (i)<(to); ++(i))
-#define FOR_DEC(i, from, to) for(int (i)=(to)-1; (i)>=(from); --(i))
-#define FOR(i, to) FOR_INC((i), 0, (to))
-#define OOR(x, min, max) (((x) < (min) || (x) > (max)))
-
-static const int WarnIfNot(const int condFlag, const char* condition){
- 	if (condFlag == 0) {
-        cout << "Warning: [" << condition << "] is violated!\n";
-    }
-    return condFlag;
-}
-#define W_IFNOT(cond) WarnIfNot((cond), (#cond))
-#define P_IFNOT(cond, var) if (!W_IFNOT(cond)) cout << "= " << var <<endl;
-
-// #include "../../ProbSolvStart.h"
-
-// const int MAX = 10000 + 10;
 constexpr int MAX = (int)1e4;
 
 class ProbSolvLec
@@ -52,7 +34,7 @@ private:
                 }
             }
             else {
-                cout << _Length() <<endl;
+                cout << _Size() <<endl;
             }
         }
     }
@@ -66,7 +48,7 @@ private:
         return Q[rp];
     }
     void _DeQ(){ rp++; }
-    int _Length(){
+    int _Size(){
         W_IFNOT(wp >= rp);
         return wp-rp;
     }

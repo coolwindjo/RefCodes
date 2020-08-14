@@ -14,10 +14,17 @@ static const int WarnIfNot(const int condFlag, const char* condition){
 }
 #define W_IFNOT(cond) WarnIfNot((cond), (#cond))
 #define P_IFNOT(cond, var) if (!W_IFNOT(cond)) cout << "= " << var <<endl;
+
+typedef vector<int> vi;
 // #include "../../ProbSolvStart.h"
+
+constexpr int MAX_N = 1e5;
 
 class ProbSolv
 {
+    int N;
+    int H[MAX_N + 10];
+    vi viSt;
 public:
     ProbSolv()
     {
@@ -26,54 +33,43 @@ public:
     ~ProbSolv(){}
 private:
     void _Solve(){
-
-#if 0
-        int numLines = 0;
-        cin >> numLines;
-
-        vstr lines;
-        FOR(i, numLines){
-            string line;
-            std::getline(std::cin, line);
-            if(line.length() == 0){
-                i--;
-                continue;
-            }
-            lines.push_back(line);
+        scanf("%d", &N);
+        FOR(i, N){
+            scanf("%d", &H[i]);
         }
-#endif
-
-#if 0
-        int rows = 0;
-        int columns = 0;
-        cin >> rows;
-        cin >> columns;
-
-        vvi grid;
-        FOR(i, rows){
-            vi rowG;
-            FOR(j, columns){
-                int val;
-                cin >> val;
-                rowG.push_back(val);
-            }
-            grid.push_back(rowG);
+        int transCnt = 0;
+        FOR(i, N){
         }
-#endif
-        
+        cout << transCnt;
     }
+    void _Solve_WrongAnswer(){
+        scanf("%d", &N);
+        FOR(i, N){
+            scanf("%d", &H[i]);
+        }
+        int transCnt = N-1;
+        bool justBefore = false;
+        FOR(i, N){
+            while (!viSt.empty()){
+                if (viSt.back() > H[i]) break;
+                if (justBefore == false) {
+                    transCnt++;
+                }
+                else {
+                    justBefore = false;
+                }
+                viSt.pop_back();
+            }
 
+            viSt.push_back(H[i]);
+            justBefore = true;
+        }
+        cout << transCnt;
+    }
 };
 
 int main(){
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
-
-    int numTCs = 0;
-    cin >> numTCs;
-    FOR(tc, numTCs){
-        cout << "#" << tc+1 <<" ";
-        ProbSolv ps;
-        cout << endl;
-    }
+    ProbSolv ps;
     return 0;
 }
