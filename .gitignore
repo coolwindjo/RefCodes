@@ -17,6 +17,9 @@
 *.~$lock
 *.db
 *.vs
+*.a
+*.o
+a.out
 Debug
 x64
 ipch
@@ -24,3 +27,5 @@ __pycache__
 /CoolLibrary/CoolLib/CoolLib.General/x64/
 /CoolLibrary/CoolLib/lib/
 /CodeReferences/Python/20151103_PythonApplicationForPyQt5/RunScript_GUI/RunScript_GUI/PSTools
+/CodeReferences/Cpp/GoogleTestLecture/gtest/
+/CodeReferences/Cpp/GoogleTestLecture/gtest_201005/

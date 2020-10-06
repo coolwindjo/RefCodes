@@ -75,8 +75,9 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 COLOR_RED="\033[0;31m"
 COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
+COLOR_LIGHT_GREEN="\033[1;32m"
 COLOR_OCHRE="\033[38;5;95m"
-COLOR_BLUE="\033[0;34m"
+COLOR_BLUE="\033[1;34m"
 COLOR_WHITE="\033[0;37m"
 COLOR_RESET="\033[0m"
 
@@ -93,24 +94,6 @@ function git_color {
     fi
 }
 
-if [ "$color_prompt" = yes ]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='\e[32;1m\u@\e[30;48;5;226m\W\e[0m\$ ' # this will change your prompt format
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 function git_branch {
     local git_status="$(git status 2> /dev/null)"
     local on_branch="On branch ([^${IFS}]*)"
@@ -125,11 +108,30 @@ function git_branch {
     fi
 }
 
-#PS1="\[$COLOR_WHITE\]\n[\W]"    # basename of pwd
-#PS1+="\[\$(git_color)\]"        # colors git status
-#PS1+="\$(git_branch)"           # prints current branch
-#PS1+="\[$COLOR_BLUE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
-#export PS1
+if [ "$color_prompt" = yes ]; then
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1="${debian_chroot:+($debian_chroot)}\[$COLOR_LIGHT_GREEN\]\u\[$COLOR_WHITE\]@\[$COLOR_OCHRE\]\h\[$COLOR_RESET\]:[\[$COLOR_BLUE\]\W\[$COLOR_RESET\]]\[\033[00m\]"
+    # PS1='\e[32;1m\u@\e[30;48;5;226m\W\e[0m\$ ' # this will change your prompt format
+    # PS1='\e[30;48;5;226m\W\e[0m\$ ' # this will change your prompt format
+    # PS1="\[$COLOR_WHITE\]\n[\W]"    # basename of pwd
+    PS1+="\[\$(git_color)\]"        # colors git status
+    PS1+="\$(git_branch)"           # prints current branch
+    PS1+="\[$COLOR_RESET\]\$ "   # '#' for root, else '$'
+    #export PS1
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -175,24 +177,34 @@ export LD_LIBRARY_PATH=/usr/local/gcc-8.2/lib64:$LD_LIBRARY_PATH
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 
+# For WSL2 (Using IP for vEthernet)
+#VETHER_IP=$(/usr/bin/grep nameserver /etc/resolv.conf 2> /dev/null | /usr/bin/tr -s ' ' | /usr/bin/cut -d ' ' -f2)
+VETHER_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
+#VETHER_IP=172.18.80.1
+export DISPLAY=$VETHER_IP:0.0
+#export DISPLAY=:0
+#export LIBGL_ALWAYS_INDIRECT=1
+
 # Disabled by JoSH 060320
-#eval "$(rbenv init -)"
+eval "$(rbenv init -)"
 
 sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove
 
-cd /mnt/c/Users/coolw/source
+docker ps -a -n 10 && docker volume ls
+
+cd /mnt/d/source
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/coolwind/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/coolwind/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/coolwind/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/coolwind/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/home/coolwind/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+# else
+#    if [ -f "/home/coolwind/anaconda3/etc/profile.d/conda.sh" ]; then
+#        . "/home/coolwind/anaconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/home/coolwind/anaconda3/bin:$PATH"
+#    fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
