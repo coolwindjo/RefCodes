@@ -24,11 +24,9 @@ int main()
 		[](const Point& p1, const Point&p2) {return p1.x < p2.x; });
 
 	//std::ranges::sort(v); // C++20 스타일
-	std::cout << v.at(0).x << std::endl;
 
 	std::ranges::sort(v, std::less{}, &Point::x ); // C++20 스타일
 
-	std::cout << v.at(0).x << std::endl;
 }
 
 

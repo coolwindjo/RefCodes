@@ -1,0 +1,129 @@
+from CTO_최배권 to everyone:    8:19 AM
+강사님 그러면 malloc 으로 생성 하고 new(p) Point(1,2)를 호출해도 같은 효과 인가요?
+from CTO_최배권 to everyone:    8:25 AM
+강사님 그러면 새로운 기술이 등장하면 나중에 표준에서 예전것이 사라지고 컴파일러에도 반영되고 그러나요?
+from CTO_최배권 to everyone:    8:25 AM
+네
+from CTO_최배권 to everyone:    9:34 AM
+강사님 MyAlloc T 와 겨1치는 것 아닌가요?
+from CTO_최배권 to everyone:    9:34 AM
+겹치는것
+from CTO_최배권 to everyone:    9:34 AM
+typename이요
+from CTO_최배권 to everyone:    10:42 AM
+강사님 1_new8 다시 올려주실 수 있을까요?
+from 강석민강사 to everyone:    10:45 AM
+네 올렸습니다.
+from 이태희 to everyone:    11:47 AM
+수고하셨습니다
+from CTO_최배권 to everyone:    11:47 AM
+수고하셨습니다
+from CTO_김중연 to everyone:    11:48 AM
+수고하셨습니다.
+from VS_김경호 to everyone:    12:15 PM
+네
+from VS_김경호 to everyone:    12:16 PM
+.
+from CTO_최배권 to everyone:    2:31 PM
+부분특수화에서는 디폴트 값을 쓰지 않는것이 문법인가요?
+from 이태희 to everyone:    2:31 PM
+default delete가 위에서 적용되었기 때문에 아래 생략하는 건가요?
+from HE본부_박소환 to everyone:    2:32 PM
+배열일 경우엔 default_delete 말고 다른 것은  못쓰는건가요?
+from HE본부_박소환 to everyone:    3:29 PM
+저걸 인지할 수 있으면, 
+from HE본부_박소환 to everyone:    3:30 PM
+차라리 Test 아래에 하는게 더 좋을것 같은데 굳이 저렇게 할 필요가 있을까요?
+from CTO_최배권 to everyone:    3:56 PM
+신기하네요
+from VS본부 원유상 to everyone:    4:10 PM
+로그인이 안되네요.. ㅠㅠ
+from 이태희 to everyone:    4:10 PM
+아이디 비번이 ...?
+from 윤지한 to everyone:    4:10 PM
+저도 안되네요
+from he_김안나 to everyone:    4:10 PM
+저도 비번을 모르겠어요
+from CTO_최배권 to everyone:    4:11 PM
+AD 전환이 아닌가 보네요
+from HE본부_박소환 to everyone:    4:11 PM
+lg의 러닝넷 사이트에서 하는게 아니었나요?
+from HE본부_박소환 to everyone:    4:11 PM
+거기에 최종평가가 올라와있길래 그거 풀고 있었는데
+러닝넷에서 보입니다. 
+from webex 252 to everyone:    4:13 PM
+EP- 러닝넷 -내 강좌에서 보시면 됩니다~!
+from webex 252 to everyone:    4:13 PM
+공부방 내에 올라가있습니다!!
+from webex 252 to everyone:    4:13 PM
+확인부탁드립니다:)
+from H&A_문준우 to everyone:    4:15 PM
+완료했습니다.
+from CTO_백계영 to everyone:    4:16 PM
+완료하였습니다.
+from HE본부_박소환 to everyone:    4:18 PM
+완료하였습니다
+from webex 252 to everyone:    4:18 PM
+다 푸신 분들께서는 설문을 부탁드립니다:)
+시험이 종료된 후 한꺼번에 공지드리려 했으나,
+빨리 푸신 분들이 계셔서 미리 공지드립니다.
+설문은 2가지가 있습니다.
+과정설문/강사설문
+더 좋은 강의를 제공드리기 위한 설문입니다~ 번거로우시겠지만 참여 부탁드립니다.
+http://survey.lge.com/
+접속 후 과정 코드
+P00000371 입력하시면 됩니다.
+from CTO_최영수 to everyone:    4:18 PM
+완료했습니다
+from CTO_김형석 to everyone:    4:19 PM
+완료하였습니다.
+from webex 252 to everyone:    4:20 PM
+다 푸신 분들께서는 설문을 부탁드립니다:)
+시험이 종료된 후 한꺼번에 공지드리려 했으나,
+빨리 푸신 분들이 계셔서 미리 공지드립니다.
+설문은 2가지 종류가 있습니다.
+"과정설문/강사설문"
+더 좋은 강의를 제공드리기 위한 설문입니다~ 
+번거로우시겠지만 참여 부탁드립니다.
+http://survey.lge.com/ 접속 후
+과정코드 :  P00000371
+입력하시면 됩니다.
+from CTO_정은석 to everyone:    4:20 PM
+완료했습니다.
+from VS_신영호 to everyone:    4:21 PM
+완료 했습니다.  감사합니다. 
+from 이태희 to everyone:    4:21 PM
+완료하였습니다. 수고하셨습니다 :)
+from webex 252 to everyone:    4:22 PM
+다 푸신 분들께서는 설문을 부탁드립니다:)
+시험이 종료된 후 한꺼번에 공지드리려 했으나,
+빨리 푸신 분들이 계셔서 미리 공지드립니다.
+설문은 2가지 종류가 있습니다.
+"과정설문/강사설문"
+더 좋은 강의를 제공드리기 위한 설문입니다~ 
+번거로우시겠지만 참여 부탁드립니다.
+http://survey.lge.com/ 접속 후
+과정코드 :  P00000371
+입력하시면 됩니다.
+50분부터  qr공유드리겠습니다!
+미리찍으면,,, 조퇴 처리되기때문에 
+조금만 더 기다려주세요:)
+
+from VS_최상은 to everyone:    4:23 PM
+완료했습니다
+from CTO_최배권 to everyone:    4:23 PM
+완료했습니다.
+from 윤지한 to everyone:    4:26 PM
+완료했습니다. 
+from CTO_최배권 to everyone:    4:28 PM
+강사님 늦게 질문 드리는데요
+from CTO_최배권 to everyone:    4:28 PM
+문제에는 없는 질문이라서 가능할것 같은데
+from CTO_최배권 to everyone:    4:29 PM
+스마트 포인터 중에 weak pointer 의 차이점 알려주실 수 있을까요?
+from CTO_최배권 to everyone:    4:29 PM
+안드로이드 소스 중에 보여서요
+from CTO_김중연 to everyone:    4:45 PM
+파괴안됐다고 조사되어 사용중에 다른쓰레드에서 파괴하면??
+from CTO_김중연 to everyone:    4:46 PM
+어떻게 되나요?

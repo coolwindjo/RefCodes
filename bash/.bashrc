@@ -166,6 +166,23 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# checks to see if we are in a windows or linux dir
+function isWinDir {
+    case $PWD/ in
+        /mnt/*) return $(true);;
+        *) return $(false);;
+    esac
+}
+
+# wrap the git command to either run windows git or linux
+function git {
+    if isWinDir
+    then
+        git.exe "$@"
+    else
+        /usr/bin/git "$@"
+    fi
+}
 
 # added by Miniconda3 installer
 export PATH="/home/coolwind/miniconda3/bin:$PATH"
@@ -179,20 +196,22 @@ export PATH=$HOME/gems/bin:$PATH
 
 # For WSL2 (Using IP for vEthernet)
 #VETHER_IP=$(/usr/bin/grep nameserver /etc/resolv.conf 2> /dev/null | /usr/bin/tr -s ' ' | /usr/bin/cut -d ' ' -f2)
-VETHER_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
+VETHER_IP=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2; exit;}')
+#VETHER_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
+#VETHER_IP=$(/sbin/route -n | /bin/grep "^0.0.0.0" | /bin/tr -s ' ' | /bin/cut -d' ' -f2)
 #VETHER_IP=172.18.80.1
 export DISPLAY=$VETHER_IP:0.0
 #export DISPLAY=:0
 #export LIBGL_ALWAYS_INDIRECT=1
+#xhost +local:docker
 
 # Disabled by JoSH 060320
 eval "$(rbenv init -)"
 
 sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove
 
-docker ps -a -n 10 && docker volume ls
-
-cd /mnt/d/source
+#docker ps -a -n 10 && docker volume ls
+docker ps -a && docker volume ls
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
