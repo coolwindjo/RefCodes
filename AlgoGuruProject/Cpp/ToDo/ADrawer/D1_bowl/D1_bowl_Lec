@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+#define MAXN (50)
+char str[MAXN+10];
+void InputData(){
+    cin >> str;
+}
+int Solve(){
+    int sum = 10;
+    for (int i=1; str[i]; i++){
+        if (str[i-1] == str[i]) sum += 5;
+        else sum += 10;
+    }
+    return sum;
+}
+int main(){
+    InputData();
+    int ans = Solve();
+    printf("%d\n", ans);
+    return 0;
+}
+ 
+/**************************************************************
+    Problem: 1079
+    User: SWT01005
+    Language: C++
+    Result: Accepted
+    Time:1 ms
+    Memory:2084 kb
+****************************************************************/
