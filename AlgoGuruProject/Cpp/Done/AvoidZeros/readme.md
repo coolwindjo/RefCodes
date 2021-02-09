@@ -10,4 +10,4 @@ big number
 
 DFS pitfall
 
-<https://coolwindjo.github.io/2019/07/17/Avoid-Zeros.html>
+<https://coolwindjo.github.io/algoguru/2019/07/17/Avoid-Zeros.html>

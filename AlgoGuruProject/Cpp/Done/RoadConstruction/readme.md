@@ -8,4 +8,4 @@ STL::priority_queue
 
 std::cin.get
 
-<https://coolwindjo.github.io/2019/07/18/RoadConstruction.html>
+<https://coolwindjo.github.io/algoguru/2019/07/18/RoadConstruction.html>

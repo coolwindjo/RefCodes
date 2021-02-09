@@ -10,4 +10,4 @@ mathematics
 STL::unordered_set
 STL::unordered_map
 
-<https://coolwindjo.github.io/2019/07/16/Naming-Daughter.html>
+<https://coolwindjo.github.io/algoguru/2019/07/16/Naming-Daughter.html>

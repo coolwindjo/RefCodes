@@ -8,4 +8,4 @@ STL::queue
 
 DFS with backtracking
 
-<https://coolwindjo.github.io/2019/07/17/Game-Two-Zero-Four-Eight.html>
+<https://coolwindjo.github.io/algoguru/2019/07/17/Game-Two-Zero-Four-Eight.html>

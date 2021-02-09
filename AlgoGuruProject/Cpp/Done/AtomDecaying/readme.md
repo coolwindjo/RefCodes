@@ -12,4 +12,4 @@ STL::stack
 
 STL::priority_queue
 
-<https://coolwindjo.github.io/2019/08/14/atom-decaying.html>
+<https://coolwindjo.github.io/algoguru/2019/08/14/atom-decaying.html>

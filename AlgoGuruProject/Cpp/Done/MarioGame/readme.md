@@ -6,4 +6,4 @@ implementation
 
 logics
 
-<https://coolwindjo.github.io/2019/04/08/mario-game.html>
+<https://coolwindjo.github.io/algoguru/2019/04/08/mario-game.html>

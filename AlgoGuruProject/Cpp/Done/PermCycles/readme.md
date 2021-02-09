@@ -4,4 +4,4 @@
 
 STL::unordered_set
 
-<https://coolwindjo.github.io/2019/06/18/perm-cycles.html>
+<https://coolwindjo.github.io/algoguru/2019/06/18/perm-cycles.html>

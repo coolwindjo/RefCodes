@@ -6,4 +6,4 @@ DFS
 
 BFS
 
-<https://coolwindjo.github.io/2019/04/25/connect-pipes.html>
+<https://coolwindjo.github.io/algoguru/2019/04/25/connect-pipes.html>

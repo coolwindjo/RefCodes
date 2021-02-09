@@ -6,4 +6,4 @@ STL::list
 
 std::advance(it, N)
 
-<https://coolwindjo.github.io/2019/04/22/circle-list-order.html>
+<https://coolwindjo.github.io/algoguru/2019/04/22/circle-list-order.html>

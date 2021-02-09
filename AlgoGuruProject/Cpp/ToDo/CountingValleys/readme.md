@@ -5,4 +5,4 @@
 string left/right trim
 implementation
 
-<https://coolwindjo.github.io/2019/07/16/Naming-Daughter.html>
+<https://coolwindjo.github.io/algoguru/2019/07/16/Naming-Daughter.html>

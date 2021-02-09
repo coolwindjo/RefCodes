@@ -8,4 +8,4 @@ BFS with generations
 
 STL::queue
 
-<https://coolwindjo.github.io/2019/07/18/StemCellCulture.html>
+<https://coolwindjo.github.io/algoguru/2019/07/18/StemCellCulture.html>

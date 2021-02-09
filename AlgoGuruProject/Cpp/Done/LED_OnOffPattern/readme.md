@@ -6,4 +6,4 @@ implementation
 
 difference from model
 
-<https://coolwindjo.github.io/2019/06/22/LED-on-off-pattern.html>
+<https://coolwindjo.github.io/algoguru/2019/06/22/LED-on-off-pattern.html>

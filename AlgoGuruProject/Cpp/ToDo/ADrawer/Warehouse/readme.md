@@ -4,4 +4,4 @@
 
 Floyd-Warshall
 
-<https://coolwindjo.github.io/2019/04/22/warehouse.html>
+<https://coolwindjo.github.io/algoguru/2019/04/22/warehouse.html>

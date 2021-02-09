@@ -4,4 +4,4 @@
 
 DFS with backtracking
 
-<https://coolwindjo.github.io/2019/07/16/Hiking-Trail.html>
+<https://coolwindjo.github.io/algoguru/2019/07/16/Hiking-Trail.html>
