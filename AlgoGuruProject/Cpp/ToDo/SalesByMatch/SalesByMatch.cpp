@@ -26,35 +26,6 @@ private:
         return pCnt;
     }
 
-    vector<string> split_string(string input_string) {
-        string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
-            return x == y and x == ' ';
-        });
-
-        input_string.erase(new_end, input_string.end());
-
-        while (input_string[input_string.length() - 1] == ' ') {
-            input_string.pop_back();
-        }
-
-        vector<string> splits;
-        char delimiter = ' ';
-
-        size_t i = 0;
-        size_t pos = input_string.find(delimiter);
-
-        while (pos != string::npos) {
-            splits.push_back(input_string.substr(i, pos - i));
-
-            i = pos + 1;
-            pos = input_string.find(delimiter, i);
-        }
-
-        splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
-
-        return splits;
-    }
-
     void _Solve(){
         // ofstream fout(getenv("OUTPUT_PATH"));
 
@@ -65,7 +36,8 @@ private:
         string ar_temp_temp;
         getline(cin, ar_temp_temp);
 
-        vector<string> ar_temp = split_string(ar_temp_temp);
+        const string delims{" "};
+        vector<string> ar_temp = _SplitString(ar_temp_temp, delims);
 
         vector<int> ar(n);
 
@@ -83,7 +55,52 @@ private:
         // fout.close();
     }
 
+    vstr _SplitString(string line, const string &delims) {
+#ifdef TEST
+        cout << "1) line: " << line <<endl;
+#endif
+        string::iterator newEnd = unique(line.begin(), line.end(), [] (const char &x, const char &y) {
+            return x==y and x==' ';
+        });
+#ifdef TEST
+        cout << "2) line: " << line <<endl;
+#endif
 
+        line.erase(newEnd, line.end());
+#ifdef TEST
+        cout << "3) line: " << line <<endl;
+#endif
+
+        while (line[line.length() - 1] == ' ') {
+            line.pop_back();
+        }
+#ifdef TEST
+        cout << "4) line: " << line <<endl;
+#endif
+
+        vstr vstrSplits;
+
+        size_t prev = 0;
+        size_t pos;
+        while ((pos = line.find_first_of(delims, prev)) != string::npos) {
+            if (pos > prev) {
+                vstrSplits.push_back(line.substr(prev, pos-prev));
+            }
+#ifdef TEST
+            for(string name : vstrSplits) {
+                cout << name << " ";
+            }
+            cout <<endl;
+#endif
+            prev = pos + 1;
+        }
+
+        if (prev < line.length()) {
+            vstrSplits.push_back(line.substr(prev, min(pos, line.length()) - prev + 1));
+        }
+
+        return vstrSplits;
+    }
 };
 
 int main(){

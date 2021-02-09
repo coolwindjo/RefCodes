@@ -22,6 +22,8 @@ typedef vector<string> vstr;
 typedef vector<vstr> vvstr;
 typedef pair<int, string> i_str;
 typedef vector<i_str> vistr;
+typedef pair<string, int> str_i;
+typedef vector<str_i> vstri;
 typedef vector<char> vc;
 typedef vector<vc> vvc;
 

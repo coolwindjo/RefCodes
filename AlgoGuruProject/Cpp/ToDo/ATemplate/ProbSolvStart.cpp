@@ -72,6 +72,55 @@ private:
 
     } // _Solve()
 
+#if 0 // 48dd
+    vstr _SplitString(string line, const string &delims) {
+#ifdef TEST
+        cout << "1) line: " << line <<endl;
+#endif
+        string::iterator newEnd = unique(line.begin(), line.end(), [] (const char &x, const char &y) {
+            return x==y and x==' ';
+        });
+#ifdef TEST
+        cout << "2) line: " << line <<endl;
+#endif
+
+        line.erase(newEnd, line.end());
+#ifdef TEST
+        cout << "3) line: " << line <<endl;
+#endif
+
+        while (line[line.length() - 1] == ' ') {
+            line.pop_back();
+        }
+#ifdef TEST
+        cout << "4) line: " << line <<endl;
+#endif
+
+        vstr vstrSplits;
+
+        size_t prev = 0;
+        size_t pos;
+        while ((pos = line.find_first_of(delims, prev)) != string::npos) {
+            if (pos > prev) {
+                vstrSplits.push_back(line.substr(prev, pos-prev));
+            }
+#ifdef TEST
+            for(string name : vstrSplits) {
+                cout << name << " ";
+            }
+            cout <<endl;
+#endif
+            prev = pos + 1;
+        }
+
+        if (prev < line.length()) {
+            vstrSplits.push_back(line.substr(prev, min(pos, line.length()) - prev + 1));
+        }
+
+        return vstrSplits;
+    }
+#endif
+
 };
 
 int main(){

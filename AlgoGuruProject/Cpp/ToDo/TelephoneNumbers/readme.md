@@ -1,10 +1,10 @@
 # Problem information
 
-<https://programmers.co.kr/learn/courses/30/lessons/42576>
+<https://programmers.co.kr/learn/courses/30/lessons/42577>
 
 split string
 string manipulation
 unique and erase vector
-STL::map
+STL::set
 
 <https://coolwindjo.github.io/2019/07/16/Naming-Daughter.html>

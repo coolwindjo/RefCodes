@@ -6,8 +6,7 @@
 
 class ProbSolv
 {
-    vstr vstrPartList;
-    vstr vstrCompList;
+    vstr vstrPhoneBook;
 public:
     ProbSolv()
     {
@@ -18,63 +17,65 @@ public:
                 break;
             }
         }
-
-        const string delimiters{", []\r\n"};
-        vstrPartList = _SplitString(line, delimiters);
-
-#ifdef TEST
-        cout << "Participations: ";
-        for(string name : vstrPartList) {
-            cout << name << " ";
-        }
-        cout <<endl;
-#endif
-
-        FOR(i, 10){
-            std::getline(std::cin, line);
-            if(line.length() != 0){
-                break;
-            }
-        }
-        vstrCompList = _SplitString(line, delimiters);
-
-#ifdef TEST
-        cout << "Completions: ";
-        for(string name : vstrCompList) {
-            cout << name << " ";
-        }
-        cout <<endl;
-#endif
+        const string delims{"\", []"};
+        vstrPhoneBook = _SplitString(line, delims);
 
         _Solve();
     }
     ~ProbSolv(){}
 private:
     void _Solve(){
-        std::map<string, int> hash;
-        for (string name : vstrPartList) {
-            std::map<string, int>::iterator it = hash.find(name);
-            if (it != hash.end()) {
-                it->second++;
-            }
-            else {
-                hash.insert(std::pair<string, int>(name, 1));
-            }
-        }
+        sort(vstrPhoneBook.begin(), vstrPhoneBook.end());
 
-        for (string name : vstrCompList) {
-            std::map<string, int>::iterator it = hash.find(name);
-            W_IFNOT(it != hash.end());
-            if (it->second > 1) {
-                it->second--;
+        bool isPrefix = false;
+        string strPrev = "INVALID";
+        for (string number : vstrPhoneBook) {
+            if (strPrev == number.substr(0, strPrev.length()))
+            {
+                isPrefix = true;
+                break;
             }
-            else {
-                hash.erase(it);
+            strPrev = number;
+        }
+        if (!isPrefix) cout << "false";
+        else cout << "true";
+    }
+
+    void _SolveUsingSet(){ // faster than the one using sort
+        std::set<string> hash;
+        bool isPrefix = false;
+        for (string number : vstrPhoneBook){
+            std::pair<std::set<string>::iterator, bool> pos = hash.insert(number);
+            W_IFNOT(pos.second == true);
+            if (hash.size() < 2) {
+                continue;
+            }
+            std::set<string>::iterator prevIt = hash.lower_bound(number);
+            std::set<string>::iterator nextIt = hash.upper_bound(number);
+            if (prevIt != hash.begin()) {
+                string prevNum;
+                if ((prevNum = *(--prevIt)) != "") {
+                    if (prevNum == number.substr(0, prevNum.length())) {
+                        isPrefix = true;
+                        break;
+                    }
+                }
+            }
+
+            if (nextIt != hash.end()) {
+                string nextNum;
+                if ((nextNum = *nextIt) != "") {
+                    if (number == nextNum.substr(0, number.length())) {
+                        isPrefix = true;
+                        break;
+                    }
+                }
             }
         }
-        if (!hash.empty()){
-            cout << hash.begin()->first;
-        }
+        
+        if (isPrefix) cout << "false";
+        else cout << "true";
+
     } // _Solve()
 
     vstr _SplitString(string line, const string &delims) {
