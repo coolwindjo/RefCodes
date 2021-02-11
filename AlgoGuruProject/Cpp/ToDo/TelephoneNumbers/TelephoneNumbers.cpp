@@ -45,8 +45,7 @@ private:
         std::set<string> hash;
         bool isPrefix = false;
         for (string number : vstrPhoneBook){
-            std::pair<std::set<string>::iterator, bool> pos = hash.insert(number);
-            W_IFNOT(pos.second == true);
+            hash.insert(number);
             if (hash.size() < 2) {
                 continue;
             }
