@@ -1,6 +1,12 @@
 # Problem information
 
-<https://www.acmicpc.net/problem/1406>
+<https://programmers.co.kr/learn/courses/30/lessons/42579>
+
+string manipulation
+unique and erase vector
+split string
+sort
+std::unordered_map
 
 dynamic programing
 mathematics
@@ -14,11 +20,7 @@ BFS
 BFS with generations
 Floyd-Warshall
 Dijkstra
-sort
-string manipulation
-unique and erase vector
 edit distance
-split string
 std::cin.ignore
 std::cin.get
 std::stringstream
