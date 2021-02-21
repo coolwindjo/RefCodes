@@ -1,78 +1,68 @@
-#if 1
+#if 0
 #define TEST
 #endif // 1
 
 #include "../../ProbSolvStart.h"
 
-#if 0   // 12dd
 typedef enum {
-	eR=0, eD,
-    eL, eU,
-    eDIR_LEN
+	eP=0, eM,
+    ePMLEN
 } Dir_e;
-constexpr int DIR[eDIR_LEN][2] = {
-    {0,1}, {1,0},
-    {0,-1}, {-1,0}
-};
-#endif // 0
+constexpr int OPER[ePMLEN] = {+1, -1};
+
+constexpr int MAX_N = 20+1;
+constexpr int MAX_T = 1000+1;
 
 class ProbSolv
 {
 public:
+    int a[MAX_N];
+    int n;
+    int t;
+    int numSols;
     ProbSolv()
     {
-#if 0   // 43dd
-        int numLines = 0;
-        cin >> numLines;
-
-        vstr lines;
-        FOR(i, numLines){
-            string line;
+        string line;
+        FOR(i, 10){
             std::getline(std::cin, line);
-            if(line.length() == 0){
-                i--;
-                continue;
+            if(line.length() >= 2){
+                break;
             }
-            lines.push_back(line);
         }
-#endif
+        cin >> t;
 
-#if 0   // 27dd
-        int rows = 0;
-        int columns = 0;
-        cin >> rows;
-        cin >> columns;
+        string delims{", []\r"};
+        vstr vstrNums = _SplitString(line, delims);
+        int numCnt = 0;
+        for (string num : vstrNums) {
+            a[numCnt++] = std::stoi(num);
+        }
+        n = numCnt;
 
-        vvi grid;
-        FOR(i, rows){
-            vi rowG;
-            FOR(j, columns){
-                int val;
-                cin >> val;
-                rowG.push_back(val);
-            }
-            grid.push_back(rowG);
-        }
-#ifdef TEST
-        cout <<endl;
-        FOR(i, rows){
-            FOR(j, columns){
-                cout << grid[i][j] << " ";
-            }
-            cout <<endl;
-        }
-#endif
-#endif
-        
         _Solve();
     }
     ~ProbSolv(){}
 private:
-    void _Solve(){
+    void _DFS(const int idx, const int sol) {
+        if (idx == n) {
+            if (sol == t) {
+                numSols++;
+            }
+            return;
+        }
+        
+        for (int pm = eP; pm < ePMLEN; ++pm){ 
+            _DFS(idx+1, sol+OPER[pm]*a[idx]);
+        }
+        
+    }
 
+    void _Solve(){
+        numSols = 0;
+        _DFS(0, 0);
+        cout << numSols;
     } // _Solve()
 
-#if 0 // 48dd
     vstr _SplitString(string line, const string &delims) {
 #ifdef TEST
         cout << "1) line: " << line <<endl;
@@ -119,22 +109,17 @@ private:
 
         return vstrSplits;
     }
-#endif
 
 };
 
 int main(){
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
-#if 0   // 6dd
     int numTCs = 0;
     cin >> numTCs;
     FOR (tc, numTCs) {
         cout << "#" << tc+1 <<" ";
-#endif
         ProbSolv ps;
-#if 0   // 4dd
         cout << endl;
     }
-#endif
     return 0;
 }
