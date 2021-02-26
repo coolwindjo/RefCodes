@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+:Manager: as man
+:Customer: as cstr
+(DueDate) as dd
+(Function) as fn
+(Cost) as cst
+(Price) as pr
+(Usability) as usab
+(Extendability) as extab
+
+man .-> dd
+man .-> fn
+man .-> cst
+cst -d-> pr
+cstr .u-> dd
+cstr .u-> fn
+cstr .u-> pr
+cstr .u-> usab
+cstr .u-> extab
+@enduml

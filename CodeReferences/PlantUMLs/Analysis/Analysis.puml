@@ -1,0 +1,28 @@
+@startuml
+allowmixing
+title "System Context"
+diamond dia
+package StakeHolders as sh {
+  actor "Customer" as cstr
+  actor "Developer" as dev
+  actor "Manager" as man
+  actor "User" as usr
+  actor "Designer" as dsn
+  actor "Sales" as sls
+'   component "User UI" as userui
+}
+package System as sys {
+    note : 요소가 모여서 하나 이상의 목적을 완전히 달성하는 것
+'   interface "UI AJAX Ops" as uiajax
+'   component "Request Translation" as uirequests
+'   component "Backend Requests" as uibackend
+'   uiajax -down-> uirequests
+'   uirequests -down-> uibackend  
+}
+package Concerns as cc {
+'   component "User UI" as userui
+}
+sh -d-> dia
+dia -d-> sys
+cc -l-> dia  
+@enduml

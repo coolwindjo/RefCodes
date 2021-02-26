@@ -1,0 +1,36 @@
+
+@startuml
+left to right direction
+:User: as usr
+(전원관리) as powerman
+(채널관리) as channelman
+(음질/화질 조정) as adjust
+(전원을 켠다) as poweron
+(전원을 끈다) as poweroff
+(채널을 변경한다) as channelch
+(채널을 검색한다) as channelsc
+(채널을 목록을 본다) as channelsee
+(음질을 조정한다) as adjustvol
+(화질을 조정한다) as adjustscr
+(주파수 테이블 기준으로 검색한다) as channelscfrq
+(1M 단위로 검색한다) as channelsc1m
+(채널을 편집한다) as channelseeed
+
+usr -d-> powerman
+usr -d-> channelman
+usr -d-> adjust
+
+powerman .d-> poweron : <include>
+poweroff .u-> powerman : <extend>
+
+channelman <=d. channelch : <extend>
+channelman <=d. channelsc : <extend>
+channelman <=d. channelsee : <extend>
+
+adjust <-d. adjustvol : <extend>
+adjust <-d. adjustscr : <extend>
+
+channelch <-d. channelscfrq : <extend>
+channelch <-d. channelsc1m : <extend>
+channelch <-d. channelseeed : <extend>
+@enduml
