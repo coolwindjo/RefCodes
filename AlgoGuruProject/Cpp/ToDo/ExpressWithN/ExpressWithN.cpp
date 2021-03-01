@@ -4,15 +4,13 @@
 
 #include "../../ProbSolvStart.h"
 
-typedef enum {
-    eXY=0, eXplusY, eXminusY, eXmultY, eXdividY, eNUM_OPER
-} Oper;
-
+constexpr int MAX_NUM = 8;
 class ProbSolv
 {
     int N;
     int number;
-    int cache[eNUM_OPER]
+    int minNumNs;
+    std::unordered_set<int> hashM[MAX_NUM + 1];
 public:
     ProbSolv()
     {
@@ -21,50 +19,91 @@ public:
     }
     ~ProbSolv(){}
 private:
-    int _DP(int &numNs, const int a, const int b, const int oper){
-        if ((a*b)==0) && (oper==eXmultY) {
-            return 0;
+    void _DFS(const int numNs, const int result){
+        if (numNs > MAX_NUM) return;
+        if (numNs >= minNumNs) return;
+
+        if (result == number) {
+            minNumNs = numNs;
         }
 
-        if ((a==5) && (b==5) && (oper==eXY) {
-            numNs += 2;
-            return 55;
-        }
+        hashM[numNs].insert(result);
 
-        if ((b==0) && (oper==eXdividY)) {
-            return a;
-        }
+        int NN = 0;
+        FOR(i, MAX_NUM){
+            int nextNumNs = numNs + i + 1;
+            if (nextNumNs > MAX_NUM) break;
 
-        if (cache[a][b][oper] != -1) {
-            return cache[a][b][oper];
-        }
+            NN = NN*10 + N;
+            int plus = NN + result;
+            int minus = NN - result;
+            int mult = NN * result;
 
-        int ret=0;
-        switch (oper) {
-            case eXplusY:{
-                if (a==5) {
-                    ret = 5 + _DP(numNs, , );
-
+            if (hashM[nextNumNs].find(plus)==hashM[nextNumNs].end()){
+                _DFS((nextNumNs), (plus));
+            }
+            if (hashM[nextNumNs].find(minus)==hashM[nextNumNs].end()){
+                _DFS((nextNumNs), (minus));
+            }
+            if (hashM[nextNumNs].find(-1*minus)==hashM[nextNumNs].end()){
+                _DFS((nextNumNs), (-1*minus));
+            }
+            if (hashM[nextNumNs].find(mult)==hashM[nextNumNs].end()){
+                _DFS((nextNumNs), (mult));
+            }
+            if (result != 0) {
+                int divid = NN / result;
+                if (hashM[nextNumNs].find(divid)==hashM[nextNumNs].end()){
+                    _DFS((nextNumNs), (divid));
                 }
             }
-            break;
-            case eXminusY:{
-                ret = a-b;
+            if (NN != 0) {
+                int r_divid = result / NN;
+                if (hashM[nextNumNs].find(r_divid)==hashM[nextNumNs].end()){
+                    _DFS((nextNumNs), (r_divid));
+                }
             }
-            break;
-            case eXmultY:{
-                ret = a*b;
-            }
-            break;
-            case eXdividY:{
-                ret = a/b;
-            }
-            break;
         }
-        return cache[a][b][oper] = ret;
+    }
+
+    int _DP(){
+        int minNumNs = MAX_NUM + 1;
+        int NN = 0;
+        FOR(i, MAX_NUM){
+            int I = i+1;
+            NN = NN*10 + N; // 5, 55, 555, ... , 55555555
+            hashM[I].insert(NN);
+            hashM[I].insert(-1*NN);
+            FOR(j, i){
+                int J = j+1;
+                int K = (i-j);    // I:J:K = i+1:j+1:i-j, 2:1:1
+                                  //                    , 3:1:2, 3:2:1
+                for(auto itJ = hashM[J].begin();
+                itJ!=hashM[J].end(); ++itJ){
+                    for(auto itK = hashM[K].begin();
+                    itK!=hashM[K].end(); ++itK){
+                        hashM[I].insert(*itJ + *itK);
+                        hashM[I].insert(*itJ - *itK);
+                        hashM[I].insert(*itJ * *itK);
+                        if (*itK != 0) hashM[I].insert(*itJ / *itK);
+                    }
+                }
+            }
+            if (hashM[I].find(number) != hashM[I].end()) {
+                minNumNs = I;
+                break;
+            }
+        }
+        return  minNumNs;
     }
     void _Solve(){
-
+        minNumNs = MAX_NUM+1;
+        _DFS(0, 0);
+        // minNumNs = _DP();
+        if (minNumNs == MAX_NUM+1) {
+            minNumNs = -1;
+        }
+        cout << minNumNs;
     } // _Solve()
 
 };

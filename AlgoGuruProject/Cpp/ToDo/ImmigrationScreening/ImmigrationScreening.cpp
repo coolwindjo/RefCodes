@@ -1,4 +1,4 @@
-#if 1
+#if 0
 #define TEST
 #endif // 1
 
@@ -29,21 +29,29 @@ public:
     }
     ~ProbSolv(){}
 private:
-    bool 
-
-
-    ll _BS(const ll min, const ll max) {
-
+    bool _IsEnough(const ll elapsed){
+        ll sum = 0;
+        for (int t : viTimes){
+            sum += static_cast<ll>(elapsed/t);
+        }
+        return (sum >= n);
     }
-
     void _Solve(){
-        if (W_IFNOT(!viTimes.empty())!=0) return;
+        ll answer = 0;
         std::sort(viTimes.begin(), viTimes.end());
-        ll maxTime = viTimes[0] * n;
-        ll minTime = viTimes[0] * (n/viTimes.size());
-        ll optTime = _BS(minTime, maxTime);
-
-        cout << optTime;
+        ll max = viTimes[0] * static_cast<ll>(n);   // ll*int = int
+        ll min = viTimes[0];
+        while (min<=max){
+            ll mid = static_cast<ll>((min+max)*0.5);
+            if (_IsEnough(mid)){
+                answer = mid;
+                max = mid-1; 
+            }
+            else{
+                min = mid+1;
+            }
+        }
+        cout << answer;
     } // _Solve()
 
     vstr _SplitString(string line, const string &delims) {
