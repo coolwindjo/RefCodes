@@ -31,22 +31,14 @@ public:
 	}
 	virtual ~ProbSolve() {}
 
-private:
-	void _Solve(const vvi &map) {
-		FOR(dir, eDIR_LEN) {
-			_DFS(map, 1, (Dir_e)dir);
-		}
-		cout << m_maxVal;
-	}
-
-	void _DFS(const vvi &map, const int numMoves, const Dir_e dir) {
+	void DFS(const vvi &map, const int numMoves, const Dir_e dir) {
 		vvi movedMap(map);
 #if 1
 		//const int numMerges = 
-        _MoveWithQ(dir, movedMap);
+        MoveWithQ(dir, movedMap);
 #else
 		//const int numMerges = 
-        _Move(dir, movedMap);
+        Move(dir, movedMap);
 #endif // 0
 
 #ifdef TEST
@@ -79,11 +71,11 @@ private:
 		}
 
 		FOR(nextDir, eDIR_LEN) {
-			_DFS(movedMap, numMoves + 1, (Dir_e)nextDir);
+			DFS(movedMap, numMoves + 1, (Dir_e)nextDir);
 		}
 	}
 
-	int _MoveWithQ(const Dir_e dir, vvi &mapOut) {
+	int MoveWithQ(const Dir_e dir, vvi &mapOut) {
 		int numMerges = 0;
 		switch (dir)
 		{
@@ -99,7 +91,7 @@ private:
 				}
 
 				FOR_DEC(col, 0, m_mapSizeN) {
-					_FillCell(row, col,
+					FillCell(row, col,
 							  mapOut, qiVals, numMerges);
 				}
 			}
@@ -116,7 +108,7 @@ private:
 				}
 
 				FOR_DEC(row, 0, m_mapSizeN) {
-					_FillCell(row, col,
+					FillCell(row, col,
 							  mapOut, qiVals, numMerges);
 				}
 			}
@@ -133,7 +125,7 @@ private:
 				}
 
 				FOR_INC(col, 0, m_mapSizeN) {
-					_FillCell(row, col,
+					FillCell(row, col,
 							  mapOut, qiVals, numMerges);
 				}
 			}
@@ -150,7 +142,7 @@ private:
 				}
 
 				FOR_INC(row, 0, m_mapSizeN) {
-					_FillCell(row, col,
+					FillCell(row, col,
 							  mapOut, qiVals, numMerges);
 				}
 			}
@@ -163,7 +155,7 @@ private:
 		return numMerges;
 	}
 
-	void _FillCell(const int row, const int col,
+	void FillCell(const int row, const int col,
 				   vvi &mapOut, qi &qiValsOut, int &numMergesOut) {
 		int pivotVal = -1;
 
@@ -196,7 +188,7 @@ private:
 		}
 	}
 
-	int _Move(const Dir_e dir, vvi &mapOut) {
+	int Move(const Dir_e dir, vvi &mapOut) {
 		int numMerges = 0;
 		switch (dir)
 		{
@@ -444,6 +436,15 @@ private:
 		}
 		return biggest;
 	}
+
+private:
+	void _Solve(const vvi &map) {
+		FOR(dir, eDIR_LEN) {
+			DFS(map, 1, (Dir_e)dir);
+		}
+		cout << m_maxVal;
+	}
+
 };
 
 int main()

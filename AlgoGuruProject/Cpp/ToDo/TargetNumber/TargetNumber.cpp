@@ -42,8 +42,8 @@ public:
         _Solve();
     }
     ~ProbSolv(){}
-private:
-    void _DFS(const int idx, const int sol) {
+
+    void DFS(const int idx, const int sol) {
         if (idx == n) {
             if (sol == t) {
                 numSols++;
@@ -52,14 +52,15 @@ private:
         }
         
         for (int pm = eP; pm < ePMLEN; ++pm){ 
-            _DFS(idx+1, sol+OPER[pm]*a[idx]);
+            DFS(idx+1, sol+OPER[pm]*a[idx]);
         }
         
     }
 
+private:
     void _Solve(){
         numSols = 0;
-        _DFS(0, 0);
+        DFS(0, 0);
         cout << numSols;
     } // _Solve()
 

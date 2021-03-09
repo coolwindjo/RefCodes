@@ -32,8 +32,8 @@ public:
         _Solve();
     }
     ~ProbSolv(){}
-private:
-    void _DFS(  const vi &viNumItems, const int beginIdx, const int prevProductVal,
+
+    void DFS(  const vi &viNumItems, const int beginIdx, const int prevProductVal,
                 int &sumNumCombies) {
         W_IFNOT(beginIdx <= viNumItems.size());
 
@@ -45,10 +45,11 @@ private:
         sumNumCombies += productVal;
 
         FOR_INC(nextIdx, beginIdx+1, viNumItems.size()){
-            _DFS(viNumItems, nextIdx, productVal, sumNumCombies);
+            DFS(viNumItems, nextIdx, productVal, sumNumCombies);
         }
     }
 
+private:
     void _Solve() {
         typedef std::unordered_map<string, int> map_str_i;
         map_str_i map;
@@ -90,7 +91,7 @@ private:
         }
         int sumNumCombies = 0;
         FOR(i, viNumItems.size()){
-            _DFS(viNumItems, i, 1, sumNumCombies);
+            DFS(viNumItems, i, 1, sumNumCombies);
         }
 
         cout << sumNumCombies;

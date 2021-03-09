@@ -1,99 +1,85 @@
-#if 1
-#define SPLIT_DEBUG
+#if 0
+#define TEST
 #endif // 1
 
 #include "../../ProbSolvStart.h"
 
-#if 0   // 12dd
-typedef enum {
-	eR=0, eD,
-    eL, eU,
-    eDIR_LEN
-} Dir_e;
-constexpr int DIR[eDIR_LEN][2] = {
-    {0,1}, {1,0},
-    {0,-1}, {-1,0}
-};
-#endif // 0
-
 class ProbSolv
 {
+    vvi m_vviT;
 public:
     ProbSolv()
     {
-#if 0   // 43dd
-        int numLines = 0;
-        cin >> numLines;
-
-        vstr lines;
-        FOR(i, numLines){
-            string line;
+        string line;
+        FOR(i, 10){
             std::getline(std::cin, line);
-            if(line.length() == 0){
-                i--;
-                continue;
+            if(line.length() > 2){
+                break;
             }
-            lines.push_back(line);
         }
-#endif
+        vstr vstrT = _SplitString(line, string(", \r[]"));
+        vi viRow;
+        int rowCnt = 1;
+        int cntAcc = rowCnt;
+        for (int i=0; i<vstrT.size(); ++i){
+            if (cntAcc == i) {
+                m_vviT.push_back(viRow);
+                viRow.clear();
+                rowCnt++;
+                cntAcc += rowCnt;
+            }
+            viRow.push_back(std::stoi(vstrT[i]));
+        }
+        m_vviT.push_back(viRow);
 
-#if 0   // 27dd
-        int rows = 0;
-        int columns = 0;
-        cin >> rows;
-        cin >> columns;
-
-        vvi grid;
-        FOR(i, rows){
-            vi rowG;
-            FOR(j, columns){
-                int val;
-                cin >> val;
-                rowG.push_back(val);
-            }
-            grid.push_back(rowG);
-        }
-#ifdef SPLIT_DEBUG
-        cout <<endl;
-        FOR(i, rows){
-            FOR(j, columns){
-                cout << grid[i][j] << " ";
-            }
-            cout <<endl;
-        }
-#endif
-#endif
-        
         _Solve();
     }
     ~ProbSolv(){}
 
+    int DP(){
+        int maxSum = 0;
+        vi viPrevRow = m_vviT[m_vviT.size()-1];
+        vi viRow;
+        for (int i=m_vviT.size()-2; i>=0; --i){
+            viRow = m_vviT[i];
+            for (int j=0; j<viRow.size(); ++j){
+                int val = viRow[j];
+                int bigger = std::max(viPrevRow[j], viPrevRow[j+1]);
+                viRow[j] = val + bigger;
+            }
+            viPrevRow.clear();
+            viPrevRow = viRow;
+        }
+        maxSum = viRow[0];
+        return maxSum;
+    }
+
 private:
     void _Solve(){
-
+        int maxSum = DP();
+        cout << maxSum;
     } // _Solve()
 
-#if 0 // 48dd
     vstr _SplitString(string line, const string &delims) {
-#ifdef SPLIT_DEBUG
+#ifdef TEST
         cout << "\n1) line: " << line <<endl;
 #endif
         string::iterator newEnd = unique(line.begin(), line.end(), [] (const char &x, const char &y) {
             return x==y and x==' ';
         });
-#ifdef SPLIT_DEBUG
+#ifdef TEST
         cout << "2) line: " << line <<endl;
 #endif
 
         line.erase(newEnd, line.end());
-#ifdef SPLIT_DEBUG
+#ifdef TEST
         cout << "3) line: " << line <<endl;
 #endif
 
         while (line[line.length() - 1] == ' ') {
             line.pop_back();
         }
-#ifdef SPLIT_DEBUG
+#ifdef TEST
         cout << "4) line: " << line <<endl;
 #endif
 
@@ -105,7 +91,7 @@ private:
             if (pos > prev) {
                 vstrSplits.push_back(line.substr(prev, pos-prev));
             }
-#ifdef SPLIT_DEBUG
+#ifdef TEST
             for(string str : vstrSplits) {
                 cout << str << " ";
             }
@@ -120,22 +106,17 @@ private:
 
         return vstrSplits;
     }
-#endif
 
 };
 
 int main(){
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
-#if 0   // 6dd
     int numTCs = 0;
     cin >> numTCs;
     FOR (tc, numTCs) {
         cout << "#" << tc+1 <<" ";
-#endif
         ProbSolv ps;
-#if 0   // 4dd
         cout << endl;
     }
-#endif
     return 0;
 }

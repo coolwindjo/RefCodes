@@ -7,7 +7,10 @@
 class ProbSolv
 {
     vi m_viP;
-    int m_limit;
+    vi m_viS;
+    vi m_viQ;
+    int m_lastBig;
+    int m_numPs;
 public:
     ProbSolv()
     {
@@ -18,38 +21,69 @@ public:
                 break;
             }
         }
-        cin >> m_limit;
         vstr vstrP = _SplitString(line, string("\r, []"));
-        for(auto strP : vstrP){
-            const int p = std::stoi(strP);
+        FOR(i, 10){
+            std::getline(std::cin, line);
+            if(line.length() > 2){
+                break;
+            }
+        }
+        vstr vstrS = _SplitString(line, string("\r, []"));
+
+        for (auto strp : vstrP){
+            int p = std::stoi(strp);
             m_viP.push_back(p);
+        }
+        for (auto strs : vstrS){
+            int s = std::stoi(strs);
+            m_viS.push_back(s);
         }
 
         _Solve();
     }
     ~ProbSolv(){}
 
+    int Push(const int finDate){
+        /*/
+        if (m_lastBig < finDate)  m_lastBig = finDate;
+        m_numPs++;
+        return m_lastBig;
+        /*/
+        m_viQ.push_back(finDate);
+        return m_viQ[0];
+        //*/
+    }
+    int Flush(){
+        /*/
+        int numPs = m_numPs;
+        m_numPs = 0;
+        m_lastBig = 0;
+        /*/
+        int numPs = m_viQ.size();
+        m_viQ.clear();
+        //*/
+        return numPs;
+    }
+
 private:
     void _Solve(){
-        std::sort(m_viP.begin(), m_viP.end());
-        int cnt = 0;
-        int first = 0;
-        int second = m_viP.size()-1;
-
-        while(first<=second) {
-            if (m_viP[first] > m_limit*0.5){
-                cnt+= (second - first) + 1;
-                break;
+        m_numPs = 0;
+        m_lastBig = 0;
+        vi viRel;
+        int lastBiggest = 101;
+        for(int i=0; i<m_viP.size(); ++i){
+            const double p = m_viP[i];
+            const double s = m_viS[i];
+            const int finDate = (int)((99.0-p)/s +1.0); // 100.0 -> 99.0
+            if (lastBiggest < finDate){
+                viRel.push_back(Flush());
             }
-            int sum = m_viP[first] + m_viP[second];
-            if (sum <= m_limit) {
-                first++;
-            }
-            second--;
-            cnt++;
+            lastBiggest = Push(finDate);
         }
-        
-        cout << cnt;
+        viRel.push_back(Flush());
+        for(auto rel:viRel){
+            cout << rel << ", ";
+        }
     } // _Solve()
 
     vstr _SplitString(string line, const string &delims) {

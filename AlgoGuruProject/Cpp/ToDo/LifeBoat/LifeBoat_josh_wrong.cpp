@@ -33,22 +33,42 @@ private:
     void _Solve(){
         std::sort(m_viP.begin(), m_viP.end());
         int cnt = 0;
-        int first = 0;
-        int second = m_viP.size()-1;
+        int inBoat = -1;
+        int lastIdx = m_viP.size()-1;
+        for (int i=0; i<m_viP.size(); ++i){
+            int p = m_viP[i];
+            W_IFNOT(p < m_limit);
 
-        while(first<=second) {
-            if (m_viP[first] > m_limit*0.5){
-                cnt+= (second - first) + 1;
-                break;
+            if (p < 0) continue;
+
+            int sum = inBoat + p;
+            if ((inBoat < 0) || (sum > m_limit)) {
+                inBoat = p;
+                m_viP[i] = -1;
+                if (sum > m_limit) cnt++;
+                continue;
             }
-            int sum = m_viP[first] + m_viP[second];
-            if (sum <= m_limit) {
-                first++;
+
+            for (int j=lastIdx; j>=i; --j){
+                sum = inBoat + m_viP[j];
+                if (sum <= m_limit){
+                    if (i==j) {
+                        inBoat = -1;
+                    }
+                    else {
+                        inBoat = p;
+                    }
+                    m_viP[j] = -1;
+                    break;
+                }
             }
-            second--;
+
             cnt++;
         }
-        
+
+        if (inBoat > 0){
+            cnt++;
+        }
         cout << cnt;
     } // _Solve()
 

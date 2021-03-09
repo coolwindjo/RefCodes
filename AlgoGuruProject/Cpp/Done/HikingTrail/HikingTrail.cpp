@@ -47,35 +47,7 @@ public:
 	}
 	virtual ~ProbSolv() {}
 
-private:
-	void _Solve(){
-		// Set starting peaks
-		P_IFNOT(m_viiPos.size() >= 1, m_viiPos.size());
-		while (!m_viiPos.empty()) {
-			const ii pos = m_viiPos.back(); m_viiPos.pop_back();
-			if (m_peak == m_map[pos.first][pos.second].second)
-			{
-				m_viiStartingPos.push_back(pos);
-			}
-		}
-
-		// DFS with backtracking
-		P_IFNOT(m_viiStartingPos.size() >= 1, m_viiStartingPos.size());
-		while (!m_viiStartingPos.empty()) {
-			const ii pos = m_viiStartingPos.back(); m_viiStartingPos.pop_back();
-			bool bDigged = 0;
-#ifdef TEST
-			cout << "\nStart from:" << pos.first << pos.second;
-#endif // TEST
-			_DFS(pos, 1, bDigged);
-#ifdef TEST
-			cout << "\n++++++++++++" <<endl;
-#endif // TEST
-		}
-		cout << m_maxDist << endl;
-	}
-
-	void _DFS(const ii& pos, const int dist, const bool bDigged) {
+	void DFS(const ii& pos, const int dist, const bool bDigged) {
 		// Visit!
 		m_map[pos.first][pos.second].first = 1;
 		const int height = m_map[pos.first][pos.second].second;
@@ -126,7 +98,7 @@ private:
 					P_IFNOT((1 - digging) <= (int)m_maxDigK, nextH);
 					P_IFNOT((1 - digging) <= (int)m_maxDigK, digging);
 					m_map[nextPos.first][nextPos.second].second = nextH + (digging-1);
-					_DFS(nextPos, dist + 1, 1);
+					DFS(nextPos, dist + 1, 1);
 					// backtracking!
 					m_map[nextPos.first][nextPos.second].second = nextH;
 					continue;
@@ -136,11 +108,40 @@ private:
 				// without digging
 				if (height - nextH <= 0) continue;
 			}
-			_DFS(nextPos, dist + 1, bDigged);
+			DFS(nextPos, dist + 1, bDigged);
 		}
 
 		m_map[pos.first][pos.second].first = 0; // backtracking!
 	}
+	
+private:
+	void _Solve(){
+		// Set starting peaks
+		P_IFNOT(m_viiPos.size() >= 1, m_viiPos.size());
+		while (!m_viiPos.empty()) {
+			const ii pos = m_viiPos.back(); m_viiPos.pop_back();
+			if (m_peak == m_map[pos.first][pos.second].second)
+			{
+				m_viiStartingPos.push_back(pos);
+			}
+		}
+
+		// DFS with backtracking
+		P_IFNOT(m_viiStartingPos.size() >= 1, m_viiStartingPos.size());
+		while (!m_viiStartingPos.empty()) {
+			const ii pos = m_viiStartingPos.back(); m_viiStartingPos.pop_back();
+			bool bDigged = 0;
+#ifdef TEST
+			cout << "\nStart from:" << pos.first << pos.second;
+#endif // TEST
+			DFS(pos, 1, bDigged);
+#ifdef TEST
+			cout << "\n++++++++++++" <<endl;
+#endif // TEST
+		}
+		cout << m_maxDist << endl;
+	}
+
 };
 
 int main()

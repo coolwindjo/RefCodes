@@ -1,79 +1,59 @@
-#if 1
+#if 0
 #define SPLIT_DEBUG
 #endif // 1
 
 #include "../../ProbSolvStart.h"
 
-#if 0   // 12dd
-typedef enum {
-	eR=0, eD,
-    eL, eU,
-    eDIR_LEN
-} Dir_e;
-constexpr int DIR[eDIR_LEN][2] = {
-    {0,1}, {1,0},
-    {0,-1}, {-1,0}
-};
-#endif // 0
-
 class ProbSolv
 {
+    vi m_viNums;
+    vvi m_vviBiggerFirst;
 public:
     ProbSolv()
     {
-#if 0   // 43dd
-        int numLines = 0;
-        cin >> numLines;
-
-        vstr lines;
-        FOR(i, numLines){
-            string line;
+        string line;
+        FOR(i, 10){
             std::getline(std::cin, line);
-            if(line.length() == 0){
-                i--;
-                continue;
+            if(line.length() > 2){
+                break;
             }
-            lines.push_back(line);
         }
-#endif
+        vstr vstrNums = _SplitString(line, string("\r, []"));
+        for(auto str : vstrNums){
+            m_viNums.push_back(std::stoi(str));
+        }
 
-#if 0   // 27dd
-        int rows = 0;
-        int columns = 0;
-        cin >> rows;
-        cin >> columns;
-
-        vvi grid;
-        FOR(i, rows){
-            vi rowG;
-            FOR(j, columns){
-                int val;
-                cin >> val;
-                rowG.push_back(val);
-            }
-            grid.push_back(rowG);
-        }
-#ifdef SPLIT_DEBUG
-        cout <<endl;
-        FOR(i, rows){
-            FOR(j, columns){
-                cout << grid[i][j] << " ";
-            }
-            cout <<endl;
-        }
-#endif
-#endif
-        
         _Solve();
     }
     ~ProbSolv(){}
 
+    int Digit(const int num){
+        if (num < 10) return 1;
+        return 1 + Digit(num/10);
+    }
+
 private:
     void _Solve(){
-
+        std::sort(m_viNums.begin(), m_viNums.end(), [](const int a, const int b){
+            return a>b;
+        });
+        int prevDigit = Digit(m_viNums[0]);
+        vi viNums;
+        for (int num : m_viNums){
+            int digit = Digit(num);
+            if (digit < prevDigit){
+                m_vviBiggerFirst.push_back(viNums);
+                viNums.clear();
+                prevDigit = digit;
+            }
+            viNums.push_back(num);
+        }
+        m_vviBiggerFirst.push_back(viNums);
+        string ans;
+        
+        cout << ans;
     } // _Solve()
 
-#if 0 // 48dd
     vstr _SplitString(string line, const string &delims) {
 #ifdef SPLIT_DEBUG
         cout << "\n1) line: " << line <<endl;
@@ -120,22 +100,17 @@ private:
 
         return vstrSplits;
     }
-#endif
 
 };
 
 int main(){
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
-#if 0   // 6dd
     int numTCs = 0;
     cin >> numTCs;
     FOR (tc, numTCs) {
         cout << "#" << tc+1 <<" ";
-#endif
         ProbSolv ps;
-#if 0   // 4dd
         cout << endl;
     }
-#endif
     return 0;
 }

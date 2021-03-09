@@ -18,8 +18,8 @@ public:
         _Solve();
     }
     ~ProbSolv(){}
-private:
-    void _DFS(const int numNs, const int result){
+
+    void DFS(const int numNs, const int result){
         if (numNs > MAX_NUM) return;
         if (numNs >= minNumNs) return;
 
@@ -40,33 +40,33 @@ private:
             int mult = NN * result;
 
             if (hashM[nextNumNs].find(plus)==hashM[nextNumNs].end()){
-                _DFS((nextNumNs), (plus));
+                DFS((nextNumNs), (plus));
             }
             if (hashM[nextNumNs].find(minus)==hashM[nextNumNs].end()){
-                _DFS((nextNumNs), (minus));
+                DFS((nextNumNs), (minus));
             }
             if (hashM[nextNumNs].find(-1*minus)==hashM[nextNumNs].end()){
-                _DFS((nextNumNs), (-1*minus));
+                DFS((nextNumNs), (-1*minus));
             }
             if (hashM[nextNumNs].find(mult)==hashM[nextNumNs].end()){
-                _DFS((nextNumNs), (mult));
+                DFS((nextNumNs), (mult));
             }
             if (result != 0) {
                 int divid = NN / result;
                 if (hashM[nextNumNs].find(divid)==hashM[nextNumNs].end()){
-                    _DFS((nextNumNs), (divid));
+                    DFS((nextNumNs), (divid));
                 }
             }
             if (NN != 0) {
                 int r_divid = result / NN;
                 if (hashM[nextNumNs].find(r_divid)==hashM[nextNumNs].end()){
-                    _DFS((nextNumNs), (r_divid));
+                    DFS((nextNumNs), (r_divid));
                 }
             }
         }
     }
 
-    int _DP(){
+    int DP(){
         int minNumNs = MAX_NUM + 1;
         int NN = 0;
         FOR(i, MAX_NUM){
@@ -96,10 +96,12 @@ private:
         }
         return  minNumNs;
     }
+
+private:
     void _Solve(){
         minNumNs = MAX_NUM+1;
-        _DFS(0, 0);
-        // minNumNs = _DP();
+        DFS(0, 0);
+        // minNumNs = DP();
         if (minNumNs == MAX_NUM+1) {
             minNumNs = -1;
         }

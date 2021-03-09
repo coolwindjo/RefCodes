@@ -31,8 +31,8 @@ public:
 				int numTwos = INF;
 				int numFives = INF;
 				if (val > 0) {
-					numTwos = _CountFactor(2, val);
-					numFives = _CountFactor(5, val);
+					numTwos = CountFactor(2, val);
+					numFives = CountFactor(5, val);
 				}
 				viiRow.push_back(ii(numTwos, numFives));
 				viRow.push_back(val);
@@ -45,8 +45,7 @@ public:
 	}
 	virtual ~ProbSolve() {}
 
-private:
-	int _CountFactor(const int factor, const int val) {
+	int CountFactor(const int factor, const int val) {
 		int cnt = 0;
 		int quotient = val;
 		while (quotient % factor == 0) {
@@ -56,17 +55,7 @@ private:
 		return cnt;
 	}
 
-	void _Solve() {
-#if 1
-		_UpdateFactorMap();
-#else
-		//_DFSwithStack(ii(0, 0), 0, 0);
-		_DFS(ii(0, 0), 0, 0);
-#endif // 0
-		cout << m_minZeros << endl;
-	}
-
-	void _UpdateFactorMap() {
+	void UpdateFactorMap() {
 		FOR_INC(row, 1, m_mapSizeN) {
 			m_map[row][0].first += m_map[row - 1][0].first;
 			if (m_map[row][0].first > INF) m_map[row][0].first = INF;
@@ -81,20 +70,20 @@ private:
 		}
 		FOR_INC(row, 1, m_mapSizeN) {
 			FOR_INC(col, 1, m_mapSizeN) {
-				m_map[row][col].first += _min(m_map[row - 1][col].first, m_map[row][col - 1].first);
+				m_map[row][col].first += min(m_map[row - 1][col].first, m_map[row][col - 1].first);
 				if (m_map[row][col].first > INF) m_map[row][col].first = INF;
-				m_map[row][col].second += _min(m_map[row - 1][col].second, m_map[row][col - 1].second);
+				m_map[row][col].second += min(m_map[row - 1][col].second, m_map[row][col - 1].second);
 				if (m_map[row][col].second > INF) m_map[row][col].second = INF;
 			}
 		}
-		m_minZeros = _min(m_map[m_mapSizeN - 1][m_mapSizeN - 1].first, m_map[m_mapSizeN - 1][m_mapSizeN - 1].second);
+		m_minZeros = min(m_map[m_mapSizeN - 1][m_mapSizeN - 1].first, m_map[m_mapSizeN - 1][m_mapSizeN - 1].second);
 	}
 
-	int _min(const int a, const int b) {
+	int min(const int a, const int b) {
 		return (a < b ? a : b);
 	}
 
-	void _DFS(const ii iiTwoFive, const int row, const int col) {
+	void DFS(const ii iiTwoFive, const int row, const int col) {
 		if (m_mapCanGo[row][col] == 0) {
 			W_IFNOT(m_mapCanGo[row][col] > 0);
 			return;
@@ -126,7 +115,7 @@ private:
 			if (OOR(nextRow, 0, m_mapSizeN - 1)) continue;
 			if (OOR(nextCol, 0, m_mapSizeN - 1)) continue;
 			if (m_mapCanGo[nextRow][nextCol] == 0) continue;
-			_DFS(ii(accumTwo, accumFive), nextRow, nextCol);
+			DFS(ii(accumTwo, accumFive), nextRow, nextCol);
 		}
 	}
 
@@ -142,7 +131,7 @@ private:
 		int numTwos;
 		int numFives;
 	} Node_t;
-	void _DFSwithStack(const ii iiTwoFive, const int row, const int col) {
+	void DFSwithStack(const ii iiTwoFive, const int row, const int col) {
 		stack<Node_t> S;
 		S.push(Node_t(row, col, iiTwoFive.first, iiTwoFive.second));
 
@@ -183,6 +172,18 @@ private:
 			}
 		}
 	}
+
+private:
+	void _Solve() {
+#if 1
+		UpdateFactorMap();
+#else
+		//DFSwithStack(ii(0, 0), 0, 0);
+		DFS(ii(0, 0), 0, 0);
+#endif // 0
+		cout << m_minZeros << endl;
+	}
+
 };
 
 int main() {

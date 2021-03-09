@@ -1,10 +1,9 @@
 # Problem information
 
-<https://programmers.co.kr/learn/courses/30/lessons/42885>
+<https://programmers.co.kr/learn/courses/30/lessons/43105>
 
-greedy alogrithm
-mathematics
-sort
+dynamic programing
+string manipulation
 unique and erase vector
 split string
 
