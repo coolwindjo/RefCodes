@@ -1,0 +1,50 @@
+@startuml
+start
+partition OnInitialize() {
+    :m_stMO_Bin = VFApi::vfGetBoard(m_psService->GetContext(), "SVNET_Bin")
+    :m_stMO_CL = VFApi::vfGetBoard(m_psService->GetContext(), "SVNET_Bin_CL");
+    :InitCPURTT();
+    :const R_IMPFW_COREINFO arstCoreInfo[R_IMPFW_COREMAP_MAXID] = {
+		{R_IMPFW_CORE_TYPE_OCV, 0U},			// 0
+		{R_IMPFW_CORE_TYPE_OCV, 1U},			// 1
+		{R_IMPFW_CORE_TYPE_DMAC, 0U},			// 2
+		{R_IMPFW_CORE_TYPE_DMAC, 1U},			// 3
+		{R_IMPFW_CORE_TYPE_PSCEXE, 0U},		// 4
+		{R_IMPFW_CORE_TYPE_CNN, 0U},			// 5
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 6: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 7: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 8: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 9: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 10: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 11: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 12: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 13: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U},		// 14: placeholder for MISRA
+		{R_IMPFW_CORE_TYPE_INVALID, 0U}			// 15: placeholder for MISRA
+	};
+    :R_IMPFW_CL m_stCLQueue[20U * R_IMPFW_MODULE_NUM];
+	:R_IMPFW_COREINFO m_stCoreMap[R_IMPFW_MODULE_NUM][R_IMPFW_COREMAP_MAXID];
+    partition for-each-core {
+        :m_stCoreMap[core_idx] = arstCoreInfo;
+    }
+    partition for-each-core {
+        :p_core_map[core_idx] = m_stCoreMap[core_idx][0] // beginning pointer;
+    }
+    :const uint16_t CSVNetMessageHandler_cnn::c_u32CLQueueNum = 10U * R_IMPFW_MODULE_NUM;
+    :const R_IMPFW_ERRORCODE impfw_ret = r_impfw_Init(
+        &m_ImpFwCtl, p_core_map, &m_stCLQueue[0], c_u32CLQueueNum, R_IMPFW_MODE_NORMAL
+    );
+    :m_semaCnnImpl = SEMA_Open("SemaCnnImpl");
+    :m_s32cnt = 0;
+}
+partition OnMessage() {
+    if (m_s32cnt < 10) then
+    -> YES;
+    :m_s32cnt++;
+    else
+    -> NO;
+    :cnn_sample_main(V3H_IMAGE_UNRECTI_Y_FULL);
+    endif
+}
+stop
+@enduml

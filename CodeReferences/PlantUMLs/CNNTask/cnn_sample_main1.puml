@@ -1,0 +1,120 @@
+@startuml
+start
+partition Initialize() {
+    :const uint32_t u32_test_clsize = 4096U;
+    :R_ATMLIB_CNNEnableControl double_wb_en = R_ATMLIB_CNN_DISABLE;
+	:const uint8_t dyn_ocfp_count = 0;
+    partition LayerPrologParameter {
+        :uint32_t u32maxsum_cnt_thres = 0x0100 //1U;
+        :uint32_t u32minsum_cnt_thres = 0x0100 //2U;
+        :uint8_t u8scres_mode = R_ATMLIB_CNN_SCRESMODE_1;
+        :uint16_t u16max_val_thres = 0x0100 //2U;
+        :uint16_t u16min_val_thres = 0xFFFF //3U;
+    }
+    partition Channels {
+        :const uint32_t u32Num_InputCh = 3U;
+        :const uint32_t u32Num_OutputCh = 2U;
+        :const uint32_t MEM_ALIGN = 4U  // Note: Set power of 2;
+        :const uint32_t NUM_TILES = 3U;
+        :const uint16_t u16_xsize = 336U;
+        :const uint16_t u16_xstride = 336U;
+        :const uint16_t u16_xstrideO = u16_xstride - 4U;
+        :const uint16_t u16_ysize = 56U;
+        :const uint32_t CNN_ADDR_SFTM_V3H  = (0x0224 >> 2);
+    }
+    :R_ATMLIB_CNNPlaneParam stPlane_dmai[NUM_TILES][u32Num_InputCh] = {
+        { // tile 0
+            ' /*  id,                 fp_handle,                   ptr, image_*(x, y),  image_stride,   image_format,       pad_*(t, b, l, r),  stride_*(x, y), repeat_*(x, y), repeat_skip,                    repeat_fill             */
+            {   R_ATMLIB_CNN_DMAI0, R_ATMLIB_CNN_CHANNEL_UNUSED,   0, 128, 56,       u16_xstride,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+            {   R_ATMLIB_CNN_DMAI1, R_ATMLIB_CNN_CHANNEL_UNUSED,   0, 128, 56,       u16_xstride,           R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+            {   R_ATMLIB_CNN_DMAI2, R_ATMLIB_CNN_CHANNEL_UNUSED,   0, 128, 56,       u16_xstride,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+        },
+        { // tile 1
+        '     /*  id,                 fp_handle,                   ptr, image_*(x, y),  image_stride,   image_format,       pad_*(t, b, l, r),  stride_*(x, y), repeat_*(x, y), repeat_skip,                    repeat_fill             */
+            {   R_ATMLIB_CNN_DMAI0, R_ATMLIB_CNN_CHANNEL_UNUSED, 124, 128, 56,       u16_xstride,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+            {   R_ATMLIB_CNN_DMAI1, R_ATMLIB_CNN_CHANNEL_UNUSED, 124, 128, 56,       u16_xstride,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+            {   R_ATMLIB_CNN_DMAI2, R_ATMLIB_CNN_CHANNEL_UNUSED, 124, 128, 56,       u16_xstride,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+        },
+        { // tile 2
+        '     /*  id,                 fp_handle,                   ptr, image_*(x, y),  image_stride,   image_format,       pad_*(t, b, l, r),  stride_*(x, y), repeat_*(x, y), repeat_skip,                    repeat_fill             */
+            {   R_ATMLIB_CNN_DMAI0, R_ATMLIB_CNN_CHANNEL_UNUSED, 248,  88, 56,       u16_xstride,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+            {   R_ATMLIB_CNN_DMAI1, R_ATMLIB_CNN_CHANNEL_UNUSED, 248,  88, 56,       u16_xstride,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+            {   R_ATMLIB_CNN_DMAI2, R_ATMLIB_CNN_CHANNEL_UNUSED, 248,  88, 56,       u16_xstride,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         1, 1,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL  },
+        },
+    };
+
+    :R_ATMLIB_CNNPlaneParam stPlane_dmao[NUM_TILES][u32Num_OutputCh] = {
+        { // tile 0
+            ' /*  id,                 fp_handle,                   ptr, image_*(x, y),  image_stride,   image_format,       pad_*(t, b, l, r),  stride_*(x, y), repeat_*(x, y), repeat_skip,                    repeat_fill             */
+            {   R_ATMLIB_CNN_DMAO0, R_ATMLIB_CNN_CHANNEL_UNUSED,   0, 124, 52,       u16_xstrideO,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         0, 0,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL },
+            {   R_ATMLIB_CNN_DMAO1, R_ATMLIB_CNN_CHANNEL_UNUSED,   0, 124, 52,       u16_xstrideO,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         0, 0,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL },
+        },
+        { // tile 1
+            ' /*  id,                 fp_handle,                   ptr, image_*(x, y),  image_stride,   image_format,       pad_*(t, b, l, r),  stride_*(x, y), repeat_*(x, y), repeat_skip,                    repeat_fill             */
+            {   R_ATMLIB_CNN_DMAO0, R_ATMLIB_CNN_CHANNEL_UNUSED, 124, 124, 52,       u16_xstrideO,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         0, 0,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL },
+            {   R_ATMLIB_CNN_DMAO1, R_ATMLIB_CNN_CHANNEL_UNUSED, 124, 124, 52,       u16_xstrideO,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         0, 0,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL },
+        },
+        { // tile 2
+            ' /*  id,                 fp_handle,                   ptr, image_*(x, y),  image_stride,   image_format,       pad_*(t, b, l, r),  stride_*(x, y), repeat_*(x, y), repeat_skip,                    repeat_fill             */
+            {   R_ATMLIB_CNN_DMAO0, R_ATMLIB_CNN_CHANNEL_UNUSED, 248,  84, 52,       u16_xstrideO,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         0, 0,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL },
+            {   R_ATMLIB_CNN_DMAO1, R_ATMLIB_CNN_CHANNEL_UNUSED, 248,  84, 52,       u16_xstrideO,            R_ATMLIB_IMG_8S,    0, 0, 0, 0,         0, 0,           0, 0,           R_ATMLIB_CNNRPTSKP_CONTRACT,    R_ATMLIB_CNN_ZERO_FILL },
+        },
+    }; 
+    partition Convolution {
+        :R_ATMLIB_CNNConvParam stParam;
+        :stParam.bias = R_ATMLIB_CNN_DISABLE;
+        :stParam.breluval = 0xffff;
+        :stParam.maxout_group = R_ATMLIB_CNN_MAXOUTGROUP_1CH;
+        :stParam.xpool = 1;
+        :stParam.ypool = 1;
+        :stParam.ranksel = R_ATMLIB_CNN_RANKSEL_MAXOUT; //(R_ATMLIB_CNNRANKSELType)0;
+        :stParam.rankmode = R_ATMLIB_CNN_RANKMODE_0; //(R_ATMLIB_CNNRANKMODEType)0;
+        :stParam.custom_label = R_ATMLIB_CNN_CUSTOMLABEL_0; //(R_ATMLIB_CNNCUSTOMLABELType)0;
+    }
+    partition LayerEAndPictureEpliog {
+        :uint8_t u8uvt_index = 1U;
+        :R_ATMLIB_CNNFractionAdjustFunc pFrac_func = NULL;
+    }
+}
+partition MemoryAllocation() {
+    :const uint32_t u32imgDMAI_size = (u16_xstride * u16_ysize * sizeof(int8_t) + MEM_ALIGN - 1) & ~(MEM_ALIGN - 1);
+	:const uint32_t u32imgDMAO_size = (u16_xstrideO * u16_ysize * sizeof(int8_t) + MEM_ALIGN - 1) & ~(MEM_ALIGN - 1);
+	:const uint32_t u32Phys = static_cast<uint32_t>(m_stMO_Bin.unPhysicalAddress); // 21MB
+	:int8_t* ps8Virt = reinterpret_cast<int8_t*>(m_stMO_Bin.punVirtualAddress);
+	:uint32_t u32PhysAddr_DMAI[u32Num_InputCh];
+	:uint32_t u32PhysAddr_DMAO[u32Num_OutputCh];
+	:int8_t* ps8VirtAddr_DMAO[u32Num_OutputCh];
+    partition for-each-input-channel {
+        if (channel_num == 0) then
+        -> YES;
+        :u32PhysAddr_DMAI[i] = (u32Phys + MEM_ALIGN - 1) & ~(MEM_ALIGN - 1);
+        :u32adjust = u32PhysAddr_DMAI[i] - u32Phys;
+        :u32offset = u32imgDMAI_size + u32adjust;
+        else
+        -> NO;
+     	:u32PhysAddr_DMAI[i] = u32Phys + u32offset;
+		:u32offset += u32imgDMAI_size;
+        endif
+        :memcpy( ps8Virt + (u32adjust + u32imgDMAI_size * i), &ars8input[i][0][0], u16_xsize * u16_ysize * sizeof(int8_t) );
+		:vfPrintDebugE("[SVNET] memcpy u32PhysAddr_DMAI[%d]=%08X", i, u32PhysAddr_DMAI[i]);
+    }
+    partition for-each-output-channel {
+        :u32PhysAddr_DMAO[i] = u32Phys + u32offset;
+		:ps8VirtAddr_DMAO[i] = ps8Virt + u32offset;
+		:u32offset += u32imgDMAO_size;
+		:vfPrintDebugE("[SVNET] u32PhysAddr_DMAO[%d]=%08X", i, u32PhysAddr_DMAO[i]);
+    }
+    partition for-each-tile {
+        partition for-each-input-channel {
+   			:stPlane_dmai[tile][i].ptr += u32PhysAddr_DMAI[i];
+			:vfPrintDebugE("[SVNET] dmai[%d][%d].ptr=%08X", tile, i, stPlane_dmai[tile][i].ptr);
+        }
+        partition for-each-output-channel {
+   			:stPlane_dmao[tile][i].ptr += u32PhysAddr_DMAO[i];
+			:vfPrintDebugE("[SVNET] dmao[%d][%d].ptr=%08X", tile, i, stPlane_dmao[tile][i].ptr);
+        }
+    }
+}
+
+stop
+@enduml

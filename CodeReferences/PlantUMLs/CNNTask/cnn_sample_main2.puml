@@ -1,0 +1,72 @@
+@startuml
+start
+partition AtomicLibUsage() {
+    :uint32_t* pCL = reinterpret_cast<uint32_t*>(m_stMO_CL.punVirtualAddress);
+    :rc = r_atmlib_InitializeCNNCL( &m_CLdata, pCL, u32_test_clsize, &m_CNN_data );
+    :rc = r_atmlib_CNNPictureProlog(&m_CLdata, NULL /* aru8ocfp */, dyn_ocfp_count, double_wb_en);
+    :rc = r_atmlib_CNNLayerProlog(&m_CLdata, u32maxsum_cnt_thres, u32minsum_cnt_thres, (R_ATMLIB_CNNSCRESMode)u8scres_mode, u16max_val_thres, u16min_val_thres);
+    partition for-each-tile {
+        partition for-each-input-channel {
+   			:// Set Base Address
+			R_ATMLIB_CNNChannelID eChannel = static_cast<R_ATMLIB_CNNChannelID>(R_ATMLIB_CNN_DMAI0 + chI)
+			rc = r_atmlib_CNNSetBaseAddress(&m_CLdata, eChannel, stPlane_dmai[tile][chI].ptr);
+  			:// Setup Channel
+			rc = r_atmlib_CNNSetupChannel(&m_CLdata, &(stPlane_dmai[tile][chI]));
+        }
+   		:// Setup Shifts
+		uint16_t shtm_addr = CNN_ADDR_SFTM_V3H
+        uint32_t shtm_data = 0x08UL
+        rc = r_atmlib_CNN_WPR( &m_CLdata, shtm_addr, (uint8_t)1, &shtm_data );
+
+        partition for-each-output-channel {
+            partition for-each-input-channel {
+                :R_ATMLIB_CNNChannelID eOutCh = static_cast<R_ATMLIB_CNNChannelID>(R_ATMLIB_CNN_DMAO0 + outCh);
+				:R_ATMLIB_CNNChannelID eInCh  = static_cast<R_ATMLIB_CNNChannelID>(R_ATMLIB_CNN_DMAI0 + inCh);
+                :rc = r_atmlib_CNNSetupWeights( &m_CLdata, eInCh, eOutCh, &ars16weight[outCh][inCh][0][0] ); // int16_t ars16weight[2][3][5][5]
+            }
+        }
+
+        partition for-each-output-channel {
+   			:// Set Base Address
+			R_ATMLIB_CNNChannelID eChannel = static_cast<R_ATMLIB_CNNChannelID>(R_ATMLIB_CNN_DMAO0 + chO)
+			rc = r_atmlib_CNNSetBaseAddress(&m_CLdata, eChannel, stPlane_dmao[tile][chO].ptr);
+  			:// Setup Channel
+			rc = r_atmlib_CNNSetupChannel(&m_CLdata, &(stPlane_dmao[tile][chO]));
+        }
+   		:rc = r_atmlib_CNNProcessTile(&m_CLdata, &stParam, NULL);
+    }
+    :rc = r_atmlib_CNNLayerEpilog(&m_CLdata, u8uvt_index);
+    :rc = r_atmlib_CNNPictureEpilog(&m_CLdata, 1, pFrac_func);
+    :rc = r_atmlib_CNNEndProcessing(&m_CLdata, 0);
+    :printf ("henry.kim CL length %d bytes, m_stMO_CL size is %u", (m_CLdata.cur_addr - m_CLdata.top_addr) * 4, m_stMO_CL.unSize );
+}
+partition ImpFwUsage() {
+    :R_IMPFW_COREINFO core;
+	:core.core_type = R_IMPFW_CORE_TYPE_CNN;
+	:core.core_num  = 0;
+	:(void)VFApi::vfFlushBoard(reinterpret_cast<void*>(m_stMO_Bin.unPhysicalAddress), reinterpret_cast<void*>(m_stMO_Bin.unKernelAddress), m_stMO_Bin.unSize);
+	:(void)VFApi::vfFlushBoard(reinterpret_cast<void*>(m_stMO_CL.unPhysicalAddress),  reinterpret_cast<void*>(m_stMO_CL.unKernelAddress),  m_stMO_CL.unSize);
+	:const uint32_t clPhysAddr = static_cast<uint32_t>(m_stMO_CL.unPhysicalAddress);
+	:void*	CallBackArgs = reinterpret_cast<void*>(this);
+	:const uint64_t u64started = vfGetMicroTime();
+
+	:printf("calling r_impfw_Execute()");
+    :R_IMPFW_ERRORCODE ret = r_impfw_Execute(
+							&m_ImpFwCtl, 
+							&core,
+							clPhysAddr,
+							R_IMPFW_PRIORITY_9,
+							0,
+							NULL,
+							0U,
+							(R_IMPFW_CBFUNC)Callback_CNN0,
+							CallBackArgs );
+
+    :(void)SEMA_Wait(m_semaCnnImpl, SEMA_WAIT_INFINITE);
+	:const uint64_t diff_in_micro_sec = vfGetMicroTime() - u64started;
+	:const float64_t diff_in_millisec = 0.001F * static_cast<float64_t>(diff_in_micro_sec);
+	:printf("%s: HW execution latency \t%f ms", __FUNCTION__, diff_in_millisec);
+	:(void)VFApi::vfInvalidateBoard(reinterpret_cast<void*>(m_stMO_Bin.unPhysicalAddress), reinterpret_cast<void*>(m_stMO_Bin.unKernelAddress), m_stMO_Bin.unSize);
+}
+stop
+@enduml
