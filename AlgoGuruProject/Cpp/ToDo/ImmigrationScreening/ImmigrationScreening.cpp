@@ -4,6 +4,8 @@
 
 #include "../../ProbSolvStart.h"
 
+constexpr int EPS = 1;
+
 class ProbSolv
 {
     int n;
@@ -41,14 +43,15 @@ private:
         std::sort(viTimes.begin(), viTimes.end());
         ll max = viTimes[0] * static_cast<ll>(n);   // ll*int = int
         ll min = viTimes[0];
-        while (min<=max){
-            ll mid = static_cast<ll>((min+max)*0.5);
+        while ((max-min)>EPS){
+            ll mid = static_cast<ll>((min+max)>>1);
             if (_IsEnough(mid)){
-                answer = mid;
-                max = mid-1; 
+                max = mid; 
+                answer = max;
+                if (!_IsEnough(mid-1)) break;
             }
             else{
-                min = mid+1;
+                min = mid;
             }
         }
         cout << answer;

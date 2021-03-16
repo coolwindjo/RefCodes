@@ -6,6 +6,8 @@
 
 typedef pair<ii, int> ii_i;
 typedef vector<ii_i> vii_i;
+
+constexpr int EPS = 1;
 class ProbSolv
 {
     int m_dist;
@@ -35,36 +37,52 @@ public:
     }
     ~ProbSolv(){}
 
+// #define MIN_GAP // wrong answer
 private:
     void _Solve() {
+        m_viRocks.push_back(m_dist);
         std::sort(m_viRocks.begin(), m_viRocks.end());
         int lo = 1;
         int hi = m_dist;
-        int mid;
-        int rmCnt = 0;
-        int minGap = m_dist;
-        // while (lo < hi){
-        while (lo <= hi){
-            mid = (lo + hi) >> 1;
+#ifdef MIN_GAP
+        int minGap = hi;
+#endif
+        int answer = 0;
+        while ((hi-lo) > EPS){
+            int mid = (lo + hi) >> 1;
+
+            int rmCnt = 0;
             int prev = 0;
             for (auto rock : m_viRocks) {
                 int gap = rock - prev;
                 if (gap < mid) {
-                    if ((++rmCnt) > m_n) break; 
+                    if ((++rmCnt) > m_n) break;
                 }
                 else {
+#ifdef MIN_GAP
                     minGap = std::min(minGap, gap);
+                    answer = minGap;
+#endif
                     prev = rock;
                 }
             }
             if (rmCnt > m_n) {
-                hi = mid - 1;
+                hi = mid;
             }
             else {
-                lo = mid + 1;
+#ifdef MIN_GAP
+                lo = mid+1;
+#else
+                lo = mid;
+                answer = lo;
+#endif
             }
         }
-        cout << minGap;
+#ifdef MIN_GAP
+        cout << "minGap: " << answer;
+#else
+        std::cout << "lo: " << answer;
+#endif
     }
 
     void _Solve_JoSH(){
