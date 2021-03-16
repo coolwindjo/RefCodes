@@ -37,52 +37,38 @@ public:
     }
     ~ProbSolv(){}
 
-// #define MIN_GAP // wrong answer
+    bool IsTooBig(const int mid) {
+        int rmCnt = 0;
+        int prev = 0;
+        for (auto rock : m_viRocks) {
+            if ((rock-prev) < mid) {
+                if ((++rmCnt) > m_n) break;
+            }
+            else {
+                prev = rock;
+            }
+        }
+        return (rmCnt > m_n);
+    }
 private:
     void _Solve() {
+        int answer = 0;
         m_viRocks.push_back(m_dist);
         std::sort(m_viRocks.begin(), m_viRocks.end());
+
         int lo = 1;
         int hi = m_dist;
-#ifdef MIN_GAP
-        int minGap = hi;
-#endif
-        int answer = 0;
         while ((hi-lo) > EPS){
             int mid = (lo + hi) >> 1;
-
-            int rmCnt = 0;
-            int prev = 0;
-            for (auto rock : m_viRocks) {
-                int gap = rock - prev;
-                if (gap < mid) {
-                    if ((++rmCnt) > m_n) break;
-                }
-                else {
-#ifdef MIN_GAP
-                    minGap = std::min(minGap, gap);
-                    answer = minGap;
-#endif
-                    prev = rock;
-                }
-            }
-            if (rmCnt > m_n) {
+            if (IsTooBig(mid)) {
                 hi = mid;
             }
             else {
-#ifdef MIN_GAP
-                lo = mid+1;
-#else
                 lo = mid;
                 answer = lo;
-#endif
             }
         }
-#ifdef MIN_GAP
-        cout << "minGap: " << answer;
-#else
-        std::cout << "lo: " << answer;
-#endif
+        std::cout << answer;
     }
 
     void _Solve_JoSH(){

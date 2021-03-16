@@ -1,83 +1,96 @@
 #if 0
-#define TEST
+#define SPLIT_DEBUG
 #endif // 1
 
 #include "../../ProbSolvStart.h"
 
-constexpr int EPS = 1;
-
 class ProbSolv
 {
-    int n;
-    vi viTimes;
+    int m_n;
+    vvi m_vviConnects;
+    vi  m_viVisit;
+    int m_rem;
 public:
     ProbSolv()
     {
-        cin >> n;
+        cin >> m_n;
+
         string line;
         FOR(i, 10){
             std::getline(std::cin, line);
-            if(line.length() >= 2){
+            if(line.length() > 2){
                 break;
             }
         }
-        const string delims{", []\r"};
-        vstr vstrTimes = _SplitString(line, delims);
-        for (auto t:vstrTimes){
-            viTimes.push_back(std::stoi(t));
+
+        vstr vstrCons = _SplitString(line, string("\r,\t []"));
+        FOR(i, m_n){
+            vi viCons;
+            FOR(j, m_n){
+                viCons.push_back(std::stoi(vstrCons[i*m_n+j]));
+            }
+            m_vviConnects.push_back(viCons);
         }
 
         _Solve();
     }
     ~ProbSolv(){}
-    bool IsEnough(const ll elapsed){
-        ll sum = 0;
-        for (int t : viTimes){
-            sum += static_cast<ll>(elapsed/t);
-        }
-        return (sum >= n);
+
+    bool Visited(const int com){
+        return m_viVisit[com] > 0;
     }
+    void DFS(const int com, const int cnt){
+        m_viVisit[com] = cnt;
+        if (--m_rem == 0) {
+            return;
+        }
+        FOR(i, m_n){
+            if (m_vviConnects[com][i] == 1) {
+                if (Visited(i)) continue;
+                DFS(i, cnt);
+            }
+        }
+    }
+
 private:
     void _Solve(){
-        ll answer = 0;
-        std::sort(viTimes.begin(), viTimes.end());
-
-        ll hi = viTimes[0] * static_cast<ll>(n);   // ll*int = int
-        ll lo = viTimes[0];
-        while ((hi-lo)>EPS){
-            ll mid = static_cast<ll>((lo+hi)>>1);
-            if (IsEnough(mid)){
-                hi = mid; 
-                answer = hi;
-                if (!IsEnough(mid-1)) break;
-            }
-            else{
-                lo = mid;
-            }
+        FOR(i, m_n){
+            m_viVisit.push_back(0);
         }
-        cout << answer;
+        m_rem = m_n;
+        int cnt = 1;
+        FOR(i, m_n){
+            if (Visited(i)) continue;
+            DFS(i, cnt++);
+            if (m_rem == 0) break;
+        }
+        int numNets = 0;
+        for(auto num : m_viVisit){
+            numNets = std::max(num, numNets);
+        }
+        cout << numNets;
     } // _Solve()
 
     vstr _SplitString(string line, const string &delims) {
-#ifdef TEST
-        cout << "1) line: " << line <<endl;
+#ifdef SPLIT_DEBUG
+        cout << "\n1) line: " << line <<endl;
 #endif
         string::iterator newEnd = unique(line.begin(), line.end(), [] (const char &x, const char &y) {
             return x==y and x==' ';
         });
-#ifdef TEST
+#ifdef SPLIT_DEBUG
         cout << "2) line: " << line <<endl;
 #endif
 
         line.erase(newEnd, line.end());
-#ifdef TEST
+#ifdef SPLIT_DEBUG
         cout << "3) line: " << line <<endl;
 #endif
 
         while (line[line.length() - 1] == ' ') {
             line.pop_back();
         }
-#ifdef TEST
+#ifdef SPLIT_DEBUG
         cout << "4) line: " << line <<endl;
 #endif
 
@@ -89,9 +102,9 @@ private:
             if (pos > prev) {
                 vstrSplits.push_back(line.substr(prev, pos-prev));
             }
-#ifdef TEST
-            for(string name : vstrSplits) {
-                cout << name << " ";
+#ifdef SPLIT_DEBUG
+            for(string str : vstrSplits) {
+                cout << str << " ";
             }
             cout <<endl;
 #endif
