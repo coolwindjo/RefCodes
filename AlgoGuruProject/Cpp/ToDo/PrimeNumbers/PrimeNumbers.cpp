@@ -1,7 +1,4 @@
 #if 0
-#define TEST
-#endif // 1
-#if 0
 #define SPLIT_DEBUG
 #endif // 1
 
@@ -20,41 +17,39 @@ public:
                 break;
             }
         }
-        vstr vstrNums = _SplitString(line, string("\r, []"));
-        for(auto str : vstrNums){
-            m_viNums.push_back(std::stoi(str));
+        vstr vstrNums = _SplitString(line, string("\r, []\""));
+        string strNums = vstrNums[0];
+        FOR(i, strNums.length()){
+            m_viNums.push_back(std::stoi(std::to_string(strNums[i]))-'0');
         }
-
         _Solve();
     }
     ~ProbSolv(){}
 
+    bool IsPrime(const int num){
+        int n = (num>>1)+1;
+        while ((--n) > 1) {
+            if (num%n == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    void DFS(const char bitmasks){
+        char nextBMs = bitmasks;
+        nextBMs |= 0b01000000;
+
+        DFS(nextBMs);
+    }
+
 private:
     void _Solve(){
-        vstr vstrNums;
-        int numZeros = 0;
-        for(auto num: m_viNums){
-            vstrNums.push_back(std::to_string(num));
-            if (num == 0) numZeros++;
+        DFS(0b00000000);
+        for (auto num : m_viNums){ 
+            cout << IsPrime(num) <<endl;
         }
-        string answer = "";
-        if (numZeros == m_viNums.size()){
-            answer += vstrNums[0];
-            cout << answer;
-            return;
-        }
-        std::sort(vstrNums.begin(), vstrNums.end(), [](const string &a, const string &b){
-            string aFirst = a+b;
-            string bFirst = b+a;
-            return std::stoi(aFirst) > std::stoi(bFirst);
-        });
-        for (auto str : vstrNums){
-#ifdef TEST
-            answer += " ";
-#endif
-            answer += str;
-        }
-        cout << answer;
+        
     } // _Solve()
 
     vstr _SplitString(string line, const string &delims) {
