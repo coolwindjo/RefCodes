@@ -51,29 +51,29 @@ public:
     ~ProbSolv(){}
 private:
     void _Solve(){
-        std::map<string, int> hash;
+        std::map<string, int> hsh;
         for (string name : vstrPartList) {
-            std::map<string, int>::iterator it = hash.find(name);
-            if (it != hash.end()) {
+            std::map<string, int>::iterator it = hsh.find(name);
+            if (it != hsh.end()) {
                 it->second++;
             }
             else {
-                hash.insert(std::pair<string, int>(name, 1));
+                hsh.insert(std::pair<string, int>(name, 1));
             }
         }
 
         for (string name : vstrCompList) {
-            std::map<string, int>::iterator it = hash.find(name);
-            W_IFNOT(it != hash.end());
+            std::map<string, int>::iterator it = hsh.find(name);
+            W_IFNOT(it != hsh.end());
             if (it->second > 1) {
                 it->second--;
             }
             else {
-                hash.erase(it);
+                hsh.erase(it);
             }
         }
-        if (!hash.empty()){
-            cout << hash.begin()->first;
+        if (!hsh.empty()){
+            cout << hsh.begin()->first;
         }
     } // _Solve()
 

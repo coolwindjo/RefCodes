@@ -42,16 +42,16 @@ private:
     }
 
     void _SolveUsingSet(){ // faster than the one using sort
-        std::set<string> hash;
+        std::set<string> hsh;
         bool isPrefix = false;
         for (string number : vstrPhoneBook){
-            hash.insert(number);
-            if (hash.size() < 2) {
+            hsh.insert(number);
+            if (hsh.size() < 2) {
                 continue;
             }
-            std::set<string>::iterator prevIt = hash.lower_bound(number);
-            std::set<string>::iterator nextIt = hash.upper_bound(number);
-            if (prevIt != hash.begin()) {
+            std::set<string>::iterator prevIt = hsh.lower_bound(number);
+            std::set<string>::iterator nextIt = hsh.upper_bound(number);
+            if (prevIt != hsh.begin()) {
                 string prevNum;
                 if ((prevNum = *(--prevIt)) != "") {
                     if (prevNum == number.substr(0, prevNum.length())) {
@@ -61,7 +61,7 @@ private:
                 }
             }
 
-            if (nextIt != hash.end()) {
+            if (nextIt != hsh.end()) {
                 string nextNum;
                 if ((nextNum = *nextIt) != "") {
                     if (number == nextNum.substr(0, number.length())) {

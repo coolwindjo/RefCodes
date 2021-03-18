@@ -1,4 +1,7 @@
 #if 0
+#define TEST
+#endif // 1
+#if 0
 #define SPLIT_DEBUG
 #endif // 1
 
@@ -6,7 +9,8 @@
 
 class ProbSolv
 {
-    vi m_viNums;
+    string m_strNums;
+    unordered_set<int> m_hash;
 public:
     ProbSolv()
     {
@@ -18,38 +22,84 @@ public:
             }
         }
         vstr vstrNums = _SplitString(line, string("\r, []\""));
-        string strNums = vstrNums[0];
-        FOR(i, strNums.length()){
-            m_viNums.push_back(std::stoi(std::to_string(strNums[i]))-'0');
-        }
+        m_strNums = vstrNums[0];
+
         _Solve();
     }
     ~ProbSolv(){}
 
     bool IsPrime(const int num){
-        int n = (num>>1)+1;
-        while ((--n) > 1) {
-            if (num%n == 0){
-                return false;
+        if ((num == 0) || (num == 1)) return false;
+        if ((num == 2) || (num == 3) || (num == 5) || (num == 7)) return true;
+        if (num%2 == 0) return false;
+        bool isPrime = true;
+        int n = (num>>1);
+        for (int i=3;i<n;i+=2) {
+            if (num%i == 0){
+                isPrime = false;
+                break;
             }
         }
-        return true;
+        return isPrime;
     }
-    
-    void DFS(const char bitmasks){
-        char nextBMs = bitmasks;
-        nextBMs |= 0b01000000;
 
-        DFS(nextBMs);
+    void Swap(const int idxA, const int idxB){
+        const int tmpB = m_strNums[idxA];
+        m_strNums[idxA] = m_strNums[idxB];
+        m_strNums[idxB] = tmpB;
+    }
+
+    void STL_Perm() {
+        std::sort(m_strNums.begin(), m_strNums.end());
+        do{
+            string combined = "";
+            for (auto num : m_strNums){ 
+                combined += string({num}); // string strNum{num};
+                const int combNum = std::stoi(combined);
+                if (IsPrime(combNum)) {
+                    m_hash.insert(combNum);
+#ifdef TEST
+                    cout << combNum << " ";
+#endif
+                }
+            }
+        } while(std::next_permutation(m_strNums.begin(), m_strNums.end()));
+    }
+
+    void DFS_Perm(const int begin, const int end){
+        if (begin+1 == end) {
+            string combined = "0";
+            for (int i=0; i<m_strNums.size(); ++i){ 
+                combined += string({m_strNums[i]});
+                const int combNum = std::stoi(combined);
+                if (IsPrime(combNum)) {
+                    m_hash.insert(combNum);
+#ifdef TEST
+                    cout << combNum << " ";
+#endif
+                }
+            }
+            return;
+        }
+
+        for (int i=begin; i<end; ++i){
+            Swap(begin, i);
+            DFS_Perm(begin+1, end);
+            Swap(begin, i);
+        }
     }
 
 private:
     void _Solve(){
-        DFS(0b00000000);
-        for (auto num : m_viNums){ 
-            cout << IsPrime(num) <<endl;
-        }
-        
+        /*/
+        STL_Perm();
+        /*/
+        // for (int i=0; i<m_viNums.size(); ++i) {
+        //     DFS_Perm(i, m_viNums.size());
+        // }
+        DFS_Perm(0, m_strNums.size());
+        //*/
+        cout << m_hash.size();
     } // _Solve()
 
     vstr _SplitString(string line, const string &delims) {
