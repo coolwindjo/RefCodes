@@ -2,10 +2,10 @@
 
 <https://www.acmicpc.net/problem/12100>
 
-implementation
+- implementation
 
-STL::queue
+- std::queue
 
-DFS with backtracking
+- DFS with backtracking
 
 <https://coolwindjo.github.io/algoguru/2019/07/17/Game-Two-Zero-Four-Eight.html>

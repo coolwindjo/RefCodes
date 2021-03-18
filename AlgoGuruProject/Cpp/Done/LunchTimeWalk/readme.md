@@ -1,3 +1,3 @@
 # Problem information
 
-Implementation
+- implementation
