@@ -14,10 +14,10 @@
 - BFS with generations
 - Floyd-Warshall
 - Dijkstra
-- edit distance
 - sort
 - string manipulation
 - unique and erase vector
+- edit distance
 - split string
 - std::cin.ignore
 - std::cin.get

@@ -41,6 +41,9 @@ public:
     ~ProbSolv(){}
 private:
     void _Solve(){
+        
+    }
+    void _Solve_arch(){
         typedef std::pair<int, vii> i_vii;
         typedef std::vector<i_vii> vivii;
         vivii viviiTotVecPlaysId;

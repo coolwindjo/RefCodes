@@ -1,6 +1,77 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+class CoolTimer {
+public:
+    CoolTimer()
+        : m_fn_name(nullptr)
+        , m_fn_name_size(0)
+    {
+    }
+    ~CoolTimer() {
+        if (m_fn_name != nullptr) {
+            delete[] m_fn_name;
+            m_fn_name = nullptr;
+        }
+    }
+
+    void On(const char* str) {
+        // Get the name of the function.
+        m_fn_name_size = strlen(str) + 1;
+        if (m_fn_name == nullptr) {
+            m_fn_name = new char[m_fn_name_size];
+        }
+        memcpy(m_fn_name, str, sizeof(char)*m_fn_name_size);
+
+        // Start.
+        _QueryPerformanceCounter(&m_begin);
+    }
+
+    void Off() {	
+        // End.
+        _QueryPerformanceCounter(&m_end);
+
+        // Calculate the time.
+        long seconds = m_end.tv_sec - m_begin.tv_sec;
+        long nanoseconds = m_end.tv_nsec - m_begin.tv_nsec;
+        double elapsed = seconds + nanoseconds*1e-9;
+
+        // Print the message.
+        ostringstream os;
+        os << m_fn_name << "() takes [" << elapsed << "] seconds.\n"; 
+        cout << os.str();
+        if (m_fn_name != nullptr) {
+            delete[] m_fn_name;
+            m_fn_name = nullptr;
+        }
+    }
+private:
+    /* These functions are written to match the win32
+    signatures and behavior as closely as possible.
+    */
+    bool _QueryPerformanceFrequency(timespec* frequency) {
+        /* Sanity check. */
+        assert(frequency != nullptr);
+        /* gettimeofday reports to microsecond accuracy. */
+        clock_getres(CLOCK_REALTIME, frequency);
+        return true;
+    }
+
+    bool _QueryPerformanceCounter(timespec* performance_count) {
+        /* Sanity check. */
+        assert(performance_count != nullptr);
+        /* Grab the current time. */
+        clock_gettime(CLOCK_REALTIME, performance_count);
+        return true;
+    }
+
+    timespec m_begin;
+    timespec m_end;
+    char* m_fn_name;
+    size_t m_fn_name_size;
+} Timer;
+
+#pragma GCC optimize("O2") 
 #define FOR_INC(i, from, to) for(int (i)=(from); (i)<(to); ++(i))
 #define FOR_DEC(i, from, to) for(int (i)=(to)-1; (i)>=(from); --(i))
 #define FOR(i, to) FOR_INC((i), 0, (to))
