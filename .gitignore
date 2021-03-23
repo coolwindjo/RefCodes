@@ -19,6 +19,7 @@
 *.vs
 *.a
 *.o
+*.lnk
 a.out
 Debug
 x64
@@ -30,3 +31,5 @@ __pycache__
 /CodeReferences/Cpp/GoogleTestLecture/gtest/
 /CodeReferences/Cpp/GoogleTestLecture/gtest_201005/
 out
+putty
+LinuxStudy
