@@ -53,7 +53,7 @@ public:
             }
             grid.push_back(rowG);
         }
-#ifdef TEST
+#ifdef SPLIT_DEBUG
         cout <<endl;
         FOR(i, rows){
             FOR(j, columns){
@@ -126,12 +126,16 @@ private:
 
 int main(){
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
+#if 0   // 6dd
     int numTCs = 0;
     cin >> numTCs;
     FOR (tc, numTCs) {
         cout << "#" << tc+1 <<" ";
+#endif
         ProbSolv ps;
+#if 0   // 4dd
         cout << endl;
     }
+#endif
     return 0;
 }
