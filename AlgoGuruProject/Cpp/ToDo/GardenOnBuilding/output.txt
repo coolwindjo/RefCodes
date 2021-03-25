@@ -1,6 +1,13 @@
-#1 
-#2 
-#3 
-#4 
-#5 
-#6 
+#1 putting H:5
+5 
+putting H:2
+5 2 
+putting H:4
+5 4 
+putting H:2
+5 4 2 
+putting H:6
+6 
+putting H:1
+6 1 
+5

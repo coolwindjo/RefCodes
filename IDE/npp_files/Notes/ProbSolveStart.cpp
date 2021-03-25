@@ -97,6 +97,7 @@ typedef pair<int, int> ii;
 typedef vector<ii> vii;
 typedef vector<vii> vvii;
 typedef vector<int> vi;
+typedef vector<ll> vll;
 typedef vector<vi> vvi;
 typedef pair<int, ii> i_ii;
 typedef queue<ii> qii;
