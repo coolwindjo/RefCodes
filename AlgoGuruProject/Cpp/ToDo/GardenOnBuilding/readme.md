@@ -1,28 +1,9 @@
 # Problem information
 
-<https://www.acmicpc.net/problem/1406>
+<https://codepro.lge.com/exam/18/%EA%B5%AD%EB%82%B4-%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C/quiz/4>
 
-- dynamic programing
-- mathematics
 - big number
 - implementation
-- greedy alogrithm
-- DFS
-- DFS pitfall
-- DFS with backtracking
-- BFS
-- BFS with generations
-- Floyd-Warshall
-- Dijkstra
-- sort
-- string manipulation
-- unique and erase vector
-- edit distance
-- std::cin.get
-- std::stringstream
-- std::unordered_set
-- std::list
-- std::queue
-- std::priority_queue
+- stack
 
 <https://coolwindjo.github.io/algoguru/2019/07/16/Naming-Daughter.html>

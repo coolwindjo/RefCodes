@@ -107,4 +107,4 @@ typedef vector<vi> vvi;
 typedef pair<int, ii> i_ii;
 typedef queue<ii> qii;
 typedef queue<int> qi;
-typedef priority_queue<ii> pqii;
+typedef priority_queue<i_ii> pqi_ii;    // for Dijkstra

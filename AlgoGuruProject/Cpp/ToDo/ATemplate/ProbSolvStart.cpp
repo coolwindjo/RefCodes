@@ -4,7 +4,13 @@
 
 #include "../../ProbSolvStart.h"
 
-#if 0   // 12dd
+#if 0   // 19dd
+constexpr char ALPHA[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+int c2d(char c){
+	if (c <= '9') return c - '0';
+	return c - 'A' + 10;
+}
+
 typedef enum {
 	eR=0, eD,
     eL, eU,
@@ -14,6 +20,7 @@ constexpr int DIR[eDIR_LEN][2] = {
     {0,1}, {1,0},
     {0,-1}, {-1,0}
 };
+constexpr int N_DIR[eDIR_LEN] = {eL, eU, eR, eD};
 #endif // 0
 
 class ProbSolv
