@@ -1,4 +1,7 @@
 #if 1
+#define TEST
+#endif // 1
+#if 1
 #define SPLIT_DEBUG
 #endif // 1
 
