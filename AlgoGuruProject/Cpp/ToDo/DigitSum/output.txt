@@ -1,2 +1,0 @@
-99999941
-findSmallestDigitGenerator() takes [8.5105] seconds.
