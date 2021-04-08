@@ -1,0 +1,106 @@
+@startuml
+title SensorFusion Project
+
+autonumber
+
+participant ars_40x as a4x
+participant filtered_object as fo
+participant radar_input as ri
+participant FusionEKF as fekf
+participant KalmanFilter as kf
+participant Tools as tls
+
+activate a4x #FFBBBB
+
+a4x -> ri: objects_callback(object_list) 
+activate ri #FFBBBB
+
+loop object : object_list
+
+ri -> ri: has_invalid_yaw(object)
+activate ri #FF0000
+deactivate ri
+
+alt if the object has valid yaw
+
+ri -> ri: measurement_pack = convert_to_measurement_pack(object, object_list.header)
+activate ri #FF0000
+deactivate ri
+
+ri -> fekf: ProcessMeasurement(measurement_pack)
+activate fekf #FFBBBB
+
+fekf -> kf: KalmanFilter()
+deactivate fekf
+activate kf #FFBBBB
+
+kf --> fekf: ekf_data
+deactivate kf
+activate fekf #FFBBBB
+
+fekf -> kf: Predict()
+deactivate fekf
+activate kf #FFBBBB
+
+kf --> fekf: ekf_data
+deactivate kf
+activate fekf #FFBBBB
+
+fekf -> tls: CalculateJoacobian(ekf_data.x)
+deactivate fekf
+activate tls #FFBBBB
+
+tls --> fekf: Hj
+deactivate tls
+activate fekf #FFBBBB
+
+fekf -> kf: UpdateEKF(measurement_pack.raw_measurements)
+deactivate fekf
+activate kf #FFBBBB
+
+kf --> fekf: ekf_data
+deactivate kf
+activate fekf #FFBBBB
+
+fekf --> ri: ekf_data
+deactivate fekf
+
+ri -> ri: filtered_pose = get_filtered_pos(object.position.pose, ekf_data)
+activate ri #FF0000
+deactivate ri
+
+ri -> ri: filtered_twist_vel = get_filtered_vel(object.relative_velocity.twist, ekf_data)
+activate ri #FF0000
+deactivate ri
+
+ri -> ri: filtered_accel = get_filtered_accel(object.relative_acceleration.accel, ekf_data)
+activate ri #FF0000
+deactivate ri
+
+ri -> ri: filtered_marker = convert_to_marker(object, object_list.header)
+activate ri #FF0000
+deactivate ri
+
+ri -> ri: filtered_velocity = convert_to_marker(object, object_list.header)
+activate ri #FF0000
+deactivate ri
+
+ri -> ri: filtered_distance = convert_to_marker(object, object_list.header)
+activate ri #FF0000
+deactivate ri
+
+' end ' alt
+' end ' loop
+
+ri -> fo: filtered_marker_array
+activate fo #FFBBBB
+ri -> fo: filtered_velocity_array
+activate fo #0000FF
+ri -> fo: filtered_distance_array
+activate fo #SkyBlue
+
+end ' alt
+end ' loop
+
+
+@enduml
