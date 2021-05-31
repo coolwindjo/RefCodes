@@ -11,10 +11,15 @@
             // "program": "${fileDirname}/${fileBasenameNoExtension}",
             "program": "${workspaceFolder}/${relativeFileDirname}/${fileBasenameNoExtension}.exe",
             "args": [
-                "-std=c++20"
+                // /*/
+                "-std=c++1z",
+                /*/
+                "-std=c++2a"
+                //*/
+                "| c++filt -t",
             ],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/${relativeFileDirname}",
+            "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
