@@ -21,7 +21,7 @@ int main()
     // f1 을 ft.get() 호출 할 때 실행
     future<int> ft = async( launch::deferred, &f1 );
     #else
-    // f1 을 가능혀면 thread로 실행해주고, thread가 지원되지 않으면 defferrd 적용!
+    // f1 을 가능하면 thread로 실행해주고, thread가 지원되지 않으면 defferred 적용!
     future<int> ft = async( launch::deferred | launch::async, &f1 );
     #endif
 #endif
