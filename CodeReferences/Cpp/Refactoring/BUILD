@@ -9,8 +9,8 @@ cc_test(
 		"01_ExtractMethod.h",
 	],
 	deps = [
-		# "@gtest//:gtest",
-		# "@gtest//:gtest_main"	# Only if srcs have no main()
-		"@com_google_googletest//:gtest_main"
+		"@gtest//:gtest",
+		"@gtest//:gtest_main"	# Only if srcs have no main()
+		# "@com_google_googletest//:gtest_main"
 	],
 )
