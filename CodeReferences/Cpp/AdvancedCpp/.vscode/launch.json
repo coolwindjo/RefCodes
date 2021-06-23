@@ -8,13 +8,13 @@
             "name": "g++-10 - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            // "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "program": "${workspaceFolder}/${relativeFileDirname}/${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.out",
+            // "program": "${workspaceFolder}/${relativeFileDirname}/${fileBasenameNoExtension}.out",
             "args": [
-                // /*/
+                /*/
                 "-std=c++1z",
                 /*/
-                "-std=c++2a"
+                "-std=c++2a",
                 //*/
                 "| c++filt -t",
             ],

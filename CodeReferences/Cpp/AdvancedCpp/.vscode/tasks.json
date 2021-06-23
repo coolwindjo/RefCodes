@@ -8,11 +8,12 @@
                 "-g",
                 "-Wall",
                 // "${file}",
-                "${workspaceFolder}/${relativeFileDirname}/${fileBasenameNoExtension}.cpp",
+                "${fileDirname}/${fileBasenameNoExtension}.cpp",
+                // "${workspaceFolder}/${relativeFileDirname}/${fileBasenameNoExtension}.cpp",
                 "-o",
-                // "${fileDirname}/${fileBasenameNoExtension}",
-                "${workspaceFolder}/${relativeFileDirname}/${fileBasenameNoExtension}.exe",
-                // /*/
+                "${fileDirname}/${fileBasenameNoExtension}.out",
+                // "${workspaceFolder}/${relativeFileDirname}/${fileBasenameNoExtension}.exe",
+                /*/
                 "-std=c++1z",
                 /*/
                 "-std=c++2a",
