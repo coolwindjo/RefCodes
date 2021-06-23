@@ -1,3 +1,15 @@
+// 그 외. compile options
+// vs 2017, 2019 : C++14 문법기준 컴파일
+// g++10.x       : C++14 문법기준 컴파일
+
+// C++17 이상의 문법을 사용하려면
+// g++ 소스이름.cpp  -std=c++17   또는 -std=c++20
+// cl  소스이름.cpp  /std:c++17   또는 /std:c++latest
+
+// C++20 기술을 사용하려면
+// VS 2019 Preview 설치 필요
+// g++10.2
+
 #include <functional>	// std::invoke
 
 class Dialog
@@ -16,13 +28,6 @@ void foo2(int a) {}
 // 핵심 2. 일반 Function pointer에 static member method의 주소를 담을 수 있다.
 // 핵심 3. Member method에 대한 member function pointer를 만들고 호출 하는 방법
 // 핵심 4. std::invoke() 함수
-// 그 외. compile options
-// vs 2017, 2019 : C++14 문법기준 컴파일
-// g++10.x       : C++14 문법기준 컴파일
-
-// C++17 이상의 문법을 사용하려면
-// g++ 소스이름.cpp  -std=c++17   또는 -std=c++20
-// cl  소스이름.cpp  /std:c++17   또는 /std:c++latest
 int main()
 {
 	void (*f1)() = &foo;				

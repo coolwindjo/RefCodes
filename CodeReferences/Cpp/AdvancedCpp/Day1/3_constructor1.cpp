@@ -13,7 +13,7 @@ struct DM
 struct Base
 {
 	BM bm;
-	Base()  
+	Base()		// Base(): bm()  
 	{
 		std::cout << "Base()" << std::endl; 
 	}
@@ -22,13 +22,18 @@ struct Base
 struct Derived : public Base
 {
 	DM dm;
-	Derived()  
+	Derived()  	// Derived(): Base(), dm()
 	{
 		std::cout << "Derived()" << std::endl; 
 	}
 	~Derived() { std::cout << "~Derived()" << std::endl; }
 };
 
+// Constructor calling sequence
+// 1. Base class's Member constructors
+// 2. Base class constructor
+// 3. Derived class's Member constructors
+// 4. Derived class constructor
 int main()
 {
 	Derived d;
