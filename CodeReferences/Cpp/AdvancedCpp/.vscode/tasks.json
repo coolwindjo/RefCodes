@@ -19,6 +19,7 @@
                 "-std=c++2a",
                 //*/
                 "-pthread",
+                "-latomic",
                 "-fno-elide-constructors"
             ],
             "options": {
