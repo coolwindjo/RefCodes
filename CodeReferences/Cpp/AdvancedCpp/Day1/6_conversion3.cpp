@@ -8,6 +8,7 @@ void goo(char* p) { std::cout << "goo" << std::endl; }
 int main()
 {
 	foo(0);			
+	foo(nullptr);			
 }
 
 

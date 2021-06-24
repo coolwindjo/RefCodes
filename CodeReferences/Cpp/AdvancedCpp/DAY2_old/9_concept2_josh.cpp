@@ -16,6 +16,6 @@ void foo(T a)
 int main()
 {
     // foo(3.3);    // 1
-    foo(3);       // Error: ambiguous foo definition
+    foo(3);       // error: ambiguous foo definition
     return 0;
 }

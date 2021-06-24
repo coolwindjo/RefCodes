@@ -2,20 +2,6 @@
 #include <vector>
 
 template<typename T>
-class AutoPtr
-{
-private:
-	T* obj;
-public:
-	AutoPtr(T* p = nullptr) 	: obj(p) 		{if(obj) obj->AddRef();}
-	AutoPtr(const AutoPtr &ap) 	: obj(ap.obj) 	{if(obj) obj->AddRef();}
-	~AutoPtr() 									{if(obj) obj->Release();}
-
-	T* operator->() {return obj;};
-	T& operator*() 	{return *obj;};
-};
-
-template<typename T>
 class RefCount
 {
 	mutable int refCount = 0;	// mutable Member Attributre: Constant Member Function에서도 값 변경 가능
@@ -31,7 +17,7 @@ public:
 	void Release() const 	// void Release( const RefCount* this )
 	//*/
 	{
-		// MemberAttribute = 10;	// Error: this->MemeberAttribute = 10
+		// MemberAttribute = 10;	// error: this->MemeberAttribute = 10
 									// this가 상수를 가리키므로 Error
 		if (--refCount == 0)
 		/*/

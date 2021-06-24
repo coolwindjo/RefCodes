@@ -12,7 +12,7 @@ public:
 
 	/*/
 	// Heap에 만들 수 없게 하려면?
-	// void* operator new(size_t sz) {	static_assert(false, "Error: new is not permitted!"); }
+	// void* operator new(size_t sz) {	static_assert(false, "error: new is not permitted!"); }
 	void* operator new(size_t sz) {	return nullptr; }
 	// C++ Idioms - Requiring or Prohibiting Heap-based Objects (71)
 	// https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms
@@ -26,7 +26,7 @@ int main()
 {
 	/*/
 	// Stack에 만들 수 없게 해보자
-	Car c;	// Error: 객체 파괴시 소멸자를 호출해야 하는데, 소멸자가 protected에 있으므로 error
+	Car c;	// error: 객체 파괴시 소멸자를 호출해야 하는데, 소멸자가 protected에 있으므로 error
 	Car* p1 = &c;
 	/*/
 	Car* p1 = new Car;

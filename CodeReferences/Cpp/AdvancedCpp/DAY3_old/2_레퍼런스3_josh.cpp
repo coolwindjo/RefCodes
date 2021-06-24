@@ -18,7 +18,7 @@ int main()
 	RREF&& r6 = 10;	// int&&	&&	=> int&&
 	// ----------------------------------------
 
-	int& && r7 = n;	// Error: 직접 Reference를 2번 표기 할 수 없다.
+	int& && r7 = n;	// error: 직접 Reference를 2번 표기 할 수 없다.
 
 	// Reference collapsing이 적용되는 표현식
 	// 1. typedef(using)

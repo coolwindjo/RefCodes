@@ -9,11 +9,14 @@ public:
 class ostream
 {
 public:
-	ostream& operator<<(const char* a) { printf("%s", a); return *this; }
-	ostream& operator<<(void*	 a)    { printf("void*  : %p", a); return *this; }
-	ostream& operator<<(int		 a)    { printf("int    : %d", a); return *this; }
-	ostream& operator<<(double   a)    { printf("double : %f", a); return *this; }
-	ostream& operator<<(bool     a)    { printf("bool   : %d", a); return *this; }
+	ostream& operator<<(const char* a)		{ printf("%s", a); return *this; }
+	ostream& operator<<(void*	 a)    		{ printf("void*  : %p", a); return *this; }
+	ostream& operator<<(void (*a)())  		{ printf("void (*a)()  : %p", a); return *this; }
+	ostream& operator<<(int (*a)())    		{ printf("int (*a)()  : %p", a); return *this; }
+	ostream& operator<<(void (Dialog::*a)()){ printf("void (Dialog::*a)()  : %p", a); return *this; }
+	ostream& operator<<(int		 a)    		{ printf("int    : %d", a); return *this; }
+	ostream& operator<<(double   a)    		{ printf("double : %f", a); return *this; }
+	ostream& operator<<(bool     a)    		{ printf("bool   : %d", a); return *this; }
 
 	/*/
 	template<typename T, typename R, typename ...ARGS>
@@ -26,6 +29,8 @@ public:
 };
 ostream cout;
 
+void goo() {}
+
 int main()
 {
 	int n = 0;
@@ -34,7 +39,8 @@ int main()
 	cout << n << "\n";				// cout.operator int()
 	cout << d << "\n";		
 	cout << &d << "\n";				// cout.operator void*()
-	cout << &main << "\n";			// cout.operator void*()	??????????
+	cout << &goo << "\n";			// cout.operator void(*)()
+	cout << &main << "\n";			// cout.operator int(*)()
 	cout << &Dialog::foo << "\n";	// Member Function Pointer는 void*에 담을 수 없다.
 									// size 가 4보다 클 수 있기 때문 (this_offset...)
 	if (&Dialog::foo) {

@@ -31,7 +31,7 @@ public:
 			// Deleter(주소): 삭제자의 형태에 따라 const 를 가리키는 Pointer가 안될 수도 있다.
 			//				  되도록이면 최종 결과가 const 를 가리키지 않게 하는게 안전(?, flexible)하다.
 			/*/
-			Deleter()(static_cast<const T*>(this));	// Error: const Truck*
+			Deleter()(static_cast<const T*>(this));	// error: const Truck*
 			/*/
 			Deleter()( const_cast<T*>(static_cast<const T*>(this)) );	// Truck*
 			//*/
